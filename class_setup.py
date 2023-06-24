@@ -17,4 +17,15 @@ class project:
     def cityState (self, zipcode):
         return print("My zip code is " + zipcode)
     
-    
+
+class buildingProgram:
+    def __init__(self, name, type, area):
+        self.name = name
+        self.type = type
+        self.area = area
+
+    def __str__(self):
+        return f"{self.name} {self.path}"
+
+    def __repr__(self):
+        return f"{self.name} {self.path}"

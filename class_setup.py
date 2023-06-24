@@ -1,3 +1,5 @@
+import json
+
 class project:
     def __init__(self, name, path, zipcode, moveInYear):
         self.name = name
@@ -19,15 +21,18 @@ class project:
     
 
 class buildingProgram:
-    def __init__(self, name, type, area):
+    def __init__(self, name, programName, area):
         self.name = name
-        self.type = type
+        self.programName = programName
         self.area = area
         self.areaUnits = "ftSQ"
         self.country = "USA",
         self.postalCode: "60190"
         self.state = "IL"
         self.reportingUnits = "us"
+        self.projectRegion = "West"
+        self.baselineEnergy = self.baselineEnergyConsumption()
+        self.baselineElectricity = self.baselineElectricityConsumption()
 
 
     def __str__(self):
@@ -37,7 +42,7 @@ class buildingProgram:
         return f"{self.name} {self.path}"
     
     def areaForProgram (self):
-        return print("area for " + self.type + " is " + self.area)
+        return print("area for " + self.programName + " is " + self.area)
 
     def baselineEUI (self):
         dummyEUI = int(100)
@@ -45,16 +50,30 @@ class buildingProgram:
     
     def baselineEnergyConsumption (self):
         programEnergyConsumption = int(self.area) * int(self.baselineEUI())
-        return print("baseline energy consumption for " + self.type + " is", programEnergyConsumption)
+        return programEnergyConsumption
     
-    
+    def baselineElectricityConsumption (self):
+        fp="data\\useTypes.json"
+        with open(fp, 'r') as f:
+            useTypes = json.load(f)
+        adjustmentFactor = useTypes.get(self.programName, {}).get(self.projectRegion, 1)
+        # baselineAllConsumption = self.baselineEnergyConsumption()
+        adjustedEnergyConsumption =  self.baselineEnergy * adjustmentFactor
 
+        return adjustedEnergyConsumption
+
+    def baselineNaturalGasConsumption (self):
+
+        NGConsumption =  self.baselineEnergy - self.baselineElectricity
+
+        return NGConsumption
     
     # def baselineEUI(self):
         
 
 programTest = buildingProgram("Workspace", "Office", "1000")
-programTest.baselineEnergyConsumption()
+# programTest.baselineEnergyConsumption()
+print(programTest.baselineElectricityConsumption())
 
 # import requests
 # import json

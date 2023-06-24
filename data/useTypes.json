@@ -1,0 +1,93 @@
+{
+    "College University": {
+      "Northeast": 0.36,
+      "South": 0.69,
+      "Midwest": 0.48,
+      "West": 0.53,
+      "US Average": 0.54
+    },
+    "Enclosed Mall": {
+      "Northeast": 0.56,
+      "South": 0.75,
+      "Midwest": 0.58,
+      "West": 0.61,
+      "US Average": 0.65
+    },
+    "Hospital": {
+      "Northeast": 0.39,
+      "South": 0.51,
+      "Midwest": 0.42,
+      "West": 0.49,
+      "US Average": 0.46
+    },
+    "Hotel": {
+      "Northeast": 0.48,
+      "South": 0.64,
+      "Midwest": 0.51,
+      "West": 0.46,
+      "US Average": 0.54
+    },
+    "Laboratory / Technology / Science": {
+      "Northeast": 0.64,
+      "South": 0.76,
+      "Midwest": 0.63,
+      "West": 0.55,
+      "US Average": 0.67
+    },
+    "Mixed Use Property": {
+      "Northeast": 0.64,
+      "South": 0.76,
+      "Midwest": 0.63,
+      "West": 0.55,
+      "US Average": 0.67
+    },
+    "Multi-family Housing": {
+      "Northeast": 0.3,
+      "South": 0.69,
+      "Midwest": 0.35,
+      "West": 0.49,
+      "US Average": 0.47
+    },
+    "Office": {
+      "Northeast": 0.58,
+      "South": 0.82,
+      "Midwest": 0.65,
+      "West": 0.74,
+      "US Average": 0.7
+    },
+    "Other": {
+      "Northeast": 0.64,
+      "South": 0.76,
+      "Midwest": 0.63,
+      "West": 0.55,
+      "US Average": 0.67
+    },
+    "Parking": {
+      "Northeast": 0.64,
+      "South": 0.76,
+      "Midwest": 0.63,
+      "West": 0.55,
+      "US Average": 0.67
+    },
+    "Restaurant": {
+      "Northeast": 0.56,
+      "South": 0.55,
+      "Midwest": 0.52,
+      "West": 0.54,
+      "US Average": 0.54
+    },
+    "Retail": {
+      "Northeast": 0.67,
+      "South": 0.9,
+      "Midwest": 0.63,
+      "West": 0.81,
+      "US Average": 0.78
+    },
+    "Single Family Home": {
+      "Northeast": 0.3,
+      "South": 0.69,
+      "Midwest": 0.35,
+      "West": 0.49,
+      "US Average": 0.47
+    }
+  }

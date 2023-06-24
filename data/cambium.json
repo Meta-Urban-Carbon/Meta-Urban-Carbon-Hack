@@ -1,0 +1,2306 @@
+[
+    {
+      "state": "AL",
+      "year": 2024,
+      "cef_load": 0.39,
+      "lrmer_co2e": 376.7
+    },
+    {
+      "state": "AL",
+      "year": 2026,
+      "cef_load": 0.44,
+      "lrmer_co2e": 298.2
+    },
+    {
+      "state": "AL",
+      "year": 2028,
+      "cef_load": 0.56,
+      "lrmer_co2e": 247.9
+    },
+    {
+      "state": "AL",
+      "year": 2030,
+      "cef_load": 0.59,
+      "lrmer_co2e": 322.3
+    },
+    {
+      "state": "AL",
+      "year": 2035,
+      "cef_load": 0.68,
+      "lrmer_co2e": 412.6
+    },
+    {
+      "state": "AL",
+      "year": 2040,
+      "cef_load": 0.75,
+      "lrmer_co2e": 454.7
+    },
+    {
+      "state": "AL",
+      "year": 2045,
+      "cef_load": 0.76,
+      "lrmer_co2e": 406.3
+    },
+    {
+      "state": "AL",
+      "year": 2050,
+      "cef_load": 0.76,
+      "lrmer_co2e": 371.7
+    },
+    {
+      "state": "AR",
+      "year": 2024,
+      "cef_load": 0.52,
+      "lrmer_co2e": 473.7
+    },
+    {
+      "state": "AR",
+      "year": 2026,
+      "cef_load": 0.64,
+      "lrmer_co2e": 412.3
+    },
+    {
+      "state": "AR",
+      "year": 2028,
+      "cef_load": 0.82,
+      "lrmer_co2e": 340.5
+    },
+    {
+      "state": "AR",
+      "year": 2030,
+      "cef_load": 0.89,
+      "lrmer_co2e": 318.6
+    },
+    {
+      "state": "AR",
+      "year": 2035,
+      "cef_load": 0.92,
+      "lrmer_co2e": 308.3
+    },
+    {
+      "state": "AR",
+      "year": 2040,
+      "cef_load": 0.95,
+      "lrmer_co2e": 295.2
+    },
+    {
+      "state": "AR",
+      "year": 2045,
+      "cef_load": 0.95,
+      "lrmer_co2e": 252.8
+    },
+    {
+      "state": "AR",
+      "year": 2050,
+      "cef_load": 0.93,
+      "lrmer_co2e": 233.6
+    },
+    {
+      "state": "AZ",
+      "year": 2024,
+      "cef_load": 0.66,
+      "lrmer_co2e": 334.6
+    },
+    {
+      "state": "AZ",
+      "year": 2026,
+      "cef_load": 0.71,
+      "lrmer_co2e": 194.4
+    },
+    {
+      "state": "AZ",
+      "year": 2028,
+      "cef_load": 0.8,
+      "lrmer_co2e": 132.4
+    },
+    {
+      "state": "AZ",
+      "year": 2030,
+      "cef_load": 0.84,
+      "lrmer_co2e": 113.9
+    },
+    {
+      "state": "AZ",
+      "year": 2035,
+      "cef_load": 0.89,
+      "lrmer_co2e": 166.7
+    },
+    {
+      "state": "AZ",
+      "year": 2040,
+      "cef_load": 0.93,
+      "lrmer_co2e": 216.8
+    },
+    {
+      "state": "AZ",
+      "year": 2045,
+      "cef_load": 0.95,
+      "lrmer_co2e": 221.7
+    },
+    {
+      "state": "AZ",
+      "year": 2050,
+      "cef_load": 0.94,
+      "lrmer_co2e": 230.2
+    },
+    {
+      "state": "CA",
+      "year": 2024,
+      "cef_load": 0.69,
+      "lrmer_co2e": 208.2
+    },
+    {
+      "state": "CA",
+      "year": 2026,
+      "cef_load": 0.73,
+      "lrmer_co2e": 119.5
+    },
+    {
+      "state": "CA",
+      "year": 2028,
+      "cef_load": 0.81,
+      "lrmer_co2e": 63.4
+    },
+    {
+      "state": "CA",
+      "year": 2030,
+      "cef_load": 0.86,
+      "lrmer_co2e": 40
+    },
+    {
+      "state": "CA",
+      "year": 2035,
+      "cef_load": 0.92,
+      "lrmer_co2e": 42.6
+    },
+    {
+      "state": "CA",
+      "year": 2040,
+      "cef_load": 0.95,
+      "lrmer_co2e": 20.9
+    },
+    {
+      "state": "CA",
+      "year": 2045,
+      "cef_load": 1,
+      "lrmer_co2e": 8.5
+    },
+    {
+      "state": "CA",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "CO",
+      "year": 2024,
+      "cef_load": 0.47,
+      "lrmer_co2e": 391.2
+    },
+    {
+      "state": "CO",
+      "year": 2026,
+      "cef_load": 0.59,
+      "lrmer_co2e": 307.2
+    },
+    {
+      "state": "CO",
+      "year": 2028,
+      "cef_load": 0.84,
+      "lrmer_co2e": 211.2
+    },
+    {
+      "state": "CO",
+      "year": 2030,
+      "cef_load": 0.94,
+      "lrmer_co2e": 147.3
+    },
+    {
+      "state": "CO",
+      "year": 2035,
+      "cef_load": 0.96,
+      "lrmer_co2e": 133.8
+    },
+    {
+      "state": "CO",
+      "year": 2040,
+      "cef_load": 0.97,
+      "lrmer_co2e": 145.2
+    },
+    {
+      "state": "CO",
+      "year": 2045,
+      "cef_load": 0.99,
+      "lrmer_co2e": 141.2
+    },
+    {
+      "state": "CO",
+      "year": 2050,
+      "cef_load": 0.98,
+      "lrmer_co2e": 154.6
+    },
+    {
+      "state": "CT",
+      "year": 2024,
+      "cef_load": 0.52,
+      "lrmer_co2e": 381.6
+    },
+    {
+      "state": "CT",
+      "year": 2026,
+      "cef_load": 0.53,
+      "lrmer_co2e": 348.3
+    },
+    {
+      "state": "CT",
+      "year": 2028,
+      "cef_load": 0.55,
+      "lrmer_co2e": 319
+    },
+    {
+      "state": "CT",
+      "year": 2030,
+      "cef_load": 0.58,
+      "lrmer_co2e": 314.3
+    },
+    {
+      "state": "CT",
+      "year": 2035,
+      "cef_load": 0.64,
+      "lrmer_co2e": 319.6
+    },
+    {
+      "state": "CT",
+      "year": 2040,
+      "cef_load": 0.65,
+      "lrmer_co2e": 311.3
+    },
+    {
+      "state": "CT",
+      "year": 2045,
+      "cef_load": 0.62,
+      "lrmer_co2e": 293.5
+    },
+    {
+      "state": "CT",
+      "year": 2050,
+      "cef_load": 0.61,
+      "lrmer_co2e": 275.5
+    },
+    {
+      "state": "DE",
+      "year": 2024,
+      "cef_load": 0.4,
+      "lrmer_co2e": 424.9
+    },
+    {
+      "state": "DE",
+      "year": 2026,
+      "cef_load": 0.44,
+      "lrmer_co2e": 386.5
+    },
+    {
+      "state": "DE",
+      "year": 2028,
+      "cef_load": 0.51,
+      "lrmer_co2e": 337.4
+    },
+    {
+      "state": "DE",
+      "year": 2030,
+      "cef_load": 0.55,
+      "lrmer_co2e": 359.3
+    },
+    {
+      "state": "DE",
+      "year": 2035,
+      "cef_load": 0.64,
+      "lrmer_co2e": 393.8
+    },
+    {
+      "state": "DE",
+      "year": 2040,
+      "cef_load": 0.66,
+      "lrmer_co2e": 423.3
+    },
+    {
+      "state": "DE",
+      "year": 2045,
+      "cef_load": 0.64,
+      "lrmer_co2e": 420.6
+    },
+    {
+      "state": "DE",
+      "year": 2050,
+      "cef_load": 0.61,
+      "lrmer_co2e": 410.5
+    },
+    {
+      "state": "FL",
+      "year": 2024,
+      "cef_load": 0.36,
+      "lrmer_co2e": 291
+    },
+    {
+      "state": "FL",
+      "year": 2026,
+      "cef_load": 0.46,
+      "lrmer_co2e": 231.3
+    },
+    {
+      "state": "FL",
+      "year": 2028,
+      "cef_load": 0.52,
+      "lrmer_co2e": 177
+    },
+    {
+      "state": "FL",
+      "year": 2030,
+      "cef_load": 0.58,
+      "lrmer_co2e": 202.3
+    },
+    {
+      "state": "FL",
+      "year": 2035,
+      "cef_load": 0.68,
+      "lrmer_co2e": 253
+    },
+    {
+      "state": "FL",
+      "year": 2040,
+      "cef_load": 0.71,
+      "lrmer_co2e": 303.2
+    },
+    {
+      "state": "FL",
+      "year": 2045,
+      "cef_load": 0.74,
+      "lrmer_co2e": 342.9
+    },
+    {
+      "state": "FL",
+      "year": 2050,
+      "cef_load": 0.71,
+      "lrmer_co2e": 357.3
+    },
+    {
+      "state": "GA",
+      "year": 2024,
+      "cef_load": 0.5,
+      "lrmer_co2e": 371.9
+    },
+    {
+      "state": "GA",
+      "year": 2026,
+      "cef_load": 0.57,
+      "lrmer_co2e": 294.1
+    },
+    {
+      "state": "GA",
+      "year": 2028,
+      "cef_load": 0.64,
+      "lrmer_co2e": 245
+    },
+    {
+      "state": "GA",
+      "year": 2030,
+      "cef_load": 0.69,
+      "lrmer_co2e": 320.5
+    },
+    {
+      "state": "GA",
+      "year": 2035,
+      "cef_load": 0.77,
+      "lrmer_co2e": 411.4
+    },
+    {
+      "state": "GA",
+      "year": 2040,
+      "cef_load": 0.81,
+      "lrmer_co2e": 453.4
+    },
+    {
+      "state": "GA",
+      "year": 2045,
+      "cef_load": 0.84,
+      "lrmer_co2e": 404.2
+    },
+    {
+      "state": "GA",
+      "year": 2050,
+      "cef_load": 0.84,
+      "lrmer_co2e": 369.3
+    },
+    {
+      "state": "IA",
+      "year": 2024,
+      "cef_load": 0.59,
+      "lrmer_co2e": 287
+    },
+    {
+      "state": "IA",
+      "year": 2026,
+      "cef_load": 0.7,
+      "lrmer_co2e": 170.2
+    },
+    {
+      "state": "IA",
+      "year": 2028,
+      "cef_load": 0.82,
+      "lrmer_co2e": 106.3
+    },
+    {
+      "state": "IA",
+      "year": 2030,
+      "cef_load": 0.88,
+      "lrmer_co2e": 126.8
+    },
+    {
+      "state": "IA",
+      "year": 2035,
+      "cef_load": 0.9,
+      "lrmer_co2e": 163.1
+    },
+    {
+      "state": "IA",
+      "year": 2040,
+      "cef_load": 0.93,
+      "lrmer_co2e": 189.1
+    },
+    {
+      "state": "IA",
+      "year": 2045,
+      "cef_load": 0.94,
+      "lrmer_co2e": 195
+    },
+    {
+      "state": "IA",
+      "year": 2050,
+      "cef_load": 0.95,
+      "lrmer_co2e": 199.5
+    },
+    {
+      "state": "ID",
+      "year": 2024,
+      "cef_load": 0.75,
+      "lrmer_co2e": 371.3
+    },
+    {
+      "state": "ID",
+      "year": 2026,
+      "cef_load": 0.77,
+      "lrmer_co2e": 268.9
+    },
+    {
+      "state": "ID",
+      "year": 2028,
+      "cef_load": 0.82,
+      "lrmer_co2e": 186.3
+    },
+    {
+      "state": "ID",
+      "year": 2030,
+      "cef_load": 0.87,
+      "lrmer_co2e": 156.1
+    },
+    {
+      "state": "ID",
+      "year": 2035,
+      "cef_load": 0.9,
+      "lrmer_co2e": 198.1
+    },
+    {
+      "state": "ID",
+      "year": 2040,
+      "cef_load": 0.91,
+      "lrmer_co2e": 240
+    },
+    {
+      "state": "ID",
+      "year": 2045,
+      "cef_load": 0.94,
+      "lrmer_co2e": 235.2
+    },
+    {
+      "state": "ID",
+      "year": 2050,
+      "cef_load": 0.94,
+      "lrmer_co2e": 246.5
+    },
+    {
+      "state": "IL",
+      "year": 2024,
+      "cef_load": 0.65,
+      "lrmer_co2e": 436.7
+    },
+    {
+      "state": "IL",
+      "year": 2026,
+      "cef_load": 0.7,
+      "lrmer_co2e": 375.4
+    },
+    {
+      "state": "IL",
+      "year": 2028,
+      "cef_load": 0.81,
+      "lrmer_co2e": 300
+    },
+    {
+      "state": "IL",
+      "year": 2030,
+      "cef_load": 0.87,
+      "lrmer_co2e": 281.8
+    },
+    {
+      "state": "IL",
+      "year": 2035,
+      "cef_load": 0.9,
+      "lrmer_co2e": 301.6
+    },
+    {
+      "state": "IL",
+      "year": 2040,
+      "cef_load": 0.92,
+      "lrmer_co2e": 257.4
+    },
+    {
+      "state": "IL",
+      "year": 2045,
+      "cef_load": 0.97,
+      "lrmer_co2e": 158.7
+    },
+    {
+      "state": "IL",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 69.2
+    },
+    {
+      "state": "IN",
+      "year": 2024,
+      "cef_load": 0.46,
+      "lrmer_co2e": 453.6
+    },
+    {
+      "state": "IN",
+      "year": 2026,
+      "cef_load": 0.49,
+      "lrmer_co2e": 431.5
+    },
+    {
+      "state": "IN",
+      "year": 2028,
+      "cef_load": 0.62,
+      "lrmer_co2e": 387.9
+    },
+    {
+      "state": "IN",
+      "year": 2030,
+      "cef_load": 0.71,
+      "lrmer_co2e": 385.1
+    },
+    {
+      "state": "IN",
+      "year": 2035,
+      "cef_load": 0.7,
+      "lrmer_co2e": 395.2
+    },
+    {
+      "state": "IN",
+      "year": 2040,
+      "cef_load": 0.73,
+      "lrmer_co2e": 410.5
+    },
+    {
+      "state": "IN",
+      "year": 2045,
+      "cef_load": 0.73,
+      "lrmer_co2e": 407.7
+    },
+    {
+      "state": "IN",
+      "year": 2050,
+      "cef_load": 0.73,
+      "lrmer_co2e": 402.5
+    },
+    {
+      "state": "KS",
+      "year": 2024,
+      "cef_load": 0.77,
+      "lrmer_co2e": 354
+    },
+    {
+      "state": "KS",
+      "year": 2026,
+      "cef_load": 0.87,
+      "lrmer_co2e": 219.9
+    },
+    {
+      "state": "KS",
+      "year": 2028,
+      "cef_load": 0.93,
+      "lrmer_co2e": 100.6
+    },
+    {
+      "state": "KS",
+      "year": 2030,
+      "cef_load": 0.95,
+      "lrmer_co2e": 108.3
+    },
+    {
+      "state": "KS",
+      "year": 2035,
+      "cef_load": 0.96,
+      "lrmer_co2e": 146.7
+    },
+    {
+      "state": "KS",
+      "year": 2040,
+      "cef_load": 0.97,
+      "lrmer_co2e": 179.7
+    },
+    {
+      "state": "KS",
+      "year": 2045,
+      "cef_load": 0.99,
+      "lrmer_co2e": 194.2
+    },
+    {
+      "state": "KS",
+      "year": 2050,
+      "cef_load": 0.99,
+      "lrmer_co2e": 201.2
+    },
+    {
+      "state": "KY",
+      "year": 2024,
+      "cef_load": 0.17,
+      "lrmer_co2e": 372.4
+    },
+    {
+      "state": "KY",
+      "year": 2026,
+      "cef_load": 0.23,
+      "lrmer_co2e": 363.8
+    },
+    {
+      "state": "KY",
+      "year": 2028,
+      "cef_load": 0.44,
+      "lrmer_co2e": 368.4
+    },
+    {
+      "state": "KY",
+      "year": 2030,
+      "cef_load": 0.56,
+      "lrmer_co2e": 430.9
+    },
+    {
+      "state": "KY",
+      "year": 2035,
+      "cef_load": 0.66,
+      "lrmer_co2e": 479.6
+    },
+    {
+      "state": "KY",
+      "year": 2040,
+      "cef_load": 0.74,
+      "lrmer_co2e": 475.5
+    },
+    {
+      "state": "KY",
+      "year": 2045,
+      "cef_load": 0.74,
+      "lrmer_co2e": 445.2
+    },
+    {
+      "state": "KY",
+      "year": 2050,
+      "cef_load": 0.74,
+      "lrmer_co2e": 411.4
+    },
+    {
+      "state": "LA",
+      "year": 2024,
+      "cef_load": 0.33,
+      "lrmer_co2e": 502.3
+    },
+    {
+      "state": "LA",
+      "year": 2026,
+      "cef_load": 0.39,
+      "lrmer_co2e": 463.4
+    },
+    {
+      "state": "LA",
+      "year": 2028,
+      "cef_load": 0.52,
+      "lrmer_co2e": 403.8
+    },
+    {
+      "state": "LA",
+      "year": 2030,
+      "cef_load": 0.64,
+      "lrmer_co2e": 394.9
+    },
+    {
+      "state": "LA",
+      "year": 2035,
+      "cef_load": 0.74,
+      "lrmer_co2e": 368.6
+    },
+    {
+      "state": "LA",
+      "year": 2040,
+      "cef_load": 0.8,
+      "lrmer_co2e": 335.4
+    },
+    {
+      "state": "LA",
+      "year": 2045,
+      "cef_load": 0.8,
+      "lrmer_co2e": 269.8
+    },
+    {
+      "state": "LA",
+      "year": 2050,
+      "cef_load": 0.75,
+      "lrmer_co2e": 243.5
+    },
+    {
+      "state": "MA",
+      "year": 2024,
+      "cef_load": 0.67,
+      "lrmer_co2e": 387.6
+    },
+    {
+      "state": "MA",
+      "year": 2026,
+      "cef_load": 0.68,
+      "lrmer_co2e": 332.7
+    },
+    {
+      "state": "MA",
+      "year": 2028,
+      "cef_load": 0.72,
+      "lrmer_co2e": 273.5
+    },
+    {
+      "state": "MA",
+      "year": 2030,
+      "cef_load": 0.74,
+      "lrmer_co2e": 229
+    },
+    {
+      "state": "MA",
+      "year": 2035,
+      "cef_load": 0.8,
+      "lrmer_co2e": 197.4
+    },
+    {
+      "state": "MA",
+      "year": 2040,
+      "cef_load": 0.8,
+      "lrmer_co2e": 176.8
+    },
+    {
+      "state": "MA",
+      "year": 2045,
+      "cef_load": 0.77,
+      "lrmer_co2e": 152.5
+    },
+    {
+      "state": "MA",
+      "year": 2050,
+      "cef_load": 0.79,
+      "lrmer_co2e": 141.3
+    },
+    {
+      "state": "MD",
+      "year": 2024,
+      "cef_load": 0.56,
+      "lrmer_co2e": 409.6
+    },
+    {
+      "state": "MD",
+      "year": 2026,
+      "cef_load": 0.61,
+      "lrmer_co2e": 347
+    },
+    {
+      "state": "MD",
+      "year": 2028,
+      "cef_load": 0.63,
+      "lrmer_co2e": 270.1
+    },
+    {
+      "state": "MD",
+      "year": 2030,
+      "cef_load": 0.65,
+      "lrmer_co2e": 256.6
+    },
+    {
+      "state": "MD",
+      "year": 2035,
+      "cef_load": 0.71,
+      "lrmer_co2e": 262.2
+    },
+    {
+      "state": "MD",
+      "year": 2040,
+      "cef_load": 0.74,
+      "lrmer_co2e": 272.5
+    },
+    {
+      "state": "MD",
+      "year": 2045,
+      "cef_load": 0.74,
+      "lrmer_co2e": 274.7
+    },
+    {
+      "state": "MD",
+      "year": 2050,
+      "cef_load": 0.72,
+      "lrmer_co2e": 272.4
+    },
+    {
+      "state": "ME",
+      "year": 2024,
+      "cef_load": 0.93,
+      "lrmer_co2e": 282.5
+    },
+    {
+      "state": "ME",
+      "year": 2026,
+      "cef_load": 0.91,
+      "lrmer_co2e": 235.3
+    },
+    {
+      "state": "ME",
+      "year": 2028,
+      "cef_load": 0.91,
+      "lrmer_co2e": 185.1
+    },
+    {
+      "state": "ME",
+      "year": 2030,
+      "cef_load": 0.94,
+      "lrmer_co2e": 163.5
+    },
+    {
+      "state": "ME",
+      "year": 2035,
+      "cef_load": 0.95,
+      "lrmer_co2e": 156
+    },
+    {
+      "state": "ME",
+      "year": 2040,
+      "cef_load": 0.95,
+      "lrmer_co2e": 163.2
+    },
+    {
+      "state": "ME",
+      "year": 2045,
+      "cef_load": 0.92,
+      "lrmer_co2e": 168.3
+    },
+    {
+      "state": "ME",
+      "year": 2050,
+      "cef_load": 0.9,
+      "lrmer_co2e": 172.1
+    },
+    {
+      "state": "MI",
+      "year": 2024,
+      "cef_load": 0.39,
+      "lrmer_co2e": 434.2
+    },
+    {
+      "state": "MI",
+      "year": 2026,
+      "cef_load": 0.37,
+      "lrmer_co2e": 421.2
+    },
+    {
+      "state": "MI",
+      "year": 2028,
+      "cef_load": 0.41,
+      "lrmer_co2e": 414.9
+    },
+    {
+      "state": "MI",
+      "year": 2030,
+      "cef_load": 0.46,
+      "lrmer_co2e": 414.1
+    },
+    {
+      "state": "MI",
+      "year": 2035,
+      "cef_load": 0.41,
+      "lrmer_co2e": 429.5
+    },
+    {
+      "state": "MI",
+      "year": 2040,
+      "cef_load": 0.46,
+      "lrmer_co2e": 432.4
+    },
+    {
+      "state": "MI",
+      "year": 2045,
+      "cef_load": 0.49,
+      "lrmer_co2e": 429.7
+    },
+    {
+      "state": "MI",
+      "year": 2050,
+      "cef_load": 0.5,
+      "lrmer_co2e": 415
+    },
+    {
+      "state": "MN",
+      "year": 2024,
+      "cef_load": 0.73,
+      "lrmer_co2e": 285.4
+    },
+    {
+      "state": "MN",
+      "year": 2026,
+      "cef_load": 0.84,
+      "lrmer_co2e": 163.7
+    },
+    {
+      "state": "MN",
+      "year": 2028,
+      "cef_load": 0.9,
+      "lrmer_co2e": 92.7
+    },
+    {
+      "state": "MN",
+      "year": 2030,
+      "cef_load": 0.93,
+      "lrmer_co2e": 109.5
+    },
+    {
+      "state": "MN",
+      "year": 2035,
+      "cef_load": 0.97,
+      "lrmer_co2e": 138.2
+    },
+    {
+      "state": "MN",
+      "year": 2040,
+      "cef_load": 0.98,
+      "lrmer_co2e": 156.7
+    },
+    {
+      "state": "MN",
+      "year": 2045,
+      "cef_load": 0.97,
+      "lrmer_co2e": 156.6
+    },
+    {
+      "state": "MN",
+      "year": 2050,
+      "cef_load": 0.97,
+      "lrmer_co2e": 158.6
+    },
+    {
+      "state": "MO",
+      "year": 2024,
+      "cef_load": 0.42,
+      "lrmer_co2e": 400
+    },
+    {
+      "state": "MO",
+      "year": 2026,
+      "cef_load": 0.5,
+      "lrmer_co2e": 288.1
+    },
+    {
+      "state": "MO",
+      "year": 2028,
+      "cef_load": 0.69,
+      "lrmer_co2e": 189.3
+    },
+    {
+      "state": "MO",
+      "year": 2030,
+      "cef_load": 0.78,
+      "lrmer_co2e": 167.6
+    },
+    {
+      "state": "MO",
+      "year": 2035,
+      "cef_load": 0.81,
+      "lrmer_co2e": 208
+    },
+    {
+      "state": "MO",
+      "year": 2040,
+      "cef_load": 0.88,
+      "lrmer_co2e": 215.6
+    },
+    {
+      "state": "MO",
+      "year": 2045,
+      "cef_load": 0.91,
+      "lrmer_co2e": 219.8
+    },
+    {
+      "state": "MO",
+      "year": 2050,
+      "cef_load": 0.94,
+      "lrmer_co2e": 197.7
+    },
+    {
+      "state": "MS",
+      "year": 2024,
+      "cef_load": 0.31,
+      "lrmer_co2e": 469.3
+    },
+    {
+      "state": "MS",
+      "year": 2026,
+      "cef_load": 0.36,
+      "lrmer_co2e": 437.8
+    },
+    {
+      "state": "MS",
+      "year": 2028,
+      "cef_load": 0.53,
+      "lrmer_co2e": 394.7
+    },
+    {
+      "state": "MS",
+      "year": 2030,
+      "cef_load": 0.64,
+      "lrmer_co2e": 403.8
+    },
+    {
+      "state": "MS",
+      "year": 2035,
+      "cef_load": 0.76,
+      "lrmer_co2e": 395.9
+    },
+    {
+      "state": "MS",
+      "year": 2040,
+      "cef_load": 0.88,
+      "lrmer_co2e": 369.5
+    },
+    {
+      "state": "MS",
+      "year": 2045,
+      "cef_load": 0.88,
+      "lrmer_co2e": 312
+    },
+    {
+      "state": "MS",
+      "year": 2050,
+      "cef_load": 0.86,
+      "lrmer_co2e": 283.6
+    },
+    {
+      "state": "MT",
+      "year": 2024,
+      "cef_load": 0.72,
+      "lrmer_co2e": 372.4
+    },
+    {
+      "state": "MT",
+      "year": 2026,
+      "cef_load": 0.86,
+      "lrmer_co2e": 270.9
+    },
+    {
+      "state": "MT",
+      "year": 2028,
+      "cef_load": 0.92,
+      "lrmer_co2e": 189.4
+    },
+    {
+      "state": "MT",
+      "year": 2030,
+      "cef_load": 0.94,
+      "lrmer_co2e": 159.7
+    },
+    {
+      "state": "MT",
+      "year": 2035,
+      "cef_load": 0.95,
+      "lrmer_co2e": 200.6
+    },
+    {
+      "state": "MT",
+      "year": 2040,
+      "cef_load": 0.96,
+      "lrmer_co2e": 241.7
+    },
+    {
+      "state": "MT",
+      "year": 2045,
+      "cef_load": 0.97,
+      "lrmer_co2e": 236.7
+    },
+    {
+      "state": "MT",
+      "year": 2050,
+      "cef_load": 0.98,
+      "lrmer_co2e": 247.4
+    },
+    {
+      "state": "NC",
+      "year": 2024,
+      "cef_load": 0.5,
+      "lrmer_co2e": 375.4
+    },
+    {
+      "state": "NC",
+      "year": 2026,
+      "cef_load": 0.56,
+      "lrmer_co2e": 275.1
+    },
+    {
+      "state": "NC",
+      "year": 2028,
+      "cef_load": 0.65,
+      "lrmer_co2e": 197.6
+    },
+    {
+      "state": "NC",
+      "year": 2030,
+      "cef_load": 0.69,
+      "lrmer_co2e": 180.8
+    },
+    {
+      "state": "NC",
+      "year": 2035,
+      "cef_load": 0.78,
+      "lrmer_co2e": 152.3
+    },
+    {
+      "state": "NC",
+      "year": 2040,
+      "cef_load": 0.84,
+      "lrmer_co2e": 110.9
+    },
+    {
+      "state": "NC",
+      "year": 2045,
+      "cef_load": 0.92,
+      "lrmer_co2e": 52.2
+    },
+    {
+      "state": "NC",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 24
+    },
+    {
+      "state": "ND",
+      "year": 2024,
+      "cef_load": 0.75,
+      "lrmer_co2e": 288.5
+    },
+    {
+      "state": "ND",
+      "year": 2026,
+      "cef_load": 0.86,
+      "lrmer_co2e": 170.7
+    },
+    {
+      "state": "ND",
+      "year": 2028,
+      "cef_load": 0.93,
+      "lrmer_co2e": 106.8
+    },
+    {
+      "state": "ND",
+      "year": 2030,
+      "cef_load": 0.96,
+      "lrmer_co2e": 127.3
+    },
+    {
+      "state": "ND",
+      "year": 2035,
+      "cef_load": 0.97,
+      "lrmer_co2e": 163.9
+    },
+    {
+      "state": "ND",
+      "year": 2040,
+      "cef_load": 0.99,
+      "lrmer_co2e": 190
+    },
+    {
+      "state": "ND",
+      "year": 2045,
+      "cef_load": 0.99,
+      "lrmer_co2e": 196.1
+    },
+    {
+      "state": "ND",
+      "year": 2050,
+      "cef_load": 0.99,
+      "lrmer_co2e": 200.4
+    },
+    {
+      "state": "NE",
+      "year": 2024,
+      "cef_load": 0.79,
+      "lrmer_co2e": 293.6
+    },
+    {
+      "state": "NE",
+      "year": 2026,
+      "cef_load": 0.86,
+      "lrmer_co2e": 179.8
+    },
+    {
+      "state": "NE",
+      "year": 2028,
+      "cef_load": 0.92,
+      "lrmer_co2e": 114.9
+    },
+    {
+      "state": "NE",
+      "year": 2030,
+      "cef_load": 0.94,
+      "lrmer_co2e": 130.3
+    },
+    {
+      "state": "NE",
+      "year": 2035,
+      "cef_load": 0.94,
+      "lrmer_co2e": 164.1
+    },
+    {
+      "state": "NE",
+      "year": 2040,
+      "cef_load": 0.97,
+      "lrmer_co2e": 189.9
+    },
+    {
+      "state": "NE",
+      "year": 2045,
+      "cef_load": 0.98,
+      "lrmer_co2e": 196.4
+    },
+    {
+      "state": "NE",
+      "year": 2050,
+      "cef_load": 0.98,
+      "lrmer_co2e": 202
+    },
+    {
+      "state": "NH",
+      "year": 2024,
+      "cef_load": 0.94,
+      "lrmer_co2e": 413.3
+    },
+    {
+      "state": "NH",
+      "year": 2026,
+      "cef_load": 0.94,
+      "lrmer_co2e": 388.3
+    },
+    {
+      "state": "NH",
+      "year": 2028,
+      "cef_load": 0.94,
+      "lrmer_co2e": 386.2
+    },
+    {
+      "state": "NH",
+      "year": 2030,
+      "cef_load": 0.95,
+      "lrmer_co2e": 393.3
+    },
+    {
+      "state": "NH",
+      "year": 2035,
+      "cef_load": 0.96,
+      "lrmer_co2e": 398.6
+    },
+    {
+      "state": "NH",
+      "year": 2040,
+      "cef_load": 0.95,
+      "lrmer_co2e": 370.1
+    },
+    {
+      "state": "NH",
+      "year": 2045,
+      "cef_load": 0.93,
+      "lrmer_co2e": 321.4
+    },
+    {
+      "state": "NH",
+      "year": 2050,
+      "cef_load": 0.92,
+      "lrmer_co2e": 294.4
+    },
+    {
+      "state": "NJ",
+      "year": 2024,
+      "cef_load": 0.48,
+      "lrmer_co2e": 410.3
+    },
+    {
+      "state": "NJ",
+      "year": 2026,
+      "cef_load": 0.51,
+      "lrmer_co2e": 360.3
+    },
+    {
+      "state": "NJ",
+      "year": 2028,
+      "cef_load": 0.57,
+      "lrmer_co2e": 288.2
+    },
+    {
+      "state": "NJ",
+      "year": 2030,
+      "cef_load": 0.6,
+      "lrmer_co2e": 285.1
+    },
+    {
+      "state": "NJ",
+      "year": 2035,
+      "cef_load": 0.67,
+      "lrmer_co2e": 289.9
+    },
+    {
+      "state": "NJ",
+      "year": 2040,
+      "cef_load": 0.67,
+      "lrmer_co2e": 310
+    },
+    {
+      "state": "NJ",
+      "year": 2045,
+      "cef_load": 0.65,
+      "lrmer_co2e": 315.2
+    },
+    {
+      "state": "NJ",
+      "year": 2050,
+      "cef_load": 0.68,
+      "lrmer_co2e": 315.5
+    },
+    {
+      "state": "NM",
+      "year": 2024,
+      "cef_load": 0.68,
+      "lrmer_co2e": 338.2
+    },
+    {
+      "state": "NM",
+      "year": 2026,
+      "cef_load": 0.79,
+      "lrmer_co2e": 214.1
+    },
+    {
+      "state": "NM",
+      "year": 2028,
+      "cef_load": 0.89,
+      "lrmer_co2e": 135.7
+    },
+    {
+      "state": "NM",
+      "year": 2030,
+      "cef_load": 0.92,
+      "lrmer_co2e": 80.6
+    },
+    {
+      "state": "NM",
+      "year": 2035,
+      "cef_load": 0.97,
+      "lrmer_co2e": 99.2
+    },
+    {
+      "state": "NM",
+      "year": 2040,
+      "cef_load": 0.98,
+      "lrmer_co2e": 103.5
+    },
+    {
+      "state": "NM",
+      "year": 2045,
+      "cef_load": 0.99,
+      "lrmer_co2e": 66.2
+    },
+    {
+      "state": "NM",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 39.6
+    },
+    {
+      "state": "NV",
+      "year": 2024,
+      "cef_load": 0.59,
+      "lrmer_co2e": 328.7
+    },
+    {
+      "state": "NV",
+      "year": 2026,
+      "cef_load": 0.64,
+      "lrmer_co2e": 218.5
+    },
+    {
+      "state": "NV",
+      "year": 2028,
+      "cef_load": 0.75,
+      "lrmer_co2e": 145.1
+    },
+    {
+      "state": "NV",
+      "year": 2030,
+      "cef_load": 0.8,
+      "lrmer_co2e": 100.8
+    },
+    {
+      "state": "NV",
+      "year": 2035,
+      "cef_load": 0.86,
+      "lrmer_co2e": 133.3
+    },
+    {
+      "state": "NV",
+      "year": 2040,
+      "cef_load": 0.91,
+      "lrmer_co2e": 165.3
+    },
+    {
+      "state": "NV",
+      "year": 2045,
+      "cef_load": 0.94,
+      "lrmer_co2e": 168.4
+    },
+    {
+      "state": "NV",
+      "year": 2050,
+      "cef_load": 0.93,
+      "lrmer_co2e": 173.3
+    },
+    {
+      "state": "NY",
+      "year": 2024,
+      "cef_load": 0.65,
+      "lrmer_co2e": 307.3
+    },
+    {
+      "state": "NY",
+      "year": 2026,
+      "cef_load": 0.73,
+      "lrmer_co2e": 266.4
+    },
+    {
+      "state": "NY",
+      "year": 2028,
+      "cef_load": 0.76,
+      "lrmer_co2e": 174.6
+    },
+    {
+      "state": "NY",
+      "year": 2030,
+      "cef_load": 0.9,
+      "lrmer_co2e": 102
+    },
+    {
+      "state": "NY",
+      "year": 2035,
+      "cef_load": 0.95,
+      "lrmer_co2e": 31.2
+    },
+    {
+      "state": "NY",
+      "year": 2040,
+      "cef_load": 1,
+      "lrmer_co2e": 9
+    },
+    {
+      "state": "NY",
+      "year": 2045,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "NY",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "OH",
+      "year": 2024,
+      "cef_load": 0.24,
+      "lrmer_co2e": 451.6
+    },
+    {
+      "state": "OH",
+      "year": 2026,
+      "cef_load": 0.27,
+      "lrmer_co2e": 430.5
+    },
+    {
+      "state": "OH",
+      "year": 2028,
+      "cef_load": 0.4,
+      "lrmer_co2e": 387.6
+    },
+    {
+      "state": "OH",
+      "year": 2030,
+      "cef_load": 0.5,
+      "lrmer_co2e": 385.2
+    },
+    {
+      "state": "OH",
+      "year": 2035,
+      "cef_load": 0.5,
+      "lrmer_co2e": 395.5
+    },
+    {
+      "state": "OH",
+      "year": 2040,
+      "cef_load": 0.62,
+      "lrmer_co2e": 411
+    },
+    {
+      "state": "OH",
+      "year": 2045,
+      "cef_load": 0.62,
+      "lrmer_co2e": 408.2
+    },
+    {
+      "state": "OH",
+      "year": 2050,
+      "cef_load": 0.56,
+      "lrmer_co2e": 403
+    },
+    {
+      "state": "OK",
+      "year": 2024,
+      "cef_load": 0.81,
+      "lrmer_co2e": 402.4
+    },
+    {
+      "state": "OK",
+      "year": 2026,
+      "cef_load": 0.85,
+      "lrmer_co2e": 283.2
+    },
+    {
+      "state": "OK",
+      "year": 2028,
+      "cef_load": 0.9,
+      "lrmer_co2e": 179.4
+    },
+    {
+      "state": "OK",
+      "year": 2030,
+      "cef_load": 0.93,
+      "lrmer_co2e": 123.5
+    },
+    {
+      "state": "OK",
+      "year": 2035,
+      "cef_load": 0.95,
+      "lrmer_co2e": 152.7
+    },
+    {
+      "state": "OK",
+      "year": 2040,
+      "cef_load": 0.97,
+      "lrmer_co2e": 190.8
+    },
+    {
+      "state": "OK",
+      "year": 2045,
+      "cef_load": 0.97,
+      "lrmer_co2e": 208
+    },
+    {
+      "state": "OK",
+      "year": 2050,
+      "cef_load": 0.96,
+      "lrmer_co2e": 207.4
+    },
+    {
+      "state": "OR",
+      "year": 2024,
+      "cef_load": 0.83,
+      "lrmer_co2e": 368.8
+    },
+    {
+      "state": "OR",
+      "year": 2026,
+      "cef_load": 0.85,
+      "lrmer_co2e": 268.3
+    },
+    {
+      "state": "OR",
+      "year": 2028,
+      "cef_load": 0.89,
+      "lrmer_co2e": 177.6
+    },
+    {
+      "state": "OR",
+      "year": 2030,
+      "cef_load": 0.92,
+      "lrmer_co2e": 80.6
+    },
+    {
+      "state": "OR",
+      "year": 2035,
+      "cef_load": 0.93,
+      "lrmer_co2e": 50.1
+    },
+    {
+      "state": "OR",
+      "year": 2040,
+      "cef_load": 1,
+      "lrmer_co2e": 18.2
+    },
+    {
+      "state": "OR",
+      "year": 2045,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "OR",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "PA",
+      "year": 2024,
+      "cef_load": 0.4,
+      "lrmer_co2e": 431.9
+    },
+    {
+      "state": "PA",
+      "year": 2026,
+      "cef_load": 0.42,
+      "lrmer_co2e": 397.1
+    },
+    {
+      "state": "PA",
+      "year": 2028,
+      "cef_load": 0.46,
+      "lrmer_co2e": 349.8
+    },
+    {
+      "state": "PA",
+      "year": 2030,
+      "cef_load": 0.49,
+      "lrmer_co2e": 367.1
+    },
+    {
+      "state": "PA",
+      "year": 2035,
+      "cef_load": 0.54,
+      "lrmer_co2e": 397.8
+    },
+    {
+      "state": "PA",
+      "year": 2040,
+      "cef_load": 0.58,
+      "lrmer_co2e": 426.3
+    },
+    {
+      "state": "PA",
+      "year": 2045,
+      "cef_load": 0.57,
+      "lrmer_co2e": 425.4
+    },
+    {
+      "state": "PA",
+      "year": 2050,
+      "cef_load": 0.54,
+      "lrmer_co2e": 417.8
+    },
+    {
+      "state": "RI",
+      "year": 2024,
+      "cef_load": 0.57,
+      "lrmer_co2e": 380.9
+    },
+    {
+      "state": "RI",
+      "year": 2026,
+      "cef_load": 0.65,
+      "lrmer_co2e": 313.4
+    },
+    {
+      "state": "RI",
+      "year": 2028,
+      "cef_load": 0.67,
+      "lrmer_co2e": 233.2
+    },
+    {
+      "state": "RI",
+      "year": 2030,
+      "cef_load": 0.71,
+      "lrmer_co2e": 132.6
+    },
+    {
+      "state": "RI",
+      "year": 2035,
+      "cef_load": 0.99,
+      "lrmer_co2e": 56.5
+    },
+    {
+      "state": "RI",
+      "year": 2040,
+      "cef_load": 0.99,
+      "lrmer_co2e": 6
+    },
+    {
+      "state": "RI",
+      "year": 2045,
+      "cef_load": 0.99,
+      "lrmer_co2e": 6.2
+    },
+    {
+      "state": "RI",
+      "year": 2050,
+      "cef_load": 0.99,
+      "lrmer_co2e": 6.3
+    },
+    {
+      "state": "SC",
+      "year": 2024,
+      "cef_load": 0.66,
+      "lrmer_co2e": 378.6
+    },
+    {
+      "state": "SC",
+      "year": 2026,
+      "cef_load": 0.72,
+      "lrmer_co2e": 283.4
+    },
+    {
+      "state": "SC",
+      "year": 2028,
+      "cef_load": 0.81,
+      "lrmer_co2e": 227.3
+    },
+    {
+      "state": "SC",
+      "year": 2030,
+      "cef_load": 0.86,
+      "lrmer_co2e": 244.3
+    },
+    {
+      "state": "SC",
+      "year": 2035,
+      "cef_load": 0.91,
+      "lrmer_co2e": 301.1
+    },
+    {
+      "state": "SC",
+      "year": 2040,
+      "cef_load": 0.93,
+      "lrmer_co2e": 355.7
+    },
+    {
+      "state": "SC",
+      "year": 2045,
+      "cef_load": 0.92,
+      "lrmer_co2e": 376.9
+    },
+    {
+      "state": "SC",
+      "year": 2050,
+      "cef_load": 0.9,
+      "lrmer_co2e": 376
+    },
+    {
+      "state": "SD",
+      "year": 2024,
+      "cef_load": 0.78,
+      "lrmer_co2e": 303.8
+    },
+    {
+      "state": "SD",
+      "year": 2026,
+      "cef_load": 0.85,
+      "lrmer_co2e": 192.3
+    },
+    {
+      "state": "SD",
+      "year": 2028,
+      "cef_load": 0.91,
+      "lrmer_co2e": 124.3
+    },
+    {
+      "state": "SD",
+      "year": 2030,
+      "cef_load": 0.95,
+      "lrmer_co2e": 135.7
+    },
+    {
+      "state": "SD",
+      "year": 2035,
+      "cef_load": 0.96,
+      "lrmer_co2e": 168.5
+    },
+    {
+      "state": "SD",
+      "year": 2040,
+      "cef_load": 0.98,
+      "lrmer_co2e": 196.2
+    },
+    {
+      "state": "SD",
+      "year": 2045,
+      "cef_load": 0.98,
+      "lrmer_co2e": 201.4
+    },
+    {
+      "state": "SD",
+      "year": 2050,
+      "cef_load": 0.98,
+      "lrmer_co2e": 208.1
+    },
+    {
+      "state": "TN",
+      "year": 2024,
+      "cef_load": 0.51,
+      "lrmer_co2e": 367.4
+    },
+    {
+      "state": "TN",
+      "year": 2026,
+      "cef_load": 0.61,
+      "lrmer_co2e": 359.1
+    },
+    {
+      "state": "TN",
+      "year": 2028,
+      "cef_load": 0.72,
+      "lrmer_co2e": 366.9
+    },
+    {
+      "state": "TN",
+      "year": 2030,
+      "cef_load": 0.77,
+      "lrmer_co2e": 434.1
+    },
+    {
+      "state": "TN",
+      "year": 2035,
+      "cef_load": 0.81,
+      "lrmer_co2e": 485.1
+    },
+    {
+      "state": "TN",
+      "year": 2040,
+      "cef_load": 0.84,
+      "lrmer_co2e": 479.1
+    },
+    {
+      "state": "TN",
+      "year": 2045,
+      "cef_load": 0.87,
+      "lrmer_co2e": 446.8
+    },
+    {
+      "state": "TN",
+      "year": 2050,
+      "cef_load": 0.87,
+      "lrmer_co2e": 411.1
+    },
+    {
+      "state": "TX",
+      "year": 2024,
+      "cef_load": 0.58,
+      "lrmer_co2e": 312.5
+    },
+    {
+      "state": "TX",
+      "year": 2026,
+      "cef_load": 0.68,
+      "lrmer_co2e": 209.4
+    },
+    {
+      "state": "TX",
+      "year": 2028,
+      "cef_load": 0.8,
+      "lrmer_co2e": 98
+    },
+    {
+      "state": "TX",
+      "year": 2030,
+      "cef_load": 0.85,
+      "lrmer_co2e": 64.6
+    },
+    {
+      "state": "TX",
+      "year": 2035,
+      "cef_load": 0.9,
+      "lrmer_co2e": 91.5
+    },
+    {
+      "state": "TX",
+      "year": 2040,
+      "cef_load": 0.91,
+      "lrmer_co2e": 113.9
+    },
+    {
+      "state": "TX",
+      "year": 2045,
+      "cef_load": 0.91,
+      "lrmer_co2e": 103.1
+    },
+    {
+      "state": "TX",
+      "year": 2050,
+      "cef_load": 0.91,
+      "lrmer_co2e": 80.7
+    },
+    {
+      "state": "UT",
+      "year": 2024,
+      "cef_load": 0.34,
+      "lrmer_co2e": 372.9
+    },
+    {
+      "state": "UT",
+      "year": 2026,
+      "cef_load": 0.44,
+      "lrmer_co2e": 271.2
+    },
+    {
+      "state": "UT",
+      "year": 2028,
+      "cef_load": 0.62,
+      "lrmer_co2e": 189
+    },
+    {
+      "state": "UT",
+      "year": 2030,
+      "cef_load": 0.7,
+      "lrmer_co2e": 158.3
+    },
+    {
+      "state": "UT",
+      "year": 2035,
+      "cef_load": 0.8,
+      "lrmer_co2e": 200
+    },
+    {
+      "state": "UT",
+      "year": 2040,
+      "cef_load": 0.84,
+      "lrmer_co2e": 242
+    },
+    {
+      "state": "UT",
+      "year": 2045,
+      "cef_load": 0.89,
+      "lrmer_co2e": 237
+    },
+    {
+      "state": "UT",
+      "year": 2050,
+      "cef_load": 0.9,
+      "lrmer_co2e": 248.1
+    },
+    {
+      "state": "VA",
+      "year": 2024,
+      "cef_load": 0.47,
+      "lrmer_co2e": 393.5
+    },
+    {
+      "state": "VA",
+      "year": 2026,
+      "cef_load": 0.51,
+      "lrmer_co2e": 303.8
+    },
+    {
+      "state": "VA",
+      "year": 2028,
+      "cef_load": 0.56,
+      "lrmer_co2e": 239.2
+    },
+    {
+      "state": "VA",
+      "year": 2030,
+      "cef_load": 0.6,
+      "lrmer_co2e": 241.9
+    },
+    {
+      "state": "VA",
+      "year": 2035,
+      "cef_load": 0.66,
+      "lrmer_co2e": 225.5
+    },
+    {
+      "state": "VA",
+      "year": 2040,
+      "cef_load": 0.75,
+      "lrmer_co2e": 155.5
+    },
+    {
+      "state": "VA",
+      "year": 2045,
+      "cef_load": 0.95,
+      "lrmer_co2e": 67.3
+    },
+    {
+      "state": "VA",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 13.2
+    },
+    {
+      "state": "VT",
+      "year": 2024,
+      "cef_load": 1,
+      "lrmer_co2e": 207.4
+    },
+    {
+      "state": "VT",
+      "year": 2026,
+      "cef_load": 1,
+      "lrmer_co2e": 186.5
+    },
+    {
+      "state": "VT",
+      "year": 2028,
+      "cef_load": 1,
+      "lrmer_co2e": 166.8
+    },
+    {
+      "state": "VT",
+      "year": 2030,
+      "cef_load": 1,
+      "lrmer_co2e": 156.3
+    },
+    {
+      "state": "VT",
+      "year": 2035,
+      "cef_load": 1,
+      "lrmer_co2e": 147.9
+    },
+    {
+      "state": "VT",
+      "year": 2040,
+      "cef_load": 0.97,
+      "lrmer_co2e": 147.1
+    },
+    {
+      "state": "VT",
+      "year": 2045,
+      "cef_load": 0.96,
+      "lrmer_co2e": 151.8
+    },
+    {
+      "state": "VT",
+      "year": 2050,
+      "cef_load": 0.96,
+      "lrmer_co2e": 155.2
+    },
+    {
+      "state": "WA",
+      "year": 2024,
+      "cef_load": 0.9,
+      "lrmer_co2e": 283
+    },
+    {
+      "state": "WA",
+      "year": 2026,
+      "cef_load": 0.93,
+      "lrmer_co2e": 194.6
+    },
+    {
+      "state": "WA",
+      "year": 2028,
+      "cef_load": 0.96,
+      "lrmer_co2e": 103.1
+    },
+    {
+      "state": "WA",
+      "year": 2030,
+      "cef_load": 1,
+      "lrmer_co2e": 31
+    },
+    {
+      "state": "WA",
+      "year": 2035,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "WA",
+      "year": 2040,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "WA",
+      "year": 2045,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "WA",
+      "year": 2050,
+      "cef_load": 1,
+      "lrmer_co2e": 0
+    },
+    {
+      "state": "WI",
+      "year": 2024,
+      "cef_load": 0.5,
+      "lrmer_co2e": 377.7
+    },
+    {
+      "state": "WI",
+      "year": 2026,
+      "cef_load": 0.59,
+      "lrmer_co2e": 316.1
+    },
+    {
+      "state": "WI",
+      "year": 2028,
+      "cef_load": 0.73,
+      "lrmer_co2e": 268.5
+    },
+    {
+      "state": "WI",
+      "year": 2030,
+      "cef_load": 0.8,
+      "lrmer_co2e": 265.8
+    },
+    {
+      "state": "WI",
+      "year": 2035,
+      "cef_load": 0.83,
+      "lrmer_co2e": 281.7
+    },
+    {
+      "state": "WI",
+      "year": 2040,
+      "cef_load": 0.86,
+      "lrmer_co2e": 294.8
+    },
+    {
+      "state": "WI",
+      "year": 2045,
+      "cef_load": 0.85,
+      "lrmer_co2e": 304.8
+    },
+    {
+      "state": "WI",
+      "year": 2050,
+      "cef_load": 0.82,
+      "lrmer_co2e": 305.6
+    },
+    {
+      "state": "WV",
+      "year": 2024,
+      "cef_load": 0.26,
+      "lrmer_co2e": 454.9
+    },
+    {
+      "state": "WV",
+      "year": 2026,
+      "cef_load": 0.31,
+      "lrmer_co2e": 432.7
+    },
+    {
+      "state": "WV",
+      "year": 2028,
+      "cef_load": 0.42,
+      "lrmer_co2e": 388.4
+    },
+    {
+      "state": "WV",
+      "year": 2030,
+      "cef_load": 0.47,
+      "lrmer_co2e": 386.1
+    },
+    {
+      "state": "WV",
+      "year": 2035,
+      "cef_load": 0.55,
+      "lrmer_co2e": 396.8
+    },
+    {
+      "state": "WV",
+      "year": 2040,
+      "cef_load": 0.63,
+      "lrmer_co2e": 412.2
+    },
+    {
+      "state": "WV",
+      "year": 2045,
+      "cef_load": 0.64,
+      "lrmer_co2e": 409
+    },
+    {
+      "state": "WV",
+      "year": 2050,
+      "cef_load": 0.61,
+      "lrmer_co2e": 403.3
+    },
+    {
+      "state": "WY",
+      "year": 2024,
+      "cef_load": 0.31,
+      "lrmer_co2e": 391.7
+    },
+    {
+      "state": "WY",
+      "year": 2026,
+      "cef_load": 0.46,
+      "lrmer_co2e": 299.2
+    },
+    {
+      "state": "WY",
+      "year": 2028,
+      "cef_load": 0.66,
+      "lrmer_co2e": 210.5
+    },
+    {
+      "state": "WY",
+      "year": 2030,
+      "cef_load": 0.78,
+      "lrmer_co2e": 172.8
+    },
+    {
+      "state": "WY",
+      "year": 2035,
+      "cef_load": 0.84,
+      "lrmer_co2e": 197.2
+    },
+    {
+      "state": "WY",
+      "year": 2040,
+      "cef_load": 0.89,
+      "lrmer_co2e": 236
+    },
+    {
+      "state": "WY",
+      "year": 2045,
+      "cef_load": 0.95,
+      "lrmer_co2e": 233.7
+    },
+    {
+      "state": "WY",
+      "year": 2050,
+      "cef_load": 0.95,
+      "lrmer_co2e": 249.4
+    }
+  ]

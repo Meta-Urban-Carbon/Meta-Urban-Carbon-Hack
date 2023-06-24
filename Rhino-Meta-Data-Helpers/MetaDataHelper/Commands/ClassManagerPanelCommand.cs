@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using Rhino;
+﻿using Rhino;
 using Rhino.Commands;
 
 namespace MetaDataHelper
@@ -23,17 +17,14 @@ namespace MetaDataHelper
         /// <summary>
         /// The command name as it appears on the Rhino command line.
         /// </summary>
-        public override string EnglishName
-        {
-            get { return "ClassManagerPanelCommand"; }
-        }
+        public override string EnglishName => "ClassManagerPanelCommand";
 
         /// <summary>
         /// Called by Rhino when the user wants to run this command.
         /// </summary>
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
-            System.Guid panelId = MetaDataHelperPanelHost.PanelId;
+            System.Guid panelId = ClassManagerPanelHost.PanelId;
             bool bVisible = Rhino.UI.Panels.IsPanelVisible(panelId);
 
             string prompt = (bVisible)

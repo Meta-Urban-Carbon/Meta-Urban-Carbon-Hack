@@ -1,9 +1,4 @@
-﻿using Rhino;
-using System;
-using System.Runtime.InteropServices;
-using MetaDataHelper.View;
-
-namespace MetaDataHelper
+﻿namespace MetaDataHelper
 {
     ///<summary>
     /// <para>Every RhinoCommon .rhp assembly must have one and only one PlugIn-derived
@@ -32,33 +27,10 @@ namespace MetaDataHelper
         /// </summary>
         protected override Rhino.PlugIns.LoadReturnCode OnLoad(ref string errorMessage)
         {
-            System.Type panel_type = typeof(MetaDataHelperPanelHost);
+            System.Type panel_type = typeof(ClassManagerPanelHost);
             Rhino.UI.Panels.RegisterPanel(this, panel_type, "MetaDataHelper", MetaDataHelper.Properties.Resources.SampleCsWpfPanel);
 
             return Rhino.PlugIns.LoadReturnCode.Success;
-        }
-    }
-
-    /// <summary>
-    /// Rhino framework requires a System.Windows.Forms.IWin32Window derived object for a panel.
-    /// </summary>
-    [System.Runtime.InteropServices.Guid("BDFBAF41-D939-419E-8603-2FC6AC5806A7")]
-    public class MetaDataHelperPanelHost : RhinoWindows.Controls.WpfElementHost
-    {
-        public MetaDataHelperPanelHost()
-            : base(new MetaDataHelperPanelUserControl(), new ViewModel())
-        {
-        }
-
-        /// <summary>
-        /// Returns the ID of this panel.
-        /// </summary>
-        public static System.Guid PanelId
-        {
-            get
-            {
-                return typeof(MetaDataHelperPanelHost).GUID;
-            }
         }
     }
 }

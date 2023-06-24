@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rhino;
+﻿using Rhino;
 using Rhino.Commands;
-using Rhino.Geometry;
-using Rhino.Input;
-using Rhino.Input.Custom;
-using System;
-using System.Collections.Generic;
 
-namespace MetaDataHelper
+namespace MetaDataHelper.Commands
 {
     internal class ClassManagerWindowCommand : Command
     {
@@ -26,7 +16,7 @@ namespace MetaDataHelper
         public static ClassManagerWindowCommand Instance { get; private set; }
 
         ///<returns>The command name as it appears on the Rhino command line.</returns>
-        public override string EnglishName => "UserStringClassManager";
+        public override string EnglishName => "ClassManagerWindowCommand";
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {

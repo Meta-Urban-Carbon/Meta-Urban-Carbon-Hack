@@ -3,10 +3,8 @@ using Rhino.Commands;
 using Rhino.Geometry;
 using Rhino.Input;
 using Rhino.Input.Custom;
-using System;
-using System.Collections.Generic;
 
-namespace MetaDataHelper
+namespace MetaDataHelper.Commands
 {
     public class MetaDataHelperCommand : Command
     {

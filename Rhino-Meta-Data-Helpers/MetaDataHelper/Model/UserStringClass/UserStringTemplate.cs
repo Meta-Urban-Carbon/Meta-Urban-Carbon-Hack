@@ -6,23 +6,22 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using MetaDataHelper.UserStringTemplate;
 using Rhino;
 
 namespace MetaDataHelper.UserStringClass
 {
-    public class UserStringTemplate : ObservableCollection<UserString>, INotifyPropertyChanged
+    public class UserStringTemplate : ObservableCollection<UserStringDefinition>, INotifyPropertyChanged
     {
 
         public void Assign(RhinoDoc doc, Guid guid)
         {
             var docObject = doc.Objects.FindId(guid);
 
-            foreach (var UserString in this)
+            foreach (var UserStringDeffinition in this)
             {
-                docObject.Attributes.SetUserString(UserString.Key, UserString.Value.ToString());
+                var userString = UserStringDeffinition.GetCurrentUserString();
+                docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
             }
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

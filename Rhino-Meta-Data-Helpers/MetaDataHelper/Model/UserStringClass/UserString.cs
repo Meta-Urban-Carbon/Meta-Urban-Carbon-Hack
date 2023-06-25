@@ -9,6 +9,12 @@ namespace MetaDataHelper.UserStringClass
 {
     public class UserString
     {
+        public UserString(string key, string value)
+        {
+            this.Key = key;
+            this.Value = value;
+        }
+
         /// <summary>
         /// The Key for User String
         /// </summary>
@@ -18,11 +24,6 @@ namespace MetaDataHelper.UserStringClass
         /// The Value For User String
         /// </summary>
         public string Value { get; set; }
-
-        /// <summary>
-        /// The Type of the Value for UserString <see cref="UserStringValueType"/>
-        /// </summary>
-        public UserStringValueType ValueType { get; set; }
 
         public void Assign(Guid guid)
         {

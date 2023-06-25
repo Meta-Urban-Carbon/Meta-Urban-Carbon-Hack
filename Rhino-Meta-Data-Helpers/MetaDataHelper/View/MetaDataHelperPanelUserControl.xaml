@@ -9,8 +9,111 @@
              Width="Auto"
              d:DesignHeight="450"
              d:DesignWidth="800"
-             >
+>
     <Grid>
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
+        <!-- Master Grid Definition -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="1"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="1"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="1" Grid.Column="1"
+               Content="{Binding Message}"/>
+
+        <!-- Layer Button Stack. -->
+        <StackPanel Grid.Row="3" Grid.Column="1"
+                    Orientation="Horizontal">
+
+            <!-- Import SHP Button. -->
+            <Button
+                FontSize="10"
+                Padding="2"
+                Margin="2"
+                Command="{Binding AddUserStringDefinitionCommand}"
+                CommandParameter="test"
+                >
+                Add User String Definition
+            </Button>
+
+            <!-- other button -->
+            <Button FontSize="10"
+                    Padding="2"
+                    Margin="2"
+                >
+                Save Template
+            </Button>
+
+            <!-- other button -->
+            <Button FontSize="10"
+                    Padding="2"
+                    Margin="2">
+                Load Template
+            </Button>
+        </StackPanel>
+
+        <ListView Grid.Row="4" Grid.Column="1" 
+                  ItemsSource="{Binding CurrentTemplate}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Title">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Key">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedItem="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}">
+                                    <!-- Add ComboBoxItems for the keys here -->
+                                </ComboBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Type">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedItem="{Binding Path=ValueType, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="Select"/>
+                                    <ComboBoxItem Content="String"/>
+                                </ComboBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Update" 
+                                    CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
+
 </UserControl>

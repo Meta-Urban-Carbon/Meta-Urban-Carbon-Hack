@@ -23,5 +23,18 @@ namespace MetaDataHelper.UserStringClass
         {
             this.Add(keyOption.ToString());
         }
+
+        public void RemoveOption(String option)
+        {
+            var i = 0;
+            foreach (var o in this)
+            {
+                if (o == option)
+                {
+                    this.RemoveItem(i);
+                }
+                i++;
+            }
+        }
     }
 }

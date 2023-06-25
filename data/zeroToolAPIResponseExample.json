@@ -1,0 +1,99 @@
+{'values': [
+        {'propOutputList': [
+                {'propType': 'Office', 'propTypeName': None, 'propSize': 10000, 'propPercent': 100, 'areaUnits': 'sq.ft'
+                }
+            ]
+        },
+        {'percentBetterMedian': 0
+        },
+        {'percentBetterTarget': 20
+        },
+        {'percentBetterZEPI': 80
+        },
+        {'medianZEPI': 100
+        },
+        {'medianSiteEUI': 65.1910786478917
+        },
+        {'medianSourceEUI': 164.0976793509
+        },
+        {'percentBetterSiteEUI': 52.15286291831336
+        },
+        {'percentBetterSourceEUI': 131.27814348072
+        },
+        {'medianEmissions': 61.83891426916992
+        },
+        {'percentBetterEmissions': 49.47113141533594
+        },
+        {'medianEmissionsIntensity': 6.183891426916992
+        },
+        {'medianSiteEnergy': 651910.786478917
+        },
+        {'medianSourceEnergy': 1640976.793509
+        },
+        {'percentBetterSiteEnergy': 521528.6291831336
+        },
+        {'percentBetterSourceEnergy': 1312781.4348072
+        },
+        {'parkingEnergy': 0
+        },
+        {'parkingArea': 0
+        }
+    ], 
+    'errors': [
+        {'percentBetterActual': 'Could not read provided energy list'
+        },
+        {'percentBetterActualwOnSite': 'Could not read provided energy list'
+        },
+        {'percentBetterActualwOffSite': 'Could not read provided energy list'
+        },
+        {'percentBetterActualwOnandOffSite': 'Could not read provided energy list'
+        },
+        {'percentBetterActualtoGoal': 'Could not read provided energy list'
+        },
+        {'actualGoalBetter': 'Could not read provided 
+energy list'
+        },
+        {'actualZEPI': 'Could not read provided energy list'
+        },
+        {'siteEUI': 'Could not read provided energy list'
+        },
+        {'siteEUIwOnSite': 'Could not read provided energy list'
+        },
+        {'siteEUIwOffSite': 'Could not read provided energy list'
+        },
+        {'siteEUIwOnAndOffSite': 'Could not read provided energy list'
+        },
+        {'sourceEUI': 'Could not read provided energy list'
+        },
+        {'sourceEUIwOnSite': 'Could not 
+read provided energy list'
+        },
+        {'sourceEUIwOffSite': 'Could not read provided energy list'
+        },
+        {'sourceEUIwOnAndOffSite': 'Could not read provided energy list'
+        },
+        {'totalEmissions': 'Could not read provided energy list'
+        },
+        {'totalEmissionsIntensity': 'Could not read provided energy list'
+        },
+        {'onSiteRenewableTotal': 'Could not read provided energy list'
+        },
+        {'offSitePurchasedTotal': 'Could not read 
+provided energy list'
+        },
+        {'siteEnergyALL': 'Could not read provided energy list'
+        },
+        {'totalSiteEnergy': 'Could not read provided energy list'
+        },
+        {'siteEnergyList': 'Could not read provided energy list'
+        },
+        {'totalSourceEnergy': 'Could not read provided energy list'
+        },
+        {'sourceEnergyList': 'Could not read provided energy list'
+        },
+        {'directSiteEmissions': 'Could not read provided energy list'
+        },
+        {'indirectSiteEmissions': 'Could not read provided energy list'
+        }
+    ]
+}

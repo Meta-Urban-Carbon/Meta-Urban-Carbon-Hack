@@ -1,4 +1,5 @@
 import json
+import requests
 
 class project:
     def __init__(self, path):
@@ -131,16 +132,16 @@ print("project = ", newProject.name, "zone = ", newProject.projectRegion, "build
 def buildZeroToolDataInput():
     return ""
     
-    # data_input = {
-    #     'buildingType' = program.Type,
-    #     'GFA': above_ip + below_ip,
-    #     'areaUnits': 'ftSQ',
-    #     'country': 'USA',
-    #     'postalCode': project_zipcode,
-    #     'state': project_state_code,
-    #     'city': project_city,
-    #     'reportingUnits': 'us'
-    # }
+    data_input = {
+        'buildingType' = project.building.program.programName,
+        'GFA': project.building.program.area,
+        'areaUnits': 'ftSQ',
+        'country': 'USA',
+        'postalCode': project.zipcode,
+        'state': project.state,
+        'city': project.city,
+        'reportingUnits': 'us'
+    }
 
     # {"buildingType": "Office","GFA": 123123,"areaUnits": "ftSQ","country": "USA","postalCode": "60190","state": "IL","reportingUnits": "us"}
     # return data_input

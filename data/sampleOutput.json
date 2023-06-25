@@ -1,0 +1,18 @@
+{
+    "Buildings": [
+        {
+            "UniqueID": "a-2345",
+            "buildingEnergyConsumption": 4650000,
+            "buildingElectricityConsumption": 3721000.0,
+            "buildingNaturalGasConsumption": 929000.0,
+            "operationalCarbonProjection": 1958973703.2399185
+        },
+        {
+            "UniqueID": "a-2346",
+            "buildingEnergyConsumption": 224000,
+            "buildingElectricityConsumption": 120960.00000000001,
+            "buildingNaturalGasConsumption": 103039.99999999999,
+            "operationalCarbonProjection": 63681123.1238647
+        }
+    ]
+}

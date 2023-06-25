@@ -4,7 +4,7 @@
     "zipcode": "98105",
     "city": "Seattle",
     "state": "WA",
-    "moveInYear": "2025",
+    "moveInYear": 2025,
     "Buildings": [
         {
             "Name": "Mixed Use Buildings",

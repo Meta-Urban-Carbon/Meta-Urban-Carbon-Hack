@@ -6,7 +6,7 @@
     <Title>MetaDataHelper</Title>
     <Description>Description of MetaDataHelper</Description>
     <TargetExt>.rhp</TargetExt>
-    <UseWpf>true</UseWpf>
+	  <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,11 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="RhinoCommon" Version="7.22.22255.5001" />
-    <PackageReference Include="RhinoWindows" Version="7.22.22255.5001" />
+    <PackageReference Include="RhinoCommon" Version="7.22.22255.5001">
+		<Pack>False</Pack>
+    </PackageReference>
+    <PackageReference Include="RhinoWindows" Version="7.22.22255.5001">
+	    <Pack>False</Pack>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
@@ -37,11 +42,19 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   
   <PropertyGroup Condition="$(Configuration) == 'Debug' AND $([MSBuild]::IsOSPlatform(Windows))">
     <StartProgram>C:\Program Files\Rhino 7\System\Rhino.exe</StartProgram>
     <StartArguments></StartArguments>
     <StartAction>Program</StartAction>
   </PropertyGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)\MetaDataHelper.rhp&quot; &quot;C:\ProgramData\McNeel\Rhinoceros\packages\7.0\&quot; /D /Y /R" />
+  </Target>
   
 </Project>

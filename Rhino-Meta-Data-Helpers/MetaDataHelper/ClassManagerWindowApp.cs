@@ -10,7 +10,6 @@ namespace MetaDataHelper
         public ClassManagerWindowApp()
         {
             //Any inital Setup
-
         }
 
         public Result Run()

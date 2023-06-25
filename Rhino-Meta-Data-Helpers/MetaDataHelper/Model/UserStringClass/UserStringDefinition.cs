@@ -90,12 +90,28 @@ namespace MetaDataHelper.UserStringClass
             this._options.RemoveOption(option);
         }
 
-        public void Assign(RhinoDoc doc, Guid guid)
+        public void Assign(Guid guid)
         {
-            var docObject = doc.Objects.FindId(guid);
-            var userString = new UserString(this.Key, this.Value);
-            docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
+            // Check if guid, Value and Key are not null
+            if (guid != null && Key != null && Value != null)
+            {
+                var doc = RhinoDoc.ActiveDoc;
+                var docObject = doc.Objects.FindId(guid);
+
+                var userString = new UserString(this.Key, this.Value);
+                docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
+            }
+            else if (guid != null && Key != null && Value == null)
+            {
+                var doc = RhinoDoc.ActiveDoc;
+                var docObject = doc.Objects.FindId(guid);
+
+                // If Value is null, assign an empty string to it
+                var userString = new UserString(this.Key, "");
+                docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
+            }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

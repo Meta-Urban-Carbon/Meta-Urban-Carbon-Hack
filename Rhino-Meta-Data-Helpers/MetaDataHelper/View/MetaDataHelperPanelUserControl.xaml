@@ -70,7 +70,7 @@
         <StackPanel Grid.Row="3" Grid.Column="1"
                     Orientation="Horizontal">
 
-            <!-- Import SHP Button. -->
+            <!-- Add Row Button. -->
             <Button
                 FontSize="10"
                 Padding="2"
@@ -81,7 +81,7 @@
                 Add User String Definition
             </Button>
 
-            <!-- other button -->
+            <!-- Save button -->
             <Button FontSize="10"
                     Padding="2"
                     Margin="2"
@@ -90,7 +90,7 @@
                 Save Template
             </Button>
 
-            <!-- other button -->
+            <!-- Load button -->
             <Button FontSize="10"
                     Padding="2"
                     Margin="2"
@@ -163,18 +163,20 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Update" 
-                                    CommandParameter="{Binding}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+
+
+        <!-- other button -->
+        <Button Grid.Row="6" Grid.Column="1" 
+                FontSize="10"
+                Padding="2"
+                Margin="2"
+                Command="{Binding AssignTemplateToSelectedObjectsCommand}"
+        >
+            Asign To Selected
+        </Button>
 
     </Grid>
 

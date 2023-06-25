@@ -35,28 +35,14 @@ namespace MetaDataHelper
 
         private RelayCommand<UserStringDefinition> _addSelectionOptionCommand;
 
-        private void AddOption(UserStringDefinition definition)
-        {
-            if (definition != null && definition.ValueType == UserStringValueType.Select)
-            {
-                var dialog = new InputDialogSimple("Enter new option");
-                if (dialog.ShowDialog() == true)
-                {
-                    string newOption = dialog.ResponseText;
-                    if (!string.IsNullOrEmpty(newOption))
-                    {
-                        definition.ValueOptions.AddOption(newOption);
-                    }
-                }
-            }
-        }
-
 
         public ICommand OpenOptionManagerCommand { get; set; }
         public ICommand AddSelectionOptionCommand { get; set; }
         public ICommand RemoveOptionCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand LoadCommand { get; set; }
+        public ICommand AssignTemplateToSelectedObjectsCommand { get; set; }
+
 
 
         public ViewModel(uint documentSerialNumber)
@@ -82,8 +68,66 @@ namespace MetaDataHelper
 
             this.SaveCommand = new RelayCommand(SaveUserStringDefinition);
             this.LoadCommand = new RelayCommand(LoadUserStringDefinition);
+            this.AssignTemplateToSelectedObjectsCommand = new RelayCommand(AssignTemplateToSelectedObjects);
+
         }
 
+        private void AssignTemplateToSelectedObjects()
+        {
+            // Get the current Rhino document
+            var doc = Rhino.RhinoDoc.ActiveDoc;
+
+            if (doc == null) return;
+
+            // Get all objects in the document
+            var allObjects = doc.Objects;
+
+            // Create a list to hold the IDs of all selected objects
+            List<Guid> selectedObjectIds = new List<Guid>();
+
+            // Loop through all objects
+            foreach (var rhinoObject in allObjects)
+            {
+                // Check if the object is selected
+                if (rhinoObject.IsSelected(false) > 0)
+                {
+                    // If it is, add its ID to the list
+                    selectedObjectIds.Add(rhinoObject.Id);
+                }
+            }
+
+            // Loop through each UserStringDefinition in the current template
+            foreach (var userStringDefinition in this.CurrentTemplate)
+            {
+                // Loop through each selected object ID
+                foreach (var objectId in selectedObjectIds)
+                {
+                    // Assign the user string to the object
+                    userStringDefinition.Assign(objectId);
+                }
+            }
+
+            // Redraw the document to update the changes
+            doc.Views.Redraw();
+        }
+
+
+
+        private void AddOption(UserStringDefinition definition)
+        {
+            if (definition != null && definition.ValueType == UserStringValueType.Select)
+            {
+                var dialog = new InputDialogSimple("Enter new option");
+                if (dialog.ShowDialog() == true)
+                {
+                    string newOption = dialog.ResponseText;
+                    if (!string.IsNullOrEmpty(newOption))
+                    {
+                        definition.ValueOptions.AddOption(newOption);
+                    }
+                }
+            }
+        }
 
         private void SaveUserStringDefinition()
         {
@@ -123,6 +167,8 @@ namespace MetaDataHelper
                 string filename = dlg.FileName;
                 string jsonString = File.ReadAllText(filename);
                 this.CurrentTemplate = JsonConvert.DeserializeObject<UserStringTemplate>(jsonString);
+                this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
+                OnPropertyChanged("AddUserStringDefinitionCommand");
             }
         }
 

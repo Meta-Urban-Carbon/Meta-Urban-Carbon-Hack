@@ -85,6 +85,7 @@
             <Button FontSize="10"
                     Padding="2"
                     Margin="2"
+                    Command="{Binding SaveCommand}"
                 >
                 Save Template
             </Button>
@@ -92,7 +93,9 @@
             <!-- other button -->
             <Button FontSize="10"
                     Padding="2"
-                    Margin="2">
+                    Margin="2"
+                    Command="{Binding LoadCommand}"
+                    >
                 Load Template
             </Button>
         </StackPanel>
@@ -125,11 +128,11 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Add Option">
+                    <GridViewColumn Header="Manage Option">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Add Option" 
-                                        Command="{Binding Path=DataContext.AddSelectionOptionCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                <Button Content="+/-" 
+                                        Command="{Binding Path=DataContext.OpenOptionManagerCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
                                         CommandParameter="{Binding}">
                                     <Button.Style>
                                         <Style TargetType="Button">

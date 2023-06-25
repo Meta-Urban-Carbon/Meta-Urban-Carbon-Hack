@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Eto.Forms;
 using MetaDataHelper.UserStringClass;
+using Newtonsoft.Json;
 using RhinoWindows.Input;
 
 namespace MetaDataHelper
@@ -32,21 +34,12 @@ namespace MetaDataHelper
         public ICommand AddUserStringDefinitionCommand { get; set; }
 
         private RelayCommand<UserStringDefinition> _addSelectionOptionCommand;
-        public RelayCommand<UserStringDefinition> AddSelectionOptionCommand
-        {
-            get
-            {
-                return _addSelectionOptionCommand
-                       ?? (_addSelectionOptionCommand = new RelayCommand<UserStringDefinition>(
-                           definition => AddOption(definition)));
-            }
-        }
 
         private void AddOption(UserStringDefinition definition)
         {
             if (definition != null && definition.ValueType == UserStringValueType.Select)
             {
-                var dialog = new InputDialog("Enter new option");
+                var dialog = new InputDialogSimple("Enter new option");
                 if (dialog.ShowDialog() == true)
                 {
                     string newOption = dialog.ResponseText;
@@ -57,6 +50,14 @@ namespace MetaDataHelper
                 }
             }
         }
+
+
+        public ICommand OpenOptionManagerCommand { get; set; }
+        public ICommand AddSelectionOptionCommand { get; set; }
+        public ICommand RemoveOptionCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        public ICommand LoadCommand { get; set; }
+
 
         public ViewModel(uint documentSerialNumber)
         {
@@ -69,7 +70,62 @@ namespace MetaDataHelper
             this.Message = "View Model Has Loaded";
             this.CurrentTemplate = new UserStringTemplate();
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
+
+            OpenOptionManagerCommand = new RelayCommand<UserStringDefinition>(
+                definition => {
+                    if (definition != null && definition.ValueType == UserStringValueType.Select)
+                    {
+                        var dialog = new OptionManagerDialog(definition);
+                        dialog.ShowDialog();
+                    }
+                });
+
+            this.SaveCommand = new RelayCommand(SaveUserStringDefinition);
+            this.LoadCommand = new RelayCommand(LoadUserStringDefinition);
         }
+
+
+        private void SaveUserStringDefinition()
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "UserStringDefinition"; // Default file name
+            dlg.DefaultExt = ".json"; // Default file extension
+            dlg.Filter = "Json documents (.json)|*.json"; // Filter files by extension
+            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // Show save file dialog box
+            bool? result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = dlg.FileName;
+                string jsonString = JsonConvert.SerializeObject(this.CurrentTemplate);
+                File.WriteAllText(filename, jsonString);
+            }
+        }
+
+        private void LoadUserStringDefinition()
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".json"; // Default file extension
+            dlg.Filter = "Json documents (.json)|*.json"; // Filter files by extension
+            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // Show open file dialog box
+            bool? result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                string jsonString = File.ReadAllText(filename);
+                this.CurrentTemplate = JsonConvert.DeserializeObject<UserStringTemplate>(jsonString);
+            }
+        }
+
 
         private void OnShowPanel(object sender, Rhino.UI.ShowPanelEventArgs e)
         {

@@ -17,7 +17,7 @@ namespace MetaDataHelper
     /// <summary>
     /// Interaction logic for InputDialog.xaml
     /// </summary>
-    public partial class InputDialog : Window
+    public partial class InputDialogSimple : Window
     {
         public string ResponseText
         {
@@ -25,7 +25,7 @@ namespace MetaDataHelper
             set { InputTextBox.Text = value; }
         }
 
-        public InputDialog(string question)
+        public InputDialogSimple (string question)
         {
             InitializeComponent();
             Title = question;

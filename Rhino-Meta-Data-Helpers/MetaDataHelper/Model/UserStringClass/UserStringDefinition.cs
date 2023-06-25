@@ -85,6 +85,11 @@ namespace MetaDataHelper.UserStringClass
             this._options.AddOption(option);
         }
 
+        public void RemoveOption(String option)
+        {
+            this._options.RemoveOption(option);
+        }
+
         public void Assign(RhinoDoc doc, Guid guid)
         {
             var docObject = doc.Objects.FindId(guid);

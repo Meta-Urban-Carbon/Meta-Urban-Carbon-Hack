@@ -43,12 +43,21 @@ class Building():
         self.buildingElectricityConsumption = self.buildingElectricityConsumption()
         self.buildingNaturalGasConsumption = self.buildingNaturalGasConsumption()
         self.operationalCarbonProjection = self.operationalCarbonProjection(projectData)
+        self.buildingArea = self.totalBuildingArea()
+        self.buildingEUI = self.buildingEUI()
+        self.operationsCEI = self.operationalCarbonIntensity()
         # print("line 40 = ",projectData.projectRegion)
 
     def add_programs(self, programsData, projectData):
         for program_data in programsData:
             program = Program(program_data, projectData)
             self.programs.append(program)
+    
+    def totalBuildingArea(self):
+        totalBuildingArea = 0
+        for program in self.programs:
+            totalBuildingArea += int(program.area)
+        return totalBuildingArea
 
     def buildingElectricityConsumption(self):
         buildingElectricityConsumption = 0
@@ -66,13 +75,25 @@ class Building():
         buildingEnergyConsumption = 0
         for program in self.programs:
             buildingEnergyConsumption += program.baselineEnergy
+            # buildingEnergyConsumption is in kBTU
         return buildingEnergyConsumption
+    
+    def buildingEUI(self):
+        buildingEUI = self.buildingEnergyConsumption / int(self.buildingArea)
+        return buildingEUI
     
     def operationalCarbonProjection(self, projectData):
         cambiumFactor = self.cambiumFactor(projectData.state, projectData.moveInYear)
         # print("cambiumFactor = ", cambiumFactor)
         # print("buildingEnergyConsumption = ", self.buildingEnergyConsumption)
-        return self.buildingElectricityConsumption * cambiumFactor
+        buildingElectricEmissions = roundNumbers(self.buildingElectricityConsumption * cambiumFactor * 0.000293015)
+        buildingNGEmissions = roundNumbers(self.buildingNaturalGasConsumption/1000*117)
+        buildingOperationalCarbon = roundNumbers(buildingElectricEmissions + buildingNGEmissions)
+        return (buildingElectricEmissions,  buildingNGEmissions, buildingOperationalCarbon)
+    
+    def operationalCarbonIntensity(self):
+        buildingOperationalCarbonIntensity = self.operationalCarbonProjection[-1] / self.buildingArea
+        return buildingOperationalCarbonIntensity
     
 
     def cambiumFactor(self, state, year):
@@ -87,8 +108,7 @@ class Program():
     def __init__(self, data, projectData):
         self.programName = data['Program Name']
         self.area = data['Area']
-        self.projectLevelData = projectData
-        self.medianSiteEUI = self.siteEUIFromZT()
+        self.medianSiteEUI = self.siteEUIFromZT(projectData)
         self.baselineEnergy = self.baselineEnergyConsumption()
         self.baselineElectricity = self.baselineElectricityConsumption(projectData.projectRegion)
         self.baselineNaturalGas = self.baselineNaturalGasConsumption()
@@ -102,7 +122,9 @@ class Program():
     #     return dummyEUI
     
     def baselineEnergyConsumption (self):
+        print("useType = ", self.programName , "medianSiteEUI = ", self.medianSiteEUI)
         programEnergyConsumption = int(self.area) * int(self.medianSiteEUI)
+        # programEnergyConsumption is in kBTU
         return programEnergyConsumption
     
     def baselineElectricityConsumption (self, projectRegion):
@@ -111,29 +133,31 @@ class Program():
             useTypes = json.load(f)
         adjustmentFactor = useTypes.get(self.programName, {}).get(projectRegion, 1)
         electricConsumption =  self.baselineEnergy * adjustmentFactor
+        # electricConsumption is in kBTU
         return electricConsumption
 
     def baselineNaturalGasConsumption (self):
         NGConsumption =  self.baselineEnergy - self.baselineElectricity
+        # NGConsumption is in kBTU
         return NGConsumption
        
 
-    def buildZeroToolDataInput(self):
+    def buildZeroToolDataInput(self, projectData):
     
         data_input = {
             'buildingType': self.programName,
             'GFA': self.area,
             'areaUnits': 'ftSQ',
             'country': 'USA',
-            'postalCode': self.projectLevelData.zipcode,
-            'state': self.projectLevelData.state,
-            'city': self.projectLevelData.city,
+            'postalCode': projectData.zipcode,
+            'state': projectData.state,
+            'city': projectData.city,
             'reportingUnits': 'us'
             }
         return data_input
     
-    def siteEUIFromZT(self):
-        data = self.buildZeroToolDataInput()
+    def siteEUIFromZT(self, projectData):
+        data = self.buildZeroToolDataInput(projectData)
         # print(data)
         zeroTooloutput = self.getZeroToolData(data)
         zeroTooloutputJSON = zeroTooloutput.json()
@@ -163,10 +187,13 @@ def printJSON(project):
     for building in project.buildings:
         building_dict = {
             "UniqueID": building.uniqueID,
-            "buildingEnergyConsumption": building.buildingEnergyConsumption,
-            "buildingElectricityConsumption": building.buildingElectricityConsumption,
-            "buildingNaturalGasConsumption": building.buildingNaturalGasConsumption,
-            "operationalCarbonProjection": building.operationalCarbonProjection,
+            "buildingName": building.name,
+            "buildingEnergyConsumption": roundNumbers(building.buildingEnergyConsumption),
+            "buildingElectricityConsumption": roundNumbers(building.buildingElectricityConsumption),
+            "buildingNaturalGasConsumption": roundNumbers(building.buildingNaturalGasConsumption),
+            "operationalCarbonProjection": building.operationalCarbonProjection[-1],
+            "buildingEUI": roundNumbers(building.buildingEUI),
+            "operationsCEI": roundNumbers(building.operationsCEI),
         }
 
         json_data["Buildings"].append(building_dict)
@@ -178,7 +205,14 @@ def printJSON(project):
     with open('data/sampleOutput.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
-
+def roundNumbers(number):
+    if number > 100000:
+        return int(round(number, -5))
+    elif number > 10000:
+        return int(round(number, -4))
+    elif number > 1000:
+        return int(round(number, -3))
+    else: return round(number, 1)
         
     
 newProject = Project('data\\dummyProjectData.json')

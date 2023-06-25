@@ -2,17 +2,23 @@
     "Buildings": [
         {
             "UniqueID": "a-2345",
-            "buildingEnergyConsumption": 4650000,
-            "buildingElectricityConsumption": 3721000.0,
-            "buildingNaturalGasConsumption": 929000.0,
-            "operationalCarbonProjection": 1958973703.2399185
+            "buildingName": "Mixed Use Building",
+            "buildingEnergyConsumption": 4600000,
+            "buildingElectricityConsumption": 3700000,
+            "buildingNaturalGasConsumption": 900000,
+            "operationalCarbonProjection": 700000,
+            "buildingEUI": 77.5,
+            "operationsCEI": 11.7
         },
         {
             "UniqueID": "a-2346",
-            "buildingEnergyConsumption": 224000,
-            "buildingElectricityConsumption": 120960.00000000001,
-            "buildingNaturalGasConsumption": 103039.99999999999,
-            "operationalCarbonProjection": 63681123.1238647
+            "buildingName": "Restaurant",
+            "buildingEnergyConsumption": 200000,
+            "buildingElectricityConsumption": 100000,
+            "buildingNaturalGasConsumption": 100000,
+            "operationalCarbonProjection": 30000,
+            "buildingEUI": 224.0,
+            "operationsCEI": 30.0
         }
     ]
 }

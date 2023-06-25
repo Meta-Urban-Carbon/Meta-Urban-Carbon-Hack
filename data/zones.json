@@ -1,0 +1,61 @@
+{
+    "Northeast": [
+      "CT",
+      "MA",
+      "ME",
+      "NH",
+      "NJ",
+      "NY",
+      "PA",
+      "RI",
+      "VT"
+    ],
+    "South": [
+      "AL",
+      "AR",
+      "DC",
+      "DE",
+      "FL",
+      "GA",
+      "KY",
+      "LA",
+      "MD",
+      "MS",
+      "NC",
+      "OK",
+      "SC",
+      "TN",
+      "TX",
+      "VA",
+      "WV"
+    ],
+    "Midwest": [
+      "IA",
+      "IL",
+      "IN",
+      "KS",
+      "MI",
+      "MN",
+      "MO",
+      "ND",
+      "NE",
+      "OH",
+      "SD",
+      "WI"
+    ],
+    "West": [
+      "AK",
+      "AZ",
+      "CA",
+      "CO",
+      "HI",
+      "ID",
+      "MT",
+      "NM",
+      "NV",
+      "OR",
+      "UT",
+      "WA",
+      "WY"
+    ]
+  }

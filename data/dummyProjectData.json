@@ -1,0 +1,34 @@
+{
+    "Name": "University Village",
+    "UniqueID": "a-2000",
+    "zipcode": "98105",
+    "city": "Seattle",
+    "state": "WA",
+    "moveInYear": "2025",
+    "Buildings": [
+        {
+            "Name": "Mixed Use Buildings",
+            "UniqueID": "a-2345",
+            "Programs": [
+                {
+                    "Program Name": "Office",
+                    "Area": 10000
+                },
+                {
+                    "Program Name": "Retail",
+                    "Area": 50000
+                }
+            ]
+        },
+        {
+            "Name": "Restaurant",
+            "UniqueID": "a-2346",
+            "Programs": [
+                {
+                    "Program Name": "Restaurant",
+                    "Area": 1000
+                }
+            ]
+        }
+    ]
+}

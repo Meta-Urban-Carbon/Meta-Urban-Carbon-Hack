@@ -1,44 +1,75 @@
 import json
 
 class project:
-    def __init__(self, name, path, zipcode, moveInYear):
+    def __init__(self, path):
         self.name = name
-        self.path = path
         self.zipcode = zipcode
         self.moveInYear = moveInYear
         self.operationalYears = 50
         self.unit = "ip"
-        self.country = "USA",
-        self.postalCode = "60190"
+        self.postalCode = zipcode
         self.city = "Seattle"
         self.state = "WA"
-        self.projectRegion = "West"
+        self.country = "USA"
+        self.projectRegion = self.assignProjectZone()
         self.buildings = []
         self.landscape = None
+    
+    
 
-    def add_building(self, building):
+    def addBuilding(self, building):
         self.buildings.append(building)
+    
+    def assignProjectZone(self):
+        fp="data\\zones.json"
+        with open(fp, 'r') as f:
+            zones = json.load(f)
+        for zone, states in zones.items():
+            # print(zone)
+            # print(states)
+            if self.state in states:
+                return zone
+            else: None
+
+class Site_features:
+    def __init__(self, gfa, lpd):
+        self.gfa = gfa
+        self.lpd = lpd
+        self.total_energy = self.gfa * self.lpd
 
 class building:
     def __init__(self, name):
         self.name = name
         self.programs = []
+        self.buildingArea = 0
+        self.baselineElectricityConsumption = 0
+        self.baselineNaturalGasConsumption = 0
+        self.BaselineEnergyConsumption = 0
+        self.baselineEUI = 0
 
     def addProgramToBuilding(self, program):
         self.programs.append(program)
+        self.baselineElectricityConsumption += int(program.baselineElectricity)
+        self.baselineNaturalGasConsumption += int(program.baselineNaturalGas)
+        self.BaselineEnergyConsumption += int(program.baselineEnergy)
+        self.buildingArea += int(program.area)
+        self.buildingEUI = self.BaselineEnergyConsumption / self.buildingArea
         return self.programs
     
-    def totalElectricityConsumption(self):
-        totalElectricityConsumption = 0
-        for program in self.programs:
-            totalElectricityConsumption += program.baselineElectricityConsumption()
-        return totalElectricityConsumption
+    def operationalCarbonProjection(self):
+        cambiumFactor = self.cambiumFactor()
+        return self.BaselineEnergyConsumption * 0.000000272
     
-    def totalNaturalGasConsumption(self):
-        totalNaturalGasConsumption = 0
-        for program in self.programs:
-            totalNaturalGasConsumption += program.baselineNaturalGasConsumption()
-        return totalNaturalGasConsumption
+    import json
+
+    def cambiumFactor(state, year):
+        with open('cambiumLMERMidCase.json', 'r') as f:
+            data = json.load(f)
+        for entry in data:
+            if entry['state'] == state and entry['year'] == year:
+                return entry['factor']
+        return 1
+
 
 class buildingProgram:
     def __init__(self, name, programName, area):
@@ -47,20 +78,10 @@ class buildingProgram:
         self.area = area
         self.areaUnits = "ftSQ"
         self.reportingUnits = "us"
-        # self.country = "USA",
-        # self.postalCode: "60190"
-        # self.state = "IL"
-        # self.reportingUnits = "us"
         self.projectRegion = "West"
         self.baselineEnergy = self.baselineEnergyConsumption()
         self.baselineElectricity = self.baselineElectricityConsumption()
-
-
-    # def __str__(self):
-    #     return f"{self.name} {self.path}"
-
-    # def __repr__(self):
-    #     return f"{self.name} {self.path}"
+        self.baselineNaturalGas = self.baselineNaturalGasConsumption()
     
     def areaForProgram (self):
         return print("area for " + self.programName + " is " + self.area)
@@ -88,17 +109,8 @@ class buildingProgram:
     # def baselineEUI(self):
         
 programOffice = buildingProgram("Workspace", "Office", "1000")
-# print(programOffice.baselineElectricityConsumption())
-# print(programOffice.baselineNaturalGasConsumption())
-
 programHospital = buildingProgram("New Hospital", "Hospital", "5000")
-# programTest.baselineEnergyConsumption()
-# print(programHospital.baselineElectricityConsumption())
-# print(programHospital.baselineNaturalGasConsumption())
-
 programMixedUse = buildingProgram("Mixed Use", "Mixed Use Property", "60000")
-# print(programMixedUse.baselineElectricityConsumption())
-# print(programMixedUse.baselineNaturalGasConsumption())
 
 mixedUseBuilding = building("Mixed Use Building")
 hospitalBuilding = building("Hospital Building")
@@ -107,13 +119,14 @@ mixedUseBuilding.addProgramToBuilding(programOffice)
 mixedUseBuilding.addProgramToBuilding(programMixedUse)
 hospitalBuilding.addProgramToBuilding(programHospital)
 
-print("Mixed Use Building office elec ", programOffice.baselineElectricityConsumption(), "mixed use elec ", programMixedUse.baselineElectricityConsumption(), mixedUseBuilding.totalElectricityConsumption())
-print("Mixed Use Building Office NG ", programOffice.baselineNaturalGasConsumption(), "MU NG ", programMixedUse.baselineNaturalGasConsumption(), mixedUseBuilding.totalNaturalGasConsumption())
-print("Hospital Building elec ", programHospital.baselineElectricityConsumption(), hospitalBuilding.totalElectricityConsumption())
-print("Hospital Building NG ", programHospital.baselineNaturalGasConsumption(), hospitalBuilding.totalNaturalGasConsumption())
+newProject = project("New Project",  "98115", "2025")
+newProject.addBuilding(mixedUseBuilding)
+newProject.addBuilding(hospitalBuilding)
 
-# import requests
-# import json
+print("MU Building elec ", mixedUseBuilding.baselineElectricityConsumption, "MU Building NG ", mixedUseBuilding.naturalGasConsumption)
+print("Hospital Building elec ", hospitalBuilding.baselineElectricityConsumption, "Hospital Building NG ", hospitalBuilding.naturalGasConsumption)
+print("project = ", newProject.name, "zone = ", newProject.projectRegion, "buildings = ", newProject.buildings, "details = ", newProject.buildings[0].baselineElectricityConsumption, newProject.buildings[1].baselineElectricityConsumption)
+
 
 def buildZeroToolDataInput():
     return ""

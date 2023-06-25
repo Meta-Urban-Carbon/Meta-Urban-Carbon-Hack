@@ -57,15 +57,11 @@ class buildingProgram:
         with open(fp, 'r') as f:
             useTypes = json.load(f)
         adjustmentFactor = useTypes.get(self.programName, {}).get(self.projectRegion, 1)
-        # baselineAllConsumption = self.baselineEnergyConsumption()
-        adjustedEnergyConsumption =  self.baselineEnergy * adjustmentFactor
-
-        return adjustedEnergyConsumption
+        electricConsumption =  self.baselineEnergy * adjustmentFactor
+        return electricConsumption
 
     def baselineNaturalGasConsumption (self):
-
         NGConsumption =  self.baselineEnergy - self.baselineElectricity
-
         return NGConsumption
     
     # def baselineEUI(self):
@@ -74,6 +70,7 @@ class buildingProgram:
 programTest = buildingProgram("Workspace", "Office", "1000")
 # programTest.baselineEnergyConsumption()
 print(programTest.baselineElectricityConsumption())
+print(programTest.baselineNaturalGasConsumption())
 
 # import requests
 # import json

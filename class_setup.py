@@ -8,17 +8,37 @@ class project:
         self.moveInYear = moveInYear
         self.operationalYears = 50
         self.unit = "ip"
+        self.country = "USA",
+        self.postalCode = "60190"
+        self.city = "Seattle"
+        self.state = "WA"
+        self.projectRegion = "West"
+        self.buildings = []
+        self.landscape = None
 
+    def add_building(self, building):
+        self.buildings.append(building)
 
-    def __str__(self):
-        return f"{self.name} {self.path}"
+class building:
+    def __init__(self, name):
+        self.name = name
+        self.programs = []
 
-    def __repr__(self):
-        return f"{self.name} {self.path}"
+    def addProgramToBuilding(self, program):
+        self.programs.append(program)
+        return self.programs
     
-    def cityState (self, zipcode):
-        return print("My zip code is " + zipcode)
+    def totalElectricityConsumption(self):
+        totalElectricityConsumption = 0
+        for program in self.programs:
+            totalElectricityConsumption += program.baselineElectricityConsumption()
+        return totalElectricityConsumption
     
+    def totalNaturalGasConsumption(self):
+        totalNaturalGasConsumption = 0
+        for program in self.programs:
+            totalNaturalGasConsumption += program.baselineNaturalGasConsumption()
+        return totalNaturalGasConsumption
 
 class buildingProgram:
     def __init__(self, name, programName, area):
@@ -26,20 +46,21 @@ class buildingProgram:
         self.programName = programName
         self.area = area
         self.areaUnits = "ftSQ"
-        self.country = "USA",
-        self.postalCode: "60190"
-        self.state = "IL"
         self.reportingUnits = "us"
+        # self.country = "USA",
+        # self.postalCode: "60190"
+        # self.state = "IL"
+        # self.reportingUnits = "us"
         self.projectRegion = "West"
         self.baselineEnergy = self.baselineEnergyConsumption()
         self.baselineElectricity = self.baselineElectricityConsumption()
 
 
-    def __str__(self):
-        return f"{self.name} {self.path}"
+    # def __str__(self):
+    #     return f"{self.name} {self.path}"
 
-    def __repr__(self):
-        return f"{self.name} {self.path}"
+    # def __repr__(self):
+    #     return f"{self.name} {self.path}"
     
     def areaForProgram (self):
         return print("area for " + self.programName + " is " + self.area)
@@ -66,11 +87,30 @@ class buildingProgram:
     
     # def baselineEUI(self):
         
+programOffice = buildingProgram("Workspace", "Office", "1000")
+# print(programOffice.baselineElectricityConsumption())
+# print(programOffice.baselineNaturalGasConsumption())
 
-programTest = buildingProgram("Workspace", "Office", "1000")
+programHospital = buildingProgram("New Hospital", "Hospital", "5000")
 # programTest.baselineEnergyConsumption()
-print(programTest.baselineElectricityConsumption())
-print(programTest.baselineNaturalGasConsumption())
+# print(programHospital.baselineElectricityConsumption())
+# print(programHospital.baselineNaturalGasConsumption())
+
+programMixedUse = buildingProgram("Mixed Use", "Mixed Use Property", "60000")
+# print(programMixedUse.baselineElectricityConsumption())
+# print(programMixedUse.baselineNaturalGasConsumption())
+
+mixedUseBuilding = building("Mixed Use Building")
+hospitalBuilding = building("Hospital Building")
+
+mixedUseBuilding.addProgramToBuilding(programOffice)
+mixedUseBuilding.addProgramToBuilding(programMixedUse)
+hospitalBuilding.addProgramToBuilding(programHospital)
+
+print("Mixed Use Building office elec ", programOffice.baselineElectricityConsumption(), "mixed use elec ", programMixedUse.baselineElectricityConsumption(), mixedUseBuilding.totalElectricityConsumption())
+print("Mixed Use Building Office NG ", programOffice.baselineNaturalGasConsumption(), "MU NG ", programMixedUse.baselineNaturalGasConsumption(), mixedUseBuilding.totalNaturalGasConsumption())
+print("Hospital Building elec ", programHospital.baselineElectricityConsumption(), hospitalBuilding.totalElectricityConsumption())
+print("Hospital Building NG ", programHospital.baselineNaturalGasConsumption(), hospitalBuilding.totalNaturalGasConsumption())
 
 # import requests
 # import json

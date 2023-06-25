@@ -1,11 +1,7 @@
 ﻿using Rhino;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MetaDataHelper.UserStringClass
 {
@@ -13,36 +9,70 @@ namespace MetaDataHelper.UserStringClass
     /// Defines a UserString Key and contrins the value's respective
     /// options if it is of <see cref="UserStringValueType"/> 'Select'
     /// </summary>
-    public class UserStringDefinition
+    public class UserStringDefinition : INotifyPropertyChanged
     {
+
+        private String _key;
+        private String _defaultValue;
+        private String _value;
+        private UserStringValueType _type;
         private UserStringValueOptions _options = null;
 
-        public String Key { get; set; }
-
-        public String DefaultValue { get; set; }
-
-        public String Value { get; set; }
-
-        public UserStringValueType ValueType { get; set; }
-
-        public UserStringValueOptions GetOptions()
+        public String Key
         {
-            if (this.ValueType == UserStringValueType.Select)
+            get => _key;
+            set
             {
-                return this._options;
+                _key = value;
+                OnPropertyChanged();
             }
-            else
+        }
+
+        public String DefaultValue { get=>_defaultValue;
+            set
             {
-                return null;
+                _defaultValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public String Value
+        {
+            get => _value;
+            set
+            {
+                _value = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public UserStringValueType ValueType
+        {
+            get => _type;
+            set
+            {
+                _type = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public UserStringValueOptions ValueOptions
+        {
+            get => _options;
+            set
+            {
+                _options = value;
+                OnPropertyChanged();
             }
         }
 
         public UserStringDefinition(string key)
         {
             this.Key = key;
-            this.Value = "";
+            this.Value = "value";
             this.ValueType = UserStringValueType.String;
-            this._options = new UserStringValueOptions();
+            this.ValueOptions = new UserStringValueOptions();
+            this.ValueOptions.AddOption(this.Value);
         }
 
         public UserString GetCurrentUserString()
@@ -60,6 +90,16 @@ namespace MetaDataHelper.UserStringClass
             var docObject = doc.Objects.FindId(guid);
             var userString = new UserString(this.Key, this.Value);
             docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Implements Property Change event handler
+        /// </summary>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

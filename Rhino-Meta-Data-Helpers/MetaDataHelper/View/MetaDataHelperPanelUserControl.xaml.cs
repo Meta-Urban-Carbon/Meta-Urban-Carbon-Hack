@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using MetaDataHelper.UserStringClass;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace MetaDataHelper
 {
@@ -18,5 +20,30 @@ namespace MetaDataHelper
         private ViewModel ViewModel => DataContext as ViewModel;
 
         //private ViewModel ViewModel => DataContext as ViewModel;
+    }
+
+    public class ValueTypeTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate StringTemplate { get; set; }
+        public DataTemplate SelectOptionsTemplate { get; set; }
+
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+            UserStringDefinition definition = item as UserStringDefinition;
+
+            if (definition != null)
+            {
+                if (definition.ValueType == UserStringValueType.String)
+                {
+                    return StringTemplate;
+                }
+                else if (definition.ValueType == UserStringValueType.Select)
+                {
+                    return SelectOptionsTemplate;
+                }
+            }
+
+            return base.SelectTemplate(item, container);
+        }
     }
 }

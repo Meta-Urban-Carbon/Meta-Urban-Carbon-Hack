@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Eto.Forms;
 using MetaDataHelper.UserStringClass;
 using RhinoWindows.Input;
 
@@ -13,11 +14,49 @@ namespace MetaDataHelper
 {
     public class ViewModel : Rhino.UI.ViewModel, INotifyPropertyChanged
     {
+        private UserStringTemplate _currentTemplate;
 
-        public UserStringTemplate currentTemplate { get; set; }
+        public UserStringTemplate CurrentTemplate
+        {
+            get { return _currentTemplate; }
+            set
+            {
+                if (_currentTemplate != value)
+                {
+                    _currentTemplate = value;
+                    OnPropertyChanged("CurrentTemplate"); // Notify the view about the change.
+                }
+            }
+        }
 
         public ICommand AddUserStringDefinitionCommand { get; set; }
 
+        private RelayCommand<UserStringDefinition> _addSelectionOptionCommand;
+        public RelayCommand<UserStringDefinition> AddSelectionOptionCommand
+        {
+            get
+            {
+                return _addSelectionOptionCommand
+                       ?? (_addSelectionOptionCommand = new RelayCommand<UserStringDefinition>(
+                           definition => AddOption(definition)));
+            }
+        }
+
+        private void AddOption(UserStringDefinition definition)
+        {
+            if (definition != null && definition.ValueType == UserStringValueType.Select)
+            {
+                var dialog = new InputDialog("Enter new option");
+                if (dialog.ShowDialog() == true)
+                {
+                    string newOption = dialog.ResponseText;
+                    if (!string.IsNullOrEmpty(newOption))
+                    {
+                        definition.ValueOptions.AddOption(newOption);
+                    }
+                }
+            }
+        }
 
         public ViewModel(uint documentSerialNumber)
         {
@@ -28,8 +67,8 @@ namespace MetaDataHelper
             Rhino.UI.Panels.Show += OnShowPanel;
 
             this.Message = "View Model Has Loaded";
-            this.currentTemplate = new UserStringTemplate();
-            this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.currentTemplate);
+            this.CurrentTemplate = new UserStringTemplate();
+            this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
         }
 
         private void OnShowPanel(object sender, Rhino.UI.ShowPanelEventArgs e)

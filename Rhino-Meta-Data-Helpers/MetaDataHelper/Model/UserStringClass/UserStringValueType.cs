@@ -10,5 +10,6 @@ namespace MetaDataHelper.UserStringClass
     {
         String,
         Select,
+        Gh_Calculated
     }
 }

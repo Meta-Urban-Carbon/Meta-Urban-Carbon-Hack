@@ -15,6 +15,7 @@ namespace MetaDataHelper.UserStringClass
         private String _key;
         private String _defaultValue;
         private String _value;
+        private String _ghFilePath;
         private UserStringValueType _type;
         private UserStringValueOptions _options = null;
 
@@ -52,6 +53,16 @@ namespace MetaDataHelper.UserStringClass
             set
             {
                 _type = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public String GhFilePath
+        {
+            get => _ghFilePath;
+            set
+            {
+                _ghFilePath=value;
                 OnPropertyChanged();
             }
         }

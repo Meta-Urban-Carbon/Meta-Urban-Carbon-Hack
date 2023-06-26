@@ -6,10 +6,11 @@
     [System.Runtime.InteropServices.Guid("BDFBAF41-D939-419E-8603-2FC6AC5806A7")]
     public class ClassManagerPanelHost : RhinoWindows.Controls.WpfElementHost
     {
-        public ClassManagerPanelHost()
-            : base(new MetaDataHelperPanelUserControl(), new ViewModel())
+        public ClassManagerPanelHost(uint docSn)
+            : base(new MetaDataHelperPanelUserControl(docSn),null)
         {
         }
+
 
         /// <summary>
         /// Returns the ID of this panel.

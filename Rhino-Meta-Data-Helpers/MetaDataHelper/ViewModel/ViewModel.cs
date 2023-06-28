@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Eto.Forms;
-using MetaDataHelper.Model.UserStringClass;
 using MetaDataHelper.UserStringClass;
 
 namespace MetaDataHelper
@@ -11,6 +10,7 @@ namespace MetaDataHelper
     {
         private UserStringTemplate _currentTemplate;
         private SavedTemplates _savedTemplates;
+        private UserStringTemplate _selectedSavedTemplate;
 
         public UserStringTemplate CurrentTemplate
         {
@@ -21,6 +21,22 @@ namespace MetaDataHelper
                 {
                     _currentTemplate = value;
                     OnPropertyChanged("CurrentTemplate"); // Notify the view about the change.
+                }
+            }
+        }
+        
+        public UserStringTemplate SelectedSavedTemplate
+        {
+            get => _selectedSavedTemplate;
+            set
+            {
+                _selectedSavedTemplate = value;
+                OnPropertyChanged();
+
+                // If the new value is not null, replace the CurrentTemplate with it
+                if (value != null)
+                {
+                    CurrentTemplate.Replace(_selectedSavedTemplate);
                 }
             }
         }
@@ -52,9 +68,10 @@ namespace MetaDataHelper
             Rhino.UI.Panels.Show += OnShowPanel;
 
             this.Message = "View Model Has Loaded";
-
-            this.SavedTemplates = new SavedTemplates();
             this.CurrentTemplate = new UserStringTemplate();
+            this.SavedTemplates = new SavedTemplates();
+            this.SelectedSavedTemplate = this.SavedTemplates[0];
+
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
 
             OpenOptionManagerCommand = new RelayCommand<UserStringDefinition>(

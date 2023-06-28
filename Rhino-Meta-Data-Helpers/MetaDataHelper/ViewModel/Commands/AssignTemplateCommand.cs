@@ -45,7 +45,7 @@ namespace MetaDataHelper
             }
 
             // Loop through each UserStringDefinition in the current template
-            foreach (var userStringDefinition in this._currentTemplate)
+            foreach (var userStringDefinition in this._currentTemplate.Collection)
             {
                 // Loop through each selected object ID
                 foreach (var objectId in selectedObjectIds)

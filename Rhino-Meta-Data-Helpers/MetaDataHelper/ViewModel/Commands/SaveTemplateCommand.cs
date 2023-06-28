@@ -29,7 +29,8 @@ namespace MetaDataHelper
             dlg.FileName = "UserStringDefinition"; // Default file name
             dlg.DefaultExt = ".json"; // Default file extension
             dlg.Filter = "Json documents (.json)|*.json"; // Filter files by extension
-            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            //dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            dlg.InitialDirectory = Settings.DefaultTemplatePath;
 
             // Show save file dialog box
             bool? result = dlg.ShowDialog();

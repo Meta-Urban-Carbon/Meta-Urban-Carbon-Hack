@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows.Documents;
 using Newtonsoft.Json;
 using Rhino;
 
 namespace MetaDataHelper.UserStringClass
 {
-    public class UserStringTemplate : ObservableCollection<UserStringDefinition>, INotifyPropertyChanged
+    public class UserStringTemplate : INotifyPropertyChanged
     {
-        private string _name; 
-
+        private string _name;
         private string _description;
+        private ObservableCollection<UserStringDefinition> _collection;
 
         public string Name
         {
@@ -34,11 +36,26 @@ namespace MetaDataHelper.UserStringClass
             }
         }
 
+        public ObservableCollection<UserStringDefinition> Collection
+        {
+            get => _collection;
+            set
+            {
+                _collection = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public UserStringTemplate()
+        {
+            this.Collection = new ObservableCollection<UserStringDefinition>();
+        }
+
         public void Assign(RhinoDoc doc, Guid guid)
         {
             var docObject = doc.Objects.FindId(guid);
 
-            foreach (var UserStringDeffinition in this)
+            foreach (var UserStringDeffinition in this.Collection)
             {
                 var userString = UserStringDeffinition.GetCurrentUserString();
                 docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
@@ -57,14 +74,14 @@ namespace MetaDataHelper.UserStringClass
             //var loadedTemplate = JsonConvert.DeserializeObject<List<UserStringDefinition>>(jsonString);
             var loadedTemplate = JsonConvert.DeserializeObject<UserStringTemplate>(jsonString);
             
-            this.Clear();
+            this.Collection.Clear();
 
             this.Name = loadedTemplate.Name;
             this.Description = loadedTemplate.Description; 
 
-            foreach (var userStringDefinition in loadedTemplate)
+            foreach (var userStringDefinition in loadedTemplate.Collection)
             {
-                this.Add(userStringDefinition);
+                this.Collection.Add(userStringDefinition);
             }
         }
 
@@ -80,19 +97,37 @@ namespace MetaDataHelper.UserStringClass
             //var loadedTemplate = JsonConvert.DeserializeObject<List<UserStringDefinition>>(jsonString);
             var loadedTemplate = JsonConvert.DeserializeObject<UserStringTemplate>(jsonString);
 
-            foreach (var userStringDefinition in loadedTemplate)
+            foreach (var userStringDefinition in loadedTemplate.Collection)
             {
-                this.Add(userStringDefinition);
+                this.Collection.Add(userStringDefinition);
             }
         }
 
         public void Replace(UserStringTemplate template)
         {
-            this.Clear();
-            foreach (var userStringDefinition in template)
+            this.Collection.Clear();
+            foreach (var userStringDefinition in template.Collection)
             {
-                this.Add(userStringDefinition);
+                this.Collection.Add(userStringDefinition);
             }
+        }
+
+        public void Add(UserStringDefinition template)
+        {
+            this.Collection.Add(template);
+        }
+
+        public void AddRange(List<UserStringDefinition> definitions)
+        {
+            foreach (var definition in definitions)
+            {
+                this.Collection.Add(definition);
+            }
+        }
+
+        public void Remove(UserStringDefinition definition)
+        {
+            this.Collection.Remove(definition);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

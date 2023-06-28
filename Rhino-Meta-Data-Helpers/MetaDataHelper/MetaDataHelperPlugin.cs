@@ -28,7 +28,7 @@
         protected override Rhino.PlugIns.LoadReturnCode OnLoad(ref string errorMessage)
         {
             System.Type panel_type = typeof(ClassManagerPanelHost);
-            Rhino.UI.Panels.RegisterPanel(this, panel_type, "MetaDataHelper", MetaDataHelper.Properties.Resources.SampleCsWpfPanel);
+            Rhino.UI.Panels.RegisterPanel(this, panel_type, "MetaDataHelper", MetaDataHelper.Properties.Resources.MetaDataPanelIcon);
             StartupUtilities.EnsureDirectoryExists();
 
             return Rhino.PlugIns.LoadReturnCode.Success;

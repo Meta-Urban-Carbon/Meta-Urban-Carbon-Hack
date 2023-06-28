@@ -29,6 +29,7 @@
         {
             System.Type panel_type = typeof(ClassManagerPanelHost);
             Rhino.UI.Panels.RegisterPanel(this, panel_type, "MetaDataHelper", MetaDataHelper.Properties.Resources.SampleCsWpfPanel);
+            StartupUtilities.EnsureDirectoryExists();
 
             return Rhino.PlugIns.LoadReturnCode.Success;
         }

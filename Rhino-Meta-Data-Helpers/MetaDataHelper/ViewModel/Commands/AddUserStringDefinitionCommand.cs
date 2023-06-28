@@ -11,7 +11,7 @@ namespace MetaDataHelper
     class AddUserStringDefinitionCommand: ICommand
     {
 
-        private UserStringTemplate _currenTemplate;
+        private UserStringTemplate _currentTemplate;
 
         public bool CanExecute(object parameter)
         {
@@ -24,15 +24,14 @@ namespace MetaDataHelper
             var param = parameter as String;
             //var param = parameter as string;
             var newUserStringDef = new UserStringDefinition("key");
-            this._currenTemplate.Add(newUserStringDef);
-
+            this._currentTemplate.Add(newUserStringDef);
         }
 
         public event EventHandler CanExecuteChanged;
 
         public AddUserStringDefinitionCommand(UserStringTemplate currentTemplate)
         {
-            _currenTemplate = currentTemplate;
+            this._currentTemplate = currentTemplate;
         }
 
     }

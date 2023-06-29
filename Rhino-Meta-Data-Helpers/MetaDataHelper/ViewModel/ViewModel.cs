@@ -70,7 +70,10 @@ namespace MetaDataHelper
             this.Message = "View Model Has Loaded";
             this.CurrentTemplate = new UserStringTemplate();
             this.SavedTemplates = new SavedTemplates();
-            this.SelectedSavedTemplate = this.SavedTemplates[0];
+            if (this.SavedTemplates.Count > 0)
+            {
+                this.SelectedSavedTemplate = this.SavedTemplates[0];
+            }
 
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
 

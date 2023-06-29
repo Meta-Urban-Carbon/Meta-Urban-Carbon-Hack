@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MetaDataHelper.UserStringClass
+namespace MetaDataHelper
 {
-    public enum UserStringValueType 
+    public enum AssignTargetEnum
     {
-        String,
-        Select,
-        Gh_Calculated
+        Selected, 
+        Layer,
+        All
     }
+
 }

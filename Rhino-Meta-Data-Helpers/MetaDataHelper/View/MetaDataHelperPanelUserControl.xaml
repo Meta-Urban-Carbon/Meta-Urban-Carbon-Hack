@@ -10,7 +10,7 @@
              Height="Auto"
              Width="Auto"
              d:DesignHeight="450"
-             d:DesignWidth="800"
+             d:DesignWidth="400"
 >
 
     <UserControl.Resources>
@@ -42,11 +42,11 @@
         <!-- Master Grid Definition -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -60,34 +60,42 @@
             <RowDefinition Height ="Auto"/>
             <RowDefinition Height ="Auto"/>
             <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
             <RowDefinition Height ="1"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="1" Grid.Column="1"
+               Grid.ColumnSpan="3"
                Content="{Binding Message}"/>
 
         <!-- Layer Button Stack. -->
         <StackPanel Grid.Row="3" Grid.Column="1"
+                    Grid.ColumnSpan="5"
                     Orientation="Horizontal">
+            <Label> Saved Templates: </Label>
 
-            <!-- Add Row Button. -->
-            <Button
-                FontSize="10"
-                Padding="2"
-                Margin="2"
-                Command="{Binding AddUserStringDefinitionCommand}"
-                CommandParameter="test"
-                >
-                Add User String Definition
-            </Button>
+            <ComboBox Width="150"
+                    ItemsSource="{Binding SavedTemplates}"
+                    SelectedItem="{Binding SelectedSavedTemplate, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                        <!-- Display property of UserStringTemplate -->
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
 
             <!-- Save button -->
             <Button FontSize="10"
                     Padding="2"
                     Margin="2"
                     Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding CurrentTemplate}"
                 >
-                Save Template
+                Save
             </Button>
 
             <!-- Load button -->
@@ -96,86 +104,143 @@
                     Margin="2"
                     Command="{Binding LoadCommand}"
                     >
-                Load Template
+                Load
             </Button>
         </StackPanel>
 
-        <ListView Grid.Row="4" Grid.Column="1" 
-                  ItemsSource="{Binding CurrentTemplate}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Key">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+        <!-- Template Name -->
+        <Grid Grid.Row="6" Grid.Column="1" 
+              Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-                    <GridViewColumn Header="Value">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ContentControl Content="{Binding}" x:Name="contentControl" />
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding ValueType}" Value="{x:Static userStringClass:UserStringValueType.String}">
-                                        <Setter TargetName="contentControl" Property="ContentTemplate" Value="{StaticResource StringTemplate}" />
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding ValueType}" Value="{x:Static userStringClass:UserStringValueType.Select}">
-                                        <Setter TargetName="contentControl" Property="ContentTemplate" Value="{StaticResource SelectTemplate}" />
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+            <!-- Name Label. -->
+            <Label Grid.Column="0">
+                Template Name:
+            </Label>
 
-                    <GridViewColumn Header="Manage Option">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="+/-" 
-                                        Command="{Binding Path=DataContext.OpenOptionManagerCommand, RelativeSource={RelativeSource AncestorType=ListView}}" 
-                                        CommandParameter="{Binding}">
-                                    <Button.Style>
-                                        <Style TargetType="Button">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ValueType}" Value="{x:Static userStringClass:UserStringValueType.Select}">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+            <!-- Template Name Field. -->
+            <TextBox Grid.Column="1" 
+                     Text="{Binding CurrentTemplate.Name}">
+            </TextBox>
 
-                    <GridViewColumn Header="Type">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ComboBox SelectedValue="{Binding Path=ValueType, UpdateSourceTrigger=PropertyChanged}"
-                                          ItemsSource="{Binding Source={StaticResource UserStringValueTypeProvider}}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-
-        <!-- other button -->
-        <Button Grid.Row="6" Grid.Column="1" 
+            <!-- Add Row Button. -->
+            <Button Grid.Column="3"
                 FontSize="10"
                 Padding="2"
                 Margin="2"
-                Command="{Binding AssignTemplateToSelectedObjectsCommand}"
+                Command="{Binding AddUserStringDefinitionCommand}"
+                CommandParameter="test"
+            >
+                Add Key
+            </Button>
+        </Grid>
+
+        <!-- List of User String Deffinitions form Current Template -->
+        <DataGrid Grid.Row="8" Grid.Column="1" 
+          Grid.ColumnSpan="5"
+          ItemsSource="{Binding CurrentTemplate.Collection}"
+          CanUserResizeColumns="True"
+          AutoGenerateColumns="False">
+
+            <!-- Key Column. -->
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Key" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=Key, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Value Column. -->
+                <DataGridTemplateColumn Header="Value" 
+                                        Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentControl 
+                                Content="{Binding}" 
+                                x:Name="contentControl" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.String}">
+                                    <Setter 
+                                        TargetName="contentControl" 
+                                        Property="ContentTemplate" 
+                                        Value="{StaticResource StringTemplate}" />
+                                </DataTrigger>
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Select}">
+                                    <Setter 
+                                        TargetName="contentControl"
+                                        Property="ContentTemplate" 
+                                        Value="{StaticResource SelectTemplate}" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Value Type Column. -->
+                <DataGridTemplateColumn Header="Type" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValue="{Binding Path=ValueType, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding Source={StaticResource UserStringValueTypeProvider}}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Manage Options Column. -->
+                <DataGridTemplateColumn 
+                    Header="Manage Option" 
+                    Width="25">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button 
+                                Content="+/-" 
+                                Command="{Binding Path=DataContext.OpenOptionManagerCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                CommandParameter="{Binding}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger 
+                                                Binding="{Binding ValueType}" 
+                                                Value="{x:Static userStringClass:UserStringValueType.Select}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- other button -->
+        <Button Grid.Row="9" Grid.Column="1" 
+                Grid.ColumnSpan="2"
+                FontSize="10"
+                Padding="2"
+                Margin="2"
+                Command="{Binding AssignTemplateCommand}"
+                CommandParameter="Selected"
         >
-            Asign To Selected
+            Assign To Selected
         </Button>
 
     </Grid>

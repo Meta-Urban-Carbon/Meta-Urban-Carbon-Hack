@@ -5,28 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MetaDataHelper"
         mc:Ignorable="d"
-        Title="Manage Options" Height="300" Width="300">
+        Title="Manage Options" Height="300" Width="250">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <!-- Headder Label -->
+        <Label Grid.Row="1" Grid.Column="1" 
+               Grid.ColumnSpan="3"
+               Content="Value Options">
 
-        <ListBox x:Name="OptionList" 
+        </Label>
+
+        <!-- Options List -->
+        <ListBox Grid.Row="2" Grid.Column="1" 
+                 Grid.ColumnSpan="3"
+                 x:Name="OptionList" 
                  ItemsSource="{Binding ValueOptions }">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" Margin="0,0,10,0"/>
-                        <Button Content="Remove" Click="RemoveButton_Click"/>
+                        <TextBox 
+                            Text="{Binding}" 
+                            Margin="0,0,10,0"
+                            Width="Auto"/>
+                        <Button 
+                            Content="Remove" 
+                            Click="RemoveButton_Click"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBox x:Name="NewOptionTextBox" Width="200"/>
-            <Button Content="Add" Click="AddButton_Click"/>
-        </StackPanel>
+
+        <!-- Add Label Section at bottom -->
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" 
+                   Content="Add:">
+            </Label>
+
+            <TextBox x:Name="NewOptionTextBox" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Stretch"/>
+
+            <Button Grid.Column="2" 
+                    Width="25" 
+                    Content="Add" 
+                    Click="AddButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

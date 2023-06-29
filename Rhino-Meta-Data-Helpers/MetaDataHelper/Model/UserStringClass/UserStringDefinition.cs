@@ -15,6 +15,7 @@ namespace MetaDataHelper.UserStringClass
         private String _key;
         private String _defaultValue;
         private String _value;
+        private String _ghFilePath;
         private UserStringValueType _type;
         private UserStringValueOptions _options = null;
 
@@ -52,6 +53,16 @@ namespace MetaDataHelper.UserStringClass
             set
             {
                 _type = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public String GhFilePath
+        {
+            get => _ghFilePath;
+            set
+            {
+                _ghFilePath=value;
                 OnPropertyChanged();
             }
         }
@@ -107,7 +118,7 @@ namespace MetaDataHelper.UserStringClass
                 var docObject = doc.Objects.FindId(guid);
 
                 // If Value is null, assign an empty string to it
-                var userString = new UserString(this.Key, "");
+                var userString = new UserString(this.Key, "_");
                 docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
             }
         }

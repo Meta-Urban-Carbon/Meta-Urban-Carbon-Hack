@@ -97,6 +97,9 @@ namespace MetaDataHelper.UserStringClass
             //var loadedTemplate = JsonConvert.DeserializeObject<List<UserStringDefinition>>(jsonString);
             var loadedTemplate = JsonConvert.DeserializeObject<UserStringTemplate>(jsonString);
 
+            this.Name = loadedTemplate.Name;
+            this.Description = loadedTemplate.Description;
+
             foreach (var userStringDefinition in loadedTemplate.Collection)
             {
                 this.Collection.Add(userStringDefinition);
@@ -105,6 +108,8 @@ namespace MetaDataHelper.UserStringClass
 
         public void Replace(UserStringTemplate template)
         {
+            this.Name = template.Name;
+            this.Description = template.Description;
             this.Collection.Clear();
             foreach (var userStringDefinition in template.Collection)
             {

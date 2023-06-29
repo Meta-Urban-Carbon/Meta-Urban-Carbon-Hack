@@ -24,7 +24,6 @@ namespace MetaDataHelper
                 }
             }
         }
-        
         public UserStringTemplate SelectedSavedTemplate
         {
             get => _selectedSavedTemplate;

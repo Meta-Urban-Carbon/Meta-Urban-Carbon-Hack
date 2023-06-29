@@ -118,7 +118,7 @@ namespace MetaDataHelper.UserStringClass
                 var docObject = doc.Objects.FindId(guid);
 
                 // If Value is null, assign an empty string to it
-                var userString = new UserString(this.Key, "");
+                var userString = new UserString(this.Key, "_");
                 docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
             }
         }

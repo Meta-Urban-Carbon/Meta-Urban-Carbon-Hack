@@ -145,6 +145,8 @@
           ItemsSource="{Binding CurrentTemplate.Collection}"
           CanUserResizeColumns="True"
           AutoGenerateColumns="False">
+
+            <!-- Key Column. -->
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Key" Width="*">
                     <DataGridTemplateColumn.CellTemplate>

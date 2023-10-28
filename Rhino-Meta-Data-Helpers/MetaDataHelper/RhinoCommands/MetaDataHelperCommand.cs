@@ -23,42 +23,45 @@ namespace MetaDataHelper.Commands
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
-            // TODO: start here modifying the behaviour of your command.
-            // ---
-            RhinoApp.WriteLine("The {0} command will add a line right now.", EnglishName);
+            System.Guid panelId = ClassManagerPanelHost.PanelId;
+            bool bVisible = Rhino.UI.Panels.IsPanelVisible(panelId);
 
-            Point3d pt0;
-            using (GetPoint getPointAction = new GetPoint())
+            string prompt = (bVisible)
+                ? "Class Manager panel is visible. New value"
+                : "Class Manager panel is hidden. New value";
+
+            Rhino.Input.Custom.GetOption go = new Rhino.Input.Custom.GetOption();
+            int hide_index = go.AddOption("Hide");
+            int show_index = go.AddOption("Show");
+            int toggle_index = go.AddOption("Toggle");
+
+            go.Get();
+            if (go.CommandResult() != Rhino.Commands.Result.Success)
+                return go.CommandResult();
+
+            Rhino.Input.Custom.CommandLineOption option = go.Option();
+            if (null == option)
+                return Rhino.Commands.Result.Failure;
+
+            int index = option.Index;
+
+            if (index == hide_index)
             {
-                getPointAction.SetCommandPrompt("Please select the start point");
-                if (getPointAction.Get() != GetResult.Point)
-                {
-                    RhinoApp.WriteLine("No start point was selected.");
-                    return getPointAction.CommandResult();
-                }
-                pt0 = getPointAction.Point();
+                if (bVisible)
+                    Rhino.UI.Panels.ClosePanel(panelId);
             }
-
-            Point3d pt1;
-            using (GetPoint getPointAction = new GetPoint())
+            else if (index == show_index)
             {
-                getPointAction.SetCommandPrompt("Please select the end point");
-                getPointAction.SetBasePoint(pt0, true);
-                getPointAction.DynamicDraw +=
-                  (sender, e) => e.Display.DrawLine(pt0, e.CurrentPoint, System.Drawing.Color.DarkRed);
-                if (getPointAction.Get() != GetResult.Point)
-                {
-                    RhinoApp.WriteLine("No end point was selected.");
-                    return getPointAction.CommandResult();
-                }
-                pt1 = getPointAction.Point();
+                if (!bVisible)
+                    Rhino.UI.Panels.OpenPanel(panelId);
             }
-
-            doc.Objects.AddLine(pt0, pt1);
-            doc.Views.Redraw();
-            RhinoApp.WriteLine("The {0} command added one line to the document.", EnglishName);
-
-            // ---
+            else if (index == toggle_index)
+            {
+                if (bVisible)
+                    Rhino.UI.Panels.ClosePanel(panelId);
+                else
+                    Rhino.UI.Panels.OpenPanel(panelId);
+            }
             return Result.Success;
         }
     }

@@ -76,15 +76,7 @@ namespace MetaDataHelper
 
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
 
-            OpenOptionManagerCommand = new RelayCommand<UserStringDefinition>(
-                definition => {
-                    if (definition != null && definition.ValueType == UserStringValueType.Select)
-                    {
-                        var dialog = new OptionManagerDialog(definition);
-                        dialog.ShowDialog();
-                    }
-                });
-
+            this.OpenOptionManagerCommand = new OpenOptionManagerCommand(this.CurrentTemplate);
             this.SaveCommand = new SaveTemplateCommand(this.CurrentTemplate);
             this.LoadCommand = new LoadTemplateCommand(this.CurrentTemplate);
             this.AssignTemplateCommand = new AssignTemplateCommand(this.CurrentTemplate);

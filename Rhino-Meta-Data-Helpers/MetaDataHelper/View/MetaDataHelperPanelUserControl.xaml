@@ -20,6 +20,7 @@
 
         <DataTemplate x:Key="SelectTemplate">
             <ComboBox ItemsSource="{Binding ValueOptions}"
+                      DisplayMemberPath="Option" 
                       SelectedItem="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
         </DataTemplate>
@@ -146,8 +147,10 @@
           CanUserResizeColumns="True"
           AutoGenerateColumns="False">
 
-            <!-- Key Column. -->
+            <!-- Table. -->
             <DataGrid.Columns>
+
+                <!-- Key Column. -->
                 <DataGridTemplateColumn Header="Key" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -231,7 +234,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- other button -->
+        <!-- Assign To Selected Rhino Objects.  -->
         <Button Grid.Row="9" Grid.Column="1" 
                 Grid.ColumnSpan="2"
                 FontSize="10"

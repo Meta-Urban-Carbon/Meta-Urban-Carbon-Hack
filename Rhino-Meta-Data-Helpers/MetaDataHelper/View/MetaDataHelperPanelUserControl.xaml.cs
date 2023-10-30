@@ -12,8 +12,8 @@ namespace MetaDataHelper
         public static MetaDataHelperPanelUserControl Instance;
         public MetaDataHelperPanelUserControl(uint documentSerialNumber)
         {
-            DataContext = new ViewModel(documentSerialNumber);
             InitializeComponent();
+            DataContext = new ViewModel(documentSerialNumber);
             Instance = this;
         }
 

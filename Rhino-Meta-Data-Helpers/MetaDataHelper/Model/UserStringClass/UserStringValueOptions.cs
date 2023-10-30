@@ -1,32 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace MetaDataHelper.UserStringClass
 {
-    public class UserStringValueOptions: ObservableCollection<String>
+    public class UserStringValueOptions : ObservableCollection<OptionWrapper>
     {
-        public void AddOption(String keyOption)
+        public void AddOption(string keyOption)
         {
-            this.Add(keyOption);
+            this.Add(new OptionWrapper { Option = keyOption });
         }
 
         public void AddOption(int keyOption)
         {
-            this.Add(keyOption.ToString());
+            this.Add(new OptionWrapper { Option = keyOption.ToString() });
         }
 
         public void AddOption(double keyOption)
         {
-            this.Add(keyOption.ToString());
+            this.Add(new OptionWrapper { Option = keyOption.ToString() });
         }
 
-        public void RemoveOption(String option)
+        public void RemoveOption(string option)
         {
-            this.Remove(option);
+            var itemToRemove = this.FirstOrDefault(ow => ow.Option == option);
+            if (itemToRemove != null)
+            {
+                this.Remove(itemToRemove);
+            }
+        }
+    }
+
+    public class OptionWrapper : INotifyPropertyChanged
+    {
+        private string _option;
+        public string Option
+        {
+            get => _option;
+            set
+            {
+                if (_option != value)
+                {
+                    _option = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Implements Property Change event handler
+        /// </summary>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

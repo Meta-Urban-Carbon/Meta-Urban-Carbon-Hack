@@ -61,7 +61,7 @@ namespace MetaDataHelper
             //check if name is unique
             if (this.checkDuplicates(userStringTemplate.Name))
             {
-                this.Add(userStringTemplate);
+                base.Add(userStringTemplate);
             }
             else
             {

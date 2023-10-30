@@ -23,7 +23,7 @@ namespace MetaDataHelper
             var CurrentTemplate = parameter as UserStringTemplate;
 
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "UserStringDefinition"; // Default file name
+            dlg.FileName = CurrentTemplate.Name;//"UserStringDefinition"; // Default file name
             dlg.DefaultExt = ".json"; // Default file extension
             dlg.Filter = "Json documents (.json)|*.json"; // Filter files by extension
             //dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

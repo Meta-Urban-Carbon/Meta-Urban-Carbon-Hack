@@ -77,8 +77,8 @@ namespace MetaDataHelper
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
 
             this.OpenOptionManagerCommand = new OpenOptionManagerCommand(this.CurrentTemplate);
-            this.SaveCommand = new SaveTemplateCommand(this.CurrentTemplate);
-            this.LoadCommand = new LoadTemplateCommand(this.CurrentTemplate);
+            this.SaveCommand = new SaveTemplateCommand(this.CurrentTemplate, this.SavedTemplates);
+            this.LoadCommand = new LoadTemplateCommand(this.CurrentTemplate, this.SavedTemplates);
             this.AssignTemplateCommand = new AssignTemplateCommand(this.CurrentTemplate);
 
         }

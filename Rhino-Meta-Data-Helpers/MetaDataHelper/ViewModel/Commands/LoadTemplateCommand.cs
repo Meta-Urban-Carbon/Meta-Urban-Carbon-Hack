@@ -11,6 +11,7 @@ namespace MetaDataHelper
     internal class LoadTemplateCommand : ICommand
     {
         private UserStringTemplate _currentTemplate;
+        private SavedTemplates _savedTemplates;
 
         public bool CanExecute(object parameter)
         {
@@ -33,14 +34,16 @@ namespace MetaDataHelper
                 // Load document
                 string filename = dlg.FileName;
                 this._currentTemplate.LoadAndReplace(filename);
+                this._savedTemplates.Add(this._currentTemplate);
             }
         }
 
         public event EventHandler CanExecuteChanged;
 
-        public LoadTemplateCommand(UserStringTemplate currentTemplate)
+        public LoadTemplateCommand(UserStringTemplate currentTemplate, SavedTemplates savedTemplates)
         {
             this._currentTemplate = currentTemplate;
+            _savedTemplates = savedTemplates;
         }
     }
 }

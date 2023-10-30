@@ -71,15 +71,19 @@
                Grid.ColumnSpan="3"
                Content="{Binding Message}"/>
 
-        <!-- Layer Button Stack. -->
+        <!-- Saved Templates Row. -->
         <StackPanel Grid.Row="3" Grid.Column="1"
                     Grid.ColumnSpan="5"
                     Orientation="Horizontal">
+
+
+            <!-- Saved Templates Label. -->
             <Label> Saved Templates: </Label>
 
+            <!-- Saved Templates Dropdown. -->
             <ComboBox Width="150"
-                    ItemsSource="{Binding SavedTemplates}"
-                    SelectedItem="{Binding SelectedSavedTemplate, UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding SavedTemplates}"
+                      SelectedItem="{Binding SelectedSavedTemplate, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />

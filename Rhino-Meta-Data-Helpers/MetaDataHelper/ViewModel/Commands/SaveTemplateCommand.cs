@@ -10,6 +10,7 @@ namespace MetaDataHelper
     {
 
         private UserStringTemplate _currentTemplate;
+        private SavedTemplates _savedTemplates;
 
         public bool CanExecute(object parameter)
         {
@@ -38,15 +39,17 @@ namespace MetaDataHelper
                 string filename = dlg.FileName;
                 string jsonString = JsonConvert.SerializeObject(CurrentTemplate);
                 File.WriteAllText(filename, jsonString);
+                this._savedTemplates.Add(CurrentTemplate);
             }
 
         }
 
         public event EventHandler CanExecuteChanged;
 
-        public SaveTemplateCommand(UserStringTemplate currentTemplate)
+        public SaveTemplateCommand(UserStringTemplate currentTemplate, SavedTemplates savedTemplates)   
         {
             this._currentTemplate = currentTemplate;
+            this._savedTemplates = savedTemplates;
         }
 
     }

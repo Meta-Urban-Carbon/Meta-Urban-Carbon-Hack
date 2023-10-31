@@ -17,6 +17,12 @@ namespace MetaDataHelper
             this.DataContext = _userStringDefinition;
         }
 
+
+        /// <summary>
+        /// Adds a new option to the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             string newOption = NewOptionTextBox.Text;
@@ -25,6 +31,12 @@ namespace MetaDataHelper
                 _userStringDefinition.AddOption(newOption);
             }
         }
+
+        /// <summary>
+        /// Removes a option from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             var option = (sender as Button).DataContext as string;
@@ -32,6 +44,15 @@ namespace MetaDataHelper
             {
                 _userStringDefinition.RemoveOption(option);
             }
+        }
+        /// <summary>
+        /// Closes this dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

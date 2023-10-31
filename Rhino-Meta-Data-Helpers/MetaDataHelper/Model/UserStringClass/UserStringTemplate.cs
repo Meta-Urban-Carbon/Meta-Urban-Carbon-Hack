@@ -5,11 +5,20 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;
+using System.Windows.Input;
+using Eto.Forms;
 using Newtonsoft.Json;
 using Rhino;
 
 namespace MetaDataHelper.UserStringClass
 {
+    /// <summary>
+    /// This is the basic template or metadata class object.
+    /// it holds a general name and description, and each
+    /// user string deffintion is held in it's collection.
+    /// It has helper tools for loading, adding and replacing
+    /// items. 
+    /// </summary>
     public class UserStringTemplate : INotifyPropertyChanged
     {
         private string _name;
@@ -36,6 +45,10 @@ namespace MetaDataHelper.UserStringClass
             }
         }
 
+        /// <summary>
+        /// The Collection of <see cref="UserStringDefinition"/>s that
+        /// make up this template. 
+        /// </summary>
         public ObservableCollection<UserStringDefinition> Collection
         {
             get => _collection;
@@ -46,11 +59,20 @@ namespace MetaDataHelper.UserStringClass
             }
         }
 
+        public ICommand RemoveCommand { get; private set; }
+
+
         public UserStringTemplate()
         {
             this.Collection = new ObservableCollection<UserStringDefinition>();
+            this.RemoveCommand = new RelayCommand(ExecuteRemoveCommand, CanExecuteRemoveCommand);
         }
 
+        /// <summary>
+        /// Assigns this template to a specific rhino geometry. 
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="guid"></param>
         public void Assign(RhinoDoc doc, Guid guid)
         {
             var docObject = doc.Objects.FindId(guid);
@@ -133,6 +155,19 @@ namespace MetaDataHelper.UserStringClass
         public void Remove(UserStringDefinition definition)
         {
             this.Collection.Remove(definition);
+        }
+
+        private bool CanExecuteRemoveCommand(object parameter)
+        {
+            return parameter is UserStringDefinition;
+        }
+
+        private void ExecuteRemoveCommand(object parameter)
+        {
+            if (parameter is UserStringDefinition definition)
+            {
+                this.Remove(definition);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

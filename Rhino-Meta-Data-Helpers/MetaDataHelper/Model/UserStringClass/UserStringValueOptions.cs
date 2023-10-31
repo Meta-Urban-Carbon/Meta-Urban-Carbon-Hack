@@ -31,6 +31,18 @@ namespace MetaDataHelper.UserStringClass
                 this.Remove(itemToRemove);
             }
         }
+
+        // Check if an option exists in the collection
+        public bool ContainsOption(string option)
+        {
+            return this.Any(ow => ow.Option == option);
+        }
+
+        // Get the first option if it exists
+        public string GetFirstOption()
+        {
+            return this.FirstOrDefault()?.Option ?? string.Empty;
+        }
     }
 
     public class OptionWrapper : INotifyPropertyChanged

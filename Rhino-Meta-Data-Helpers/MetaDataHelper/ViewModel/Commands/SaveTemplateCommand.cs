@@ -10,6 +10,7 @@ namespace MetaDataHelper
     {
 
         private UserStringTemplate _currentTemplate;
+        private SavedTemplates _savedTemplates;
 
         public bool CanExecute(object parameter)
         {
@@ -22,7 +23,7 @@ namespace MetaDataHelper
             var CurrentTemplate = parameter as UserStringTemplate;
 
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "UserStringDefinition"; // Default file name
+            dlg.FileName = CurrentTemplate.Name;//"UserStringDefinition"; // Default file name
             dlg.DefaultExt = ".json"; // Default file extension
             dlg.Filter = "Json documents (.json)|*.json"; // Filter files by extension
             //dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -38,15 +39,17 @@ namespace MetaDataHelper
                 string filename = dlg.FileName;
                 string jsonString = JsonConvert.SerializeObject(CurrentTemplate);
                 File.WriteAllText(filename, jsonString);
+                this._savedTemplates.Add(CurrentTemplate);
             }
 
         }
 
         public event EventHandler CanExecuteChanged;
 
-        public SaveTemplateCommand(UserStringTemplate currentTemplate)
+        public SaveTemplateCommand(UserStringTemplate currentTemplate, SavedTemplates savedTemplates)   
         {
             this._currentTemplate = currentTemplate;
+            this._savedTemplates = savedTemplates;
         }
 
     }

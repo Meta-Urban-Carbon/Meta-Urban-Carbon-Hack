@@ -56,6 +56,43 @@ namespace MetaDataHelper
             }
         }
 
+        public void Add(UserStringTemplate userStringTemplate)
+        {
+            //check if name is unique
+            if (this.checkDuplicates(userStringTemplate.Name))
+            {
+                base.Add(userStringTemplate);
+            }
+            else
+            {
+                //replace existing
+                foreach (var item in this)
+                {
+                    if (item.Name == userStringTemplate.Name)
+                    {
+                        item.Replace(userStringTemplate);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// checks if the name is unique
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>is it unique? bool</returns>
+        public bool checkDuplicates(string name)
+        {
+            foreach (var item in this)
+            {
+                if (item.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

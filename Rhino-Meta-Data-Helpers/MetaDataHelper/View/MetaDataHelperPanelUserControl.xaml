@@ -14,10 +14,18 @@
 >
 
     <UserControl.Resources>
+
+        <!-- Converters-->
+        <local:StringToBooleanConverter x:Key="StringToBooleanConverter" />
+        <local:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+
+
+        <!-- For String -->
         <DataTemplate x:Key="StringTemplate">
             <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
         </DataTemplate>
 
+        <!-- For Select -->
         <DataTemplate x:Key="SelectTemplate">
             <ComboBox ItemsSource="{Binding ValueOptions}"
                       DisplayMemberPath="Option" 
@@ -25,6 +33,37 @@
             </ComboBox>
         </DataTemplate>
 
+        <!-- For Integer -->
+        <DataTemplate x:Key="IntegerTemplate">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
+                     PreviewTextInput="IntergerValidationTextBox"/>
+        </DataTemplate>
+
+        <!-- For Double -->
+        <DataTemplate x:Key="DoubleTemplate">
+            <TextBox 
+                Text="{Binding Value,  UpdateSourceTrigger=PropertyChanged,  Converter={StaticResource StringToDoubleConverter}, ValidatesOnExceptions=True, NotifyOnValidationError=True}" 
+                PreviewTextInput="DoubleValidationTextBox"
+            />
+        </DataTemplate>
+
+        <!--
+        <DataTemplate x:Key="DoubleTemplate">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                      />
+        </DataTemplate>
+        -->
+
+
+        <!-- For Boolean -->
+        <DataTemplate x:Key="BooleanTemplate">
+            <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToBooleanConverter}}" Content="{Binding Value}"/>
+        </DataTemplate>
+
+        <!-- For Gh_Calculated (This is just an example; adjust based on your actual need) -->
+        <DataTemplate x:Key="GhCalculatedTemplate">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+        </DataTemplate>
 
         <ObjectDataProvider MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}"
@@ -71,15 +110,19 @@
                Grid.ColumnSpan="3"
                Content="{Binding Message}"/>
 
-        <!-- Layer Button Stack. -->
+        <!-- Saved Templates Row. -->
         <StackPanel Grid.Row="3" Grid.Column="1"
                     Grid.ColumnSpan="5"
                     Orientation="Horizontal">
+
+
+            <!-- Saved Templates Label. -->
             <Label> Saved Templates: </Label>
 
+            <!-- Saved Templates Dropdown. -->
             <ComboBox Width="150"
-                    ItemsSource="{Binding SavedTemplates}"
-                    SelectedItem="{Binding SelectedSavedTemplate, UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding SavedTemplates}"
+                      SelectedItem="{Binding SelectedSavedTemplate, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
@@ -128,22 +171,12 @@
                      Text="{Binding CurrentTemplate.Name}">
             </TextBox>
 
-            <!-- Add Row Button. -->
-            <Button Grid.Column="3"
-                FontSize="10"
-                Padding="2"
-                Margin="2"
-                Command="{Binding AddUserStringDefinitionCommand}"
-                CommandParameter="test"
-            >
-                Add Key
-            </Button>
         </Grid>
 
         <!-- List of User String Deffinitions form Current Template -->
         <DataGrid Grid.Row="8" Grid.Column="1" 
           Grid.ColumnSpan="5"
-          ItemsSource="{Binding CurrentTemplate.Collection}"
+          ItemsSource="{Binding CurrentTemplate.Collection }"
           CanUserResizeColumns="True"
           AutoGenerateColumns="False">
 
@@ -168,6 +201,8 @@
                                 Content="{Binding}" 
                                 x:Name="contentControl" />
                             <DataTemplate.Triggers>
+
+                                <!-- String Trigger. -->
                                 <DataTrigger 
                                     Binding="{Binding ValueType}" 
                                     Value="{x:Static userStringClass:UserStringValueType.String}">
@@ -176,6 +211,8 @@
                                         Property="ContentTemplate" 
                                         Value="{StaticResource StringTemplate}" />
                                 </DataTrigger>
+
+                                <!-- Boolean Trigger. -->
                                 <DataTrigger 
                                     Binding="{Binding ValueType}" 
                                     Value="{x:Static userStringClass:UserStringValueType.Select}">
@@ -183,6 +220,48 @@
                                         TargetName="contentControl"
                                         Property="ContentTemplate" 
                                         Value="{StaticResource SelectTemplate}" />
+                                </DataTrigger>
+                                
+                                <!-- Integer Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Integer}"
+                                    >
+                                    <Setter 
+                                        TargetName="contentControl" 
+                                        Property="ContentTemplate" 
+                                        Value="{StaticResource IntegerTemplate}" 
+                                        />
+                                </DataTrigger>
+
+                                <!-- Double Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Double}">
+                                    <Setter 
+                                        TargetName="contentControl" 
+                                        Property="ContentTemplate" 
+                                        Value="{StaticResource DoubleTemplate}" />
+                                </DataTrigger>
+
+                                <!-- Boolean Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Boolean}">
+                                    <Setter TargetName="contentControl" 
+                                            Property="ContentTemplate" 
+                                            Value="{StaticResource BooleanTemplate}" 
+                                            />
+                                </DataTrigger>
+
+                                <!-- Gh_Calculated Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Gh_Calculated}">
+                                    <Setter TargetName="contentControl" 
+                                            Property="ContentTemplate" 
+                                            Value="{StaticResource GhCalculatedTemplate}" 
+                                            />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
@@ -231,6 +310,19 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
+                <!-- Remove Row Button. -->
+                <DataGridTemplateColumn Header="Remove" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="X" 
+                                    Command="{Binding Path=DataContext.CurrentTemplate.RemoveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Remove this item"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
 
@@ -244,6 +336,17 @@
                 CommandParameter="Selected"
         >
             Assign To Selected
+        </Button>
+
+        <!-- Add Row Button. -->
+        <Button Grid.Row="9" Grid.Column="3"
+                FontSize="10"
+                Padding="2"
+                Margin="2"
+                Command="{Binding AddUserStringDefinitionCommand}"
+                CommandParameter="test"
+        >
+            Add Key
         </Button>
 
     </Grid>

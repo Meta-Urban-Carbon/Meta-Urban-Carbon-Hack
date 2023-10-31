@@ -16,17 +16,27 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!-- Headder Label -->
         <Label Grid.Row="1" Grid.Column="1" 
-               Grid.ColumnSpan="3"
-               Content="Value Options">
+               Grid.ColumnSpan="2"
+               Content="SELECT OPTIONS">
 
         </Label>
+
+        <Button Grid.Row="1" Grid.Column="3"
+            HorizontalAlignment="Right"
+            Content="Close" 
+            Name="btnClose" 
+            Width="35" 
+            Height="25" 
+            Click="btnClose_Click" 
+            />
+
 
         <!-- Options List -->
         <ListBox Grid.Row="2" Grid.Column="1" 
@@ -39,7 +49,8 @@
                         <TextBox 
                             Text="{Binding Option }" 
                             Margin="0,0,10,0"
-                            Width="Auto"/>
+                            Width="Auto"
+                            MinWidth="120"/>
                         <Button 
                             Content="Remove" 
                             Click="RemoveButton_Click"/>
@@ -66,7 +77,7 @@
                      HorizontalAlignment="Stretch"/>
 
             <Button Grid.Column="2" 
-                    Width="25" 
+                    Width="35" 
                     Content="Add" 
                     Click="AddButton_Click"/>
         </Grid>

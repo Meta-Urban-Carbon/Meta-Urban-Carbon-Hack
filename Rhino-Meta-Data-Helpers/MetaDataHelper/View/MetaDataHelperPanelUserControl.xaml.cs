@@ -1,6 +1,8 @@
 ﻿using MetaDataHelper.UserStringClass;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MetaDataHelper
 {
@@ -20,6 +22,27 @@ namespace MetaDataHelper
         private ViewModel ViewModel => DataContext as ViewModel;
 
         //private ViewModel ViewModel => DataContext as ViewModel;
+
+
+        private void DoubleValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.-]+"); // Adjusted pattern to also allow dots for decimal and negative sign
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void IntergerValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9-]+"); // Adjusted pattern to also allow negative sign
+            e.Handled = regex.IsMatch(e.Text);
+        }   
+
+        private void TextBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true; // Disallow pasting in the TextBox
+            }
+        }
     }
 
     public class ValueTypeTemplateSelector : DataTemplateSelector

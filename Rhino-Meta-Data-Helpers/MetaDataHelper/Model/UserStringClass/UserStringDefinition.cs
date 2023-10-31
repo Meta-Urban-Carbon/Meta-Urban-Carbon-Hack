@@ -1,6 +1,7 @@
 ﻿using Rhino;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace MetaDataHelper.UserStringClass
@@ -52,8 +53,12 @@ namespace MetaDataHelper.UserStringClass
             get => _type;
             set
             {
-                _type = value;
-                OnPropertyChanged();
+                if (_type != value)
+                {
+                    _type = value;
+                    AdjustValueForType();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -120,6 +125,74 @@ namespace MetaDataHelper.UserStringClass
                 // If Value is null, assign an empty string to it
                 var userString = new UserString(this.Key, "_");
                 docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
+            }
+        }
+
+        private void AdjustValueForType()
+        {
+            switch (_type)
+            {
+                case UserStringValueType.String:
+                    // For a string, we don't change the value
+                    //If Option, unwrap the option
+                    if (_options != null)
+                    {
+                        Value = _options.GetFirstOption();
+                    }
+                    break;
+
+                case UserStringValueType.Integer:
+                    // Try to parse the current value as an integer
+                    if (!int.TryParse(_value, out int intResult))
+                    {
+                        Value = "0"; // Default integer value
+                    }
+                    else
+                    {
+                        Value = intResult.ToString();
+                    }
+                    break;
+
+                case UserStringValueType.Double:
+                    // Try to parse the current value as a double
+                    if (!double.TryParse(_value, out double doubleResult))
+                    {
+                        Value = "0.0"; // Default double value
+                    }
+                    else
+                    {
+                        Value = doubleResult.ToString();
+                    }
+                    break;
+
+                case UserStringValueType.Boolean:
+                    // Try to interpret the value as a boolean
+                    string lowerValue = _value.ToLower();
+                    if (lowerValue == "true" || lowerValue == "yes")
+                    {
+                        Value = "true";
+                    }
+                    else if (lowerValue == "false" || lowerValue == "no")
+                    {
+                        Value = "false";
+                    }
+                    else
+                    {
+                        Value = "false"; // Default boolean value
+                    }
+                    break;
+
+                case UserStringValueType.Select:
+                    // For a selection type, we'll check if the current value is a valid option. 
+                    // If not, we can default to the first option or another default value.
+                    if (!_options.ContainsOption(_value))
+                    {
+                        Value = _options.GetFirstOption();
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
 

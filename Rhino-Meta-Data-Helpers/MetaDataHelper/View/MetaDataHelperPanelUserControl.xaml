@@ -14,10 +14,18 @@
 >
 
     <UserControl.Resources>
+
+        <!-- Converters-->
+        <local:StringToBooleanConverter x:Key="StringToBooleanConverter" />
+        <local:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+
+
+        <!-- For String -->
         <DataTemplate x:Key="StringTemplate">
             <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
         </DataTemplate>
 
+        <!-- For Select -->
         <DataTemplate x:Key="SelectTemplate">
             <ComboBox ItemsSource="{Binding ValueOptions}"
                       DisplayMemberPath="Option" 
@@ -25,6 +33,37 @@
             </ComboBox>
         </DataTemplate>
 
+        <!-- For Integer -->
+        <DataTemplate x:Key="IntegerTemplate">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
+                     PreviewTextInput="IntergerValidationTextBox"/>
+        </DataTemplate>
+
+        <!-- For Double -->
+        <DataTemplate x:Key="DoubleTemplate">
+            <TextBox 
+                Text="{Binding Value,  UpdateSourceTrigger=PropertyChanged,  Converter={StaticResource StringToDoubleConverter}, ValidatesOnExceptions=True, NotifyOnValidationError=True}" 
+                PreviewTextInput="DoubleValidationTextBox"
+            />
+        </DataTemplate>
+
+        <!--
+        <DataTemplate x:Key="DoubleTemplate">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                      />
+        </DataTemplate>
+        -->
+
+
+        <!-- For Boolean -->
+        <DataTemplate x:Key="BooleanTemplate">
+            <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToBooleanConverter}}" Content="{Binding Value}"/>
+        </DataTemplate>
+
+        <!-- For Gh_Calculated (This is just an example; adjust based on your actual need) -->
+        <DataTemplate x:Key="GhCalculatedTemplate">
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+        </DataTemplate>
 
         <ObjectDataProvider MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}"
@@ -162,6 +201,8 @@
                                 Content="{Binding}" 
                                 x:Name="contentControl" />
                             <DataTemplate.Triggers>
+
+                                <!-- String Trigger. -->
                                 <DataTrigger 
                                     Binding="{Binding ValueType}" 
                                     Value="{x:Static userStringClass:UserStringValueType.String}">
@@ -170,6 +211,8 @@
                                         Property="ContentTemplate" 
                                         Value="{StaticResource StringTemplate}" />
                                 </DataTrigger>
+
+                                <!-- Boolean Trigger. -->
                                 <DataTrigger 
                                     Binding="{Binding ValueType}" 
                                     Value="{x:Static userStringClass:UserStringValueType.Select}">
@@ -177,6 +220,48 @@
                                         TargetName="contentControl"
                                         Property="ContentTemplate" 
                                         Value="{StaticResource SelectTemplate}" />
+                                </DataTrigger>
+                                
+                                <!-- Integer Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Integer}"
+                                    >
+                                    <Setter 
+                                        TargetName="contentControl" 
+                                        Property="ContentTemplate" 
+                                        Value="{StaticResource IntegerTemplate}" 
+                                        />
+                                </DataTrigger>
+
+                                <!-- Double Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Double}">
+                                    <Setter 
+                                        TargetName="contentControl" 
+                                        Property="ContentTemplate" 
+                                        Value="{StaticResource DoubleTemplate}" />
+                                </DataTrigger>
+
+                                <!-- Boolean Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Boolean}">
+                                    <Setter TargetName="contentControl" 
+                                            Property="ContentTemplate" 
+                                            Value="{StaticResource BooleanTemplate}" 
+                                            />
+                                </DataTrigger>
+
+                                <!-- Gh_Calculated Trigger. -->
+                                <DataTrigger 
+                                    Binding="{Binding ValueType}" 
+                                    Value="{x:Static userStringClass:UserStringValueType.Gh_Calculated}">
+                                    <Setter TargetName="contentControl" 
+                                            Property="ContentTemplate" 
+                                            Value="{StaticResource GhCalculatedTemplate}" 
+                                            />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>

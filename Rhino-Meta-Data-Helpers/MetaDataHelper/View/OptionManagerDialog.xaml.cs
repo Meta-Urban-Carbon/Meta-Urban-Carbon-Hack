@@ -1,5 +1,4 @@
-﻿using MetaDataHelper.UserStringClass;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace MetaDataHelper

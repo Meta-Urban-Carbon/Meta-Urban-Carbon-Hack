@@ -4,13 +4,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Windows.Documents;
 using System.Windows.Input;
-using Eto.Forms;
 using Newtonsoft.Json;
 using Rhino;
 
-namespace MetaDataHelper.UserStringClass
+namespace MetaDataHelper
 {
     /// <summary>
     /// This is the basic template or metadata class object.

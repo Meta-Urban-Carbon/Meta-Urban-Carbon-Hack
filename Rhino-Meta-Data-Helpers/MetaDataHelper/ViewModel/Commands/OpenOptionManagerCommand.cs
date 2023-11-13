@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using MetaDataHelper.UserStringClass;
 
 namespace MetaDataHelper
 {

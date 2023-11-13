@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Eto.Forms;
-using MetaDataHelper.UserStringClass;
 
 namespace MetaDataHelper
 {

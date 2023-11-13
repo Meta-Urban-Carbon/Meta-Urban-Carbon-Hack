@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MetaDataHelper"
-             xmlns:userStringClass="clr-namespace:MetaDataHelper.UserStringClass"
+             xmlns:userStringClass="clr-namespace:MetaDataHelper"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              Height="Auto"
@@ -19,7 +19,6 @@
         <local:StringToBooleanConverter x:Key="StringToBooleanConverter" />
         <local:StringToDoubleConverter x:Key="StringToDoubleConverter" />
 
-
         <!-- For String -->
         <DataTemplate x:Key="StringTemplate">
             <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
@@ -29,7 +28,7 @@
         <DataTemplate x:Key="SelectTemplate">
             <ComboBox ItemsSource="{Binding ValueOptions}"
                       DisplayMemberPath="Option" 
-                      SelectedItem="{Binding Value, UpdateSourceTrigger=PropertyChanged}">
+                      SelectedItem="{Binding SelectedValueOption, UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
         </DataTemplate>
 
@@ -42,22 +41,22 @@
         <!-- For Double -->
         <DataTemplate x:Key="DoubleTemplate">
             <TextBox 
-                Text="{Binding Value,  UpdateSourceTrigger=PropertyChanged,  Converter={StaticResource StringToDoubleConverter}, ValidatesOnExceptions=True, NotifyOnValidationError=True}" 
+                Text="{Binding Value,  
+                    UpdateSourceTrigger=PropertyChanged,  
+                    Converter={StaticResource StringToDoubleConverter}, 
+                    ValidatesOnExceptions=True, 
+                    NotifyOnValidationError=True}" 
                 PreviewTextInput="DoubleValidationTextBox"
             />
         </DataTemplate>
 
-        <!--
-        <DataTemplate x:Key="DoubleTemplate">
-            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
-                      />
-        </DataTemplate>
-        -->
-
-
         <!-- For Boolean -->
         <DataTemplate x:Key="BooleanTemplate">
-            <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToBooleanConverter}}" Content="{Binding Value}"/>
+            <CheckBox 
+                IsChecked="{Binding Value, 
+                    UpdateSourceTrigger=PropertyChanged, 
+                    Converter={StaticResource StringToBooleanConverter}}" 
+                Content="{Binding Value}"/>
         </DataTemplate>
 
         <!-- For Gh_Calculated (This is just an example; adjust based on your actual need) -->

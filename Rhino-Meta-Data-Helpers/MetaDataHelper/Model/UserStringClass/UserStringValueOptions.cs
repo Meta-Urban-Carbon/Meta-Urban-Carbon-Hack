@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
-namespace MetaDataHelper.UserStringClass
+namespace MetaDataHelper
 {
     public class UserStringValueOptions : ObservableCollection<OptionWrapper>
     {
@@ -42,33 +39,6 @@ namespace MetaDataHelper.UserStringClass
         public string GetFirstOption()
         {
             return this.FirstOrDefault()?.Option ?? string.Empty;
-        }
-    }
-
-    public class OptionWrapper : INotifyPropertyChanged
-    {
-        private string _option;
-        public string Option
-        {
-            get => _option;
-            set
-            {
-                if (_option != value)
-                {
-                    _option = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Implements Property Change event handler
-        /// </summary>
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using Rhino;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace MetaDataHelper.UserStringClass
+namespace MetaDataHelper
 {
     /// <summary>
     /// Defines a UserString Key and contrins the value's respective
@@ -17,6 +16,7 @@ namespace MetaDataHelper.UserStringClass
         private String _defaultValue;
         private String _value;
         private String _ghFilePath;
+        private OptionWrapper _selectedValueOption;
         private UserStringValueType _type;
         private UserStringValueOptions _options = null;
 
@@ -72,6 +72,20 @@ namespace MetaDataHelper.UserStringClass
             }
         }
 
+        public OptionWrapper SelectedValueOption
+        {
+            get => _selectedValueOption;
+            set
+            {
+                if (_selectedValueOption != value)
+                {
+                    _selectedValueOption = value;
+                    Value = _selectedValueOption?.Option; // Set the string Value to the Option of the OptionWrapper
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public UserStringValueOptions ValueOptions
         {
             get => _options;
@@ -113,7 +127,6 @@ namespace MetaDataHelper.UserStringClass
             {
                 var doc = RhinoDoc.ActiveDoc;
                 var docObject = doc.Objects.FindId(guid);
-
                 var userString = new UserString(this.Key, this.Value);
                 docObject.Attributes.SetUserString(userString.Key, userString.Value.ToString());
             }
@@ -195,7 +208,6 @@ namespace MetaDataHelper.UserStringClass
                     break;
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

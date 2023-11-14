@@ -1,4 +1,9 @@
-﻿using System.ComponentModel;
+﻿using Rhino;
+using Rhino.DocObjects;
+using Rhino.DocObjects.Tables;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -9,6 +14,28 @@ namespace MetaDataHelper
         private UserStringTemplate _currentTemplate;
         private SavedTemplates _savedTemplates;
         private UserStringTemplate _selectedSavedTemplate;
+        private ObservableCollection<Layer> _layers = new ObservableCollection<Layer>();
+        private Layer _selectedLayer;
+
+        public ObservableCollection<Layer> Layers
+        {
+            get => _layers;
+            set
+            {
+                _layers = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Layer SelectedLayer
+        {
+            get => _selectedLayer;
+            set
+            {
+                _selectedLayer = value;
+                OnPropertyChanged();
+            }
+        }
 
         public UserStringTemplate CurrentTemplate
         {
@@ -55,6 +82,7 @@ namespace MetaDataHelper
         public ICommand SaveCommand { get; set; }
         public ICommand LoadCommand { get; set; }
         public ICommand AssignTemplateCommand { get; set; }
+        public ICommand AssignTemplateToLayerCommand { get; set; }
 
         public ViewModel(uint documentSerialNumber)
         {
@@ -63,6 +91,14 @@ namespace MetaDataHelper
                 (sender, args) => SettingsChangedMessage = $"SettingSaved {++m_saved_count}";
             m_use_multiple_counters = this.UseMultipleCounters == true;
             Rhino.UI.Panels.Show += OnShowPanel;
+
+            RhinoDoc.LayerTableEvent += OnLayerTableEvent;
+            UpdateLayers();
+
+            // Set the selected layer to the current layer in the active Rhino document
+            var doc = Rhino.RhinoDoc.ActiveDoc;
+            var currentLayerName = doc.Layers.CurrentLayer.Name;
+            this.SelectedLayer = Layers.FirstOrDefault(l => l.Name == currentLayerName);
 
             this.Message = "View Model Has Loaded";
             this.CurrentTemplate = new UserStringTemplate();
@@ -73,12 +109,42 @@ namespace MetaDataHelper
             }
 
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
-
             this.OpenOptionManagerCommand = new OpenOptionManagerCommand(this.CurrentTemplate);
             this.SaveCommand = new SaveTemplateCommand(this.CurrentTemplate, this.SavedTemplates);
             this.LoadCommand = new LoadTemplateCommand(this.CurrentTemplate, this.SavedTemplates);
             this.AssignTemplateCommand = new AssignTemplateCommand(this.CurrentTemplate);
+            this.AssignTemplateToLayerCommand = new AssignTemplateToLayerCommand(this.CurrentTemplate);
 
+        }
+
+        public void Dispose()
+        {
+            RhinoDoc.LayerTableEvent -= OnLayerTableEvent;
+        }
+
+        private void OnLayerTableEvent(object sender, LayerTableEventArgs e)
+        {
+            if (e.EventType == LayerTableEventType.Added ||
+                e.EventType == LayerTableEventType.Deleted ||
+                e.EventType == LayerTableEventType.Modified) // Handle Modified event
+            {
+                UpdateLayers();
+            }
+        }
+
+        private void UpdateLayers()
+        {
+            // Temporarily store the selected layer name to restore it after updating the list
+            var selectedLayerName = SelectedLayer?.Name;
+
+            Layers.Clear();
+            foreach (var layer in RhinoDoc.ActiveDoc.Layers)
+            {
+                Layers.Add(layer);
+            }
+
+            // Restore the selected layer
+            SelectedLayer = Layers.FirstOrDefault(l => l.Name == selectedLayerName);
         }
 
         private void OnShowPanel(object sender, Rhino.UI.ShowPanelEventArgs e)

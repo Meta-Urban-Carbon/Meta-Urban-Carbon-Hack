@@ -348,6 +348,21 @@
             Add Key
         </Button>
 
+        <ComboBox Grid.Row="10" Grid.Column="1" 
+                  Grid.ColumnSpan="2"
+                  x:Name="LayerComboBox" 
+                  ItemsSource="{Binding Layers}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding SelectedLayer, Mode=TwoWay}" />
+
+        <Button  Grid.Row="10" Grid.Column="3" 
+             FontSize="10"
+             Padding="2"
+             Margin="2"
+                Content="Assign to Layer" 
+                Command="{Binding AssignTemplateToLayerCommand}" 
+                CommandParameter="{Binding SelectedLayer, Mode=TwoWay}"/>
+
     </Grid>
 
 </UserControl>

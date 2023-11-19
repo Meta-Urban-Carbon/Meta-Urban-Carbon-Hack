@@ -49,6 +49,21 @@
                Grid.ColumnSpan="3"
                Content="{Binding Message}"/>
 
+        <!-- Assuming your ViewModel is set as the DataContext of this Window or a parent element -->
+        
+        <DataGrid Grid.Row="4" Grid.Column="1" 
+                  Grid.ColumnSpan="5" 
+                  ItemsSource="{Binding TableViewSource.View}" AutoGenerateColumns="True"
+                  Height="800">
+            <!-- Additional DataGrid configuration goes here -->
+            <!-- If you want to define specific columns rather than auto-generating them, you can do so here -->
+        </DataGrid>
+
+
+        <Button Grid.Row="2" Grid.Column="1" 
+                            Grid.ColumnSpan="5"  Content="Update Attributes" Command="{Binding UpdateAttributesCommand}" />
+
+
     </Grid>
 
 </UserControl>

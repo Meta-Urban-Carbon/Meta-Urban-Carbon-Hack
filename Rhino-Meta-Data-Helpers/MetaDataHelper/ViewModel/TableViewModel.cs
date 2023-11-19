@@ -5,12 +5,29 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MetaDataHelper
 {
     public class TableViewModel : Rhino.UI.ViewModel, INotifyPropertyChanged
     {
+        private TableAttributes _tableAttributes;
+  
+        public CollectionViewSource TableViewSource { get; set; }
+
+        public TableAttributes TableAttributes
+        {
+            get
+            {
+               return this._tableAttributes;
+            }
+            set
+            {
+                                this._tableAttributes = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ObservableCollection<Layer> _layers = new ObservableCollection<Layer>();
 
@@ -23,6 +40,8 @@ namespace MetaDataHelper
                 OnPropertyChanged();
             }
         }
+
+        public ICommand UpdateAttributesCommand { get; private set; }
 
         public TableViewModel(uint documentSerialNumber)
         {
@@ -41,12 +60,25 @@ namespace MetaDataHelper
             
             this.Message = "View Model Has Loaded";
 
+
+            var attributesCollection = TableAttributes.GetAllObjectsAttributes(doc);
+            TableViewSource = new CollectionViewSource { Source = attributesCollection };
+
+            UpdateAttributesCommand = new RelayCommand(param => UpdateAttributes(param));
+
+
         }
 
         public void Dispose()
         {
             RhinoDoc.LayerTableEvent -= OnLayerTableEvent;
         }
+
+        public void UpdateAttributes(object parameter)
+        {
+            TableViewSource.Source = TableAttributes.GetAllObjectsAttributes(RhinoDoc.ActiveDoc);
+        }
+
 
         private void OnLayerTableEvent(object sender, LayerTableEventArgs e)
         {

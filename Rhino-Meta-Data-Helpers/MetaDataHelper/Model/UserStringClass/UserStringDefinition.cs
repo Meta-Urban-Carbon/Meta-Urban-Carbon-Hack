@@ -17,6 +17,7 @@ namespace MetaDataHelper
         private String _value;
         private String _ghFilePath;
         private OptionWrapper _selectedValueOption;
+        private UserStringGrasshopperScript _grasshopperFile;
         private UserStringValueType _type;
         private UserStringValueOptions _options = null;
 
@@ -64,10 +65,20 @@ namespace MetaDataHelper
 
         public String GhFilePath
         {
-            get => _ghFilePath;
+            get => _grasshopperFile.FilePath;
             set
             {
                 _ghFilePath=value;
+                OnPropertyChanged();
+            }
+        }
+
+        public UserStringGrasshopperScript GhScript
+        {
+            get => _grasshopperFile;
+            set
+            {
+                _grasshopperFile = value;
                 OnPropertyChanged();
             }
         }

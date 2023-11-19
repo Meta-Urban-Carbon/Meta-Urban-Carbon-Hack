@@ -1,11 +1,17 @@
 ﻿using Rhino;
 using Rhino.Commands;
+using Rhino.Geometry;
+using Rhino.Input;
+using Rhino.Input.Custom;
+using System.Runtime.InteropServices;
 
 namespace MetaDataHelper.Commands
 {
-    public class MetaDataHelperCommand : Command
+    [System.Runtime.InteropServices.Guid("FDB2E92F-D4F4-44C1-87CA-9B16CC99AA4C")]
+
+    public class MetaDataTableCommand : Command
     {
-        public MetaDataHelperCommand()
+        public MetaDataTableCommand()
         {
             // Rhino only creates one instance of each command class defined in a
             // plug-in, so it is safe to store a refence in a static property.
@@ -13,10 +19,10 @@ namespace MetaDataHelper.Commands
         }
 
         ///<summary>The only instance of this command.</summary>
-        public static MetaDataHelperCommand Instance { get; private set; }
+        public static MetaDataTableCommand Instance { get; private set; }
 
         ///<returns>The command name as it appears on the Rhino command line.</returns>
-        public override string EnglishName => "MetaDataHelperCommand";
+        public override string EnglishName => "MetaDataTableCommand";
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
@@ -24,8 +30,8 @@ namespace MetaDataHelper.Commands
             bool bVisible = Rhino.UI.Panels.IsPanelVisible(panelId);
 
             string prompt = (bVisible)
-                ? "Class Manager panel is visible. New value"
-                : "Class Manager panel is hidden. New value";
+                ? "Table panel is visible. New value"
+                : "Table panel is hidden. New value";
 
             Rhino.Input.Custom.GetOption go = new Rhino.Input.Custom.GetOption();
             int hide_index = go.AddOption("Hide");

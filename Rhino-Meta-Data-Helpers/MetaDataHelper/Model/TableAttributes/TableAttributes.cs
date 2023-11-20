@@ -1,74 +1,99 @@
 ﻿using Rhino;
 using Rhino.DocObjects;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Dynamic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace MetaDataHelper
 {
 
-    public class TableAttributes : DynamicObject, INotifyPropertyChanged
+    public class TableAttributes : ObservableCollection<RhinoObjectTableAttributes>, INotifyPropertyChanged
     {
-        private Dictionary<string, string> _attributes = new Dictionary<string, string>();
 
-        public Dictionary<string, string> Attributes
+        private List<string> _allObjectKeys; // List of all object keys
+
+        public List<string> AllObjectKeys
         {
-            get => _attributes;
+            get { return _allObjectKeys; }
             set
             {
-                _attributes = value;
+                _allObjectKeys = value;
                 OnPropertyChanged();
             }
         }
 
-        // Implement the dynamic behavior for getting and setting properties
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        public TableAttributes()
         {
-            if (_attributes.TryGetValue(binder.Name, out var value))
+            _allObjectKeys = new List<string>();
+            //_allObjectKeys = new List<string> { "ObjectGuid" };
+            this.AddAllDocumentObjects();
+            this.CreateAllObjectKeys();
+        }
+
+        public void Add(RhinoObject rhinoObject)
+        {
+            //Create a new RhinoObjectTableAttributes object
+            var rhinoObjectTableAttributes = new RhinoObjectTableAttributes(rhinoObject);
+
+            //check AllObjectKeys for objects UserString keys and update as needed
+            UpdateAllObjectKeys(rhinoObject);
+
+            //Add the new RhinoObjectTableAttributes object to the collection
+            base.Add(rhinoObjectTableAttributes);
+        }
+
+        public void AddAllDocumentObjects()
+        {
+            var doc = RhinoDoc.ActiveDoc;
+            var rhinoObjects = doc.Objects;
+
+            foreach (var rhinoObject in rhinoObjects)
             {
-                result = value;
-                return true;
-            }
-            else
-            {
-                result = null;
-                return false;
+                var rhinoObjectTableAttributes = new RhinoObjectTableAttributes(rhinoObject);
+                Add(rhinoObjectTableAttributes);
             }
         }
 
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
+        //update AllObjectKeys with new object keys
+        private void UpdateAllObjectKeys(RhinoObject rhinoObject)
         {
-            _attributes[binder.Name] = (string)value;
-            OnPropertyChanged(binder.Name);
-            return true;
-        }
-
-        // Method to update attributes
-        /*public void UpdateAttributes(RhinoObject rhinoObject)
-        {
-            // Clear existing attributes
-            Attributes.Clear();
-
-            // Extract user strings from the Rhino object and update the Attributes dictionary
-            var userStrings = rhinoObject.Attributes.GetUserStrings();
-            foreach (var key in userStrings.AllKeys)
+            var rhinoObjectKeys = rhinoObject.Attributes.GetUserStrings().Keys;
+            foreach (var key in rhinoObjectKeys)
             {
-                Attributes[key] = userStrings[key];
-            }
-        }*/
-
-        public void UpdateAttributes(RhinoObject rhinoObject)
-        {
-            var userStrings = rhinoObject.Attributes.GetUserStrings();
-            foreach (var key in userStrings.AllKeys)
-            {
-                this.TrySetMember(new SetMemberBinderImpl(key), userStrings[key]);
+                if (!_allObjectKeys.Contains(key))
+                {
+                    _allObjectKeys.Add(key.ToString());
+                    OnPropertyChanged(nameof(AllObjectKeys));
+                }
             }
         }
 
+        //Create AllObjectKeys from all RhinoObjectTableAttributes objects in the collection
+        private void CreateAllObjectKeys()
+        {
+            foreach (var rhinoObjectTableAttributes in this)
+            {
+                foreach (var key in rhinoObjectTableAttributes.Attributes.Keys)
+                {
+                    if (!_allObjectKeys.Contains(key))
+                    {
+                        _allObjectKeys.Add(key);
+                    }
+                }
+            }
+        }
+
+        //Refresh / Update the entire collection from the current rhino document. 
+        //Basicly a full re-build
+        public void Refresh()
+        {
+            _allObjectKeys = new List<string>();
+            this.Clear();
+            this.AddAllDocumentObjects();
+            this.CreateAllObjectKeys();
+        }
 
         // Method to compute filters (example method, implement as needed)
         public void ApplyFilter(string filterCriteria)
@@ -76,33 +101,6 @@ namespace MetaDataHelper
             // Filtering logic goes here
         }
 
-        // Static method to scrape all user string info from the Rhino document
-        public static List<TableAttributes> GetAllObjectsAttributes(RhinoDoc doc)
-        {
-            var allAttributes = new List<TableAttributes>();
-
-            foreach (var obj in doc.Objects)
-            {
-                var tableAttributes = new TableAttributes();
-                tableAttributes.UpdateAttributes(obj);
-                allAttributes.Add(tableAttributes);
-            }
-
-            // Handling nulls for missing attributes
-            var allKeys = allAttributes.SelectMany(attr => attr.Attributes.Keys).Distinct();
-            foreach (var attr in allAttributes)
-            {
-                foreach (var key in allKeys)
-                {
-                    if (!attr.Attributes.ContainsKey(key))
-                    {
-                        attr.Attributes[key] = null; // Insert nulls for missing attributes
-                    }
-                }
-            }
-
-            return allAttributes;
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -112,17 +110,6 @@ namespace MetaDataHelper
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private class SetMemberBinderImpl : SetMemberBinder
-        {
-            public SetMemberBinderImpl(string name) : base(name, false) { }
-
-            public override DynamicMetaObject FallbackSetMember(DynamicMetaObject target, DynamicMetaObject value, DynamicMetaObject errorSuggestion)
-            {
-                // Implementation details here
-                return null;
-            }
         }
 
     }

@@ -14,6 +14,9 @@
 >
 
     <UserControl.Resources>
+        <!-- Other resources -->
+
+            <local:DictionaryValueConverter x:Key="DictValueConverter"/>
 
     </UserControl.Resources>
 
@@ -50,14 +53,40 @@
                Content="{Binding Message}"/>
 
         <!-- Assuming your ViewModel is set as the DataContext of this Window or a parent element -->
-        
+
         <DataGrid Grid.Row="4" Grid.Column="1" 
                   Grid.ColumnSpan="5" 
+                  Height="800"
+                  x:Name="DataGridAttributes" 
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding CollectionViewSource.View}" 
+                  Loaded="DataGridAttributes_Loaded"
+                  HorizontalScrollBarVisibility="Auto" 
+                  VerticalScrollBarVisibility="Auto"
+        >
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Select">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Select" 
+                                  
+                                    Command="{Binding DataContext.SelectRhinoObjectCommand,
+                                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                    CommandParameter="{Binding ObjectGuid}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<DataGrid Grid.Row="4" Grid.Column="1" 
+                  Grid.ColumnSpan="5" 
                   ItemsSource="{Binding TableViewSource.View}" AutoGenerateColumns="True"
-                  Height="800">
+                  Height="800">-->
             <!-- Additional DataGrid configuration goes here -->
             <!-- If you want to define specific columns rather than auto-generating them, you can do so here -->
-        </DataGrid>
+        <!--</DataGrid>-->
 
 
         <Button Grid.Row="2" Grid.Column="1" 

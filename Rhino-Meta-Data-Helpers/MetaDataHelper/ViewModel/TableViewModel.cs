@@ -1,6 +1,8 @@
 ﻿using Rhino;
 using Rhino.DocObjects;
 using Rhino.DocObjects.Tables;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -13,8 +15,17 @@ namespace MetaDataHelper
     public class TableViewModel : Rhino.UI.ViewModel, INotifyPropertyChanged
     {
         private TableAttributes _tableAttributes;
-  
-        public CollectionViewSource TableViewSource { get; set; }
+        private CollectionViewSource _collectionViewSource;
+
+        public CollectionViewSource CollectionViewSource
+        {
+            get => _collectionViewSource;
+            set
+            {
+                _collectionViewSource = value;
+                OnPropertyChanged(nameof(CollectionViewSource));
+            }
+        }
 
         public TableAttributes TableAttributes
         {
@@ -41,7 +52,11 @@ namespace MetaDataHelper
             }
         }
 
+        public event Action<IEnumerable<string>> ColumnsUpdated;
+
         public ICommand UpdateAttributesCommand { get; private set; }
+        public ICommand SelectRhinoObjectCommand { get; private set; }
+
 
         public TableViewModel(uint documentSerialNumber)
         {
@@ -60,13 +75,16 @@ namespace MetaDataHelper
             
             this.Message = "View Model Has Loaded";
 
+            TableAttributes = new TableAttributes();
+            CollectionViewSource = new CollectionViewSource
+            {
+                Source = TableAttributes
+            };
 
-            var attributesCollection = TableAttributes.GetAllObjectsAttributes(doc);
-            TableViewSource = new CollectionViewSource { Source = attributesCollection };
 
             UpdateAttributesCommand = new RelayCommand(param => UpdateAttributes(param));
-
-
+            SelectRhinoObjectCommand = new SelectRhinoObjectCommand(doc);
+            
         }
 
         public void Dispose()
@@ -76,7 +94,15 @@ namespace MetaDataHelper
 
         public void UpdateAttributes(object parameter)
         {
-            TableViewSource.Source = TableAttributes.GetAllObjectsAttributes(RhinoDoc.ActiveDoc);
+            //Refresh the view
+            this.TableAttributes.Refresh();
+
+            // Raise the event with the updated keys
+            ColumnsUpdated?.Invoke(TableAttributes.AllObjectKeys);
+            //this.CollectionViewSource = new CollectionViewSource
+            //{
+            //    Source = TableAttributes
+            //};
         }
 
 
@@ -87,6 +113,15 @@ namespace MetaDataHelper
                 e.EventType == LayerTableEventType.Modified) // Handle Modified event
             {
                 UpdateLayers();
+            }
+        }
+
+        private void SelectObject(object parameter)
+        {
+            if (parameter is Guid objectId)
+            {
+                // Implement the logic to select the Rhino object with this objectId
+                // For example: RhinoDoc.ActiveDoc.Objects.Select(objectId);
             }
         }
 

@@ -14,15 +14,15 @@ namespace MetaDataHelper
         private UserStringTemplate _currentTemplate;
         private SavedTemplates _savedTemplates;
         private UserStringTemplate _selectedSavedTemplate;
-        private ObservableCollection<Layer> _layers = new ObservableCollection<Layer>();
+        private ObservableCollection<Layer> _rhinoLayers = new ObservableCollection<Layer>();
         private Layer _selectedLayer;
 
-        public ObservableCollection<Layer> Layers
+        public ObservableCollection<Layer> RhinoLayers
         {
-            get => _layers;
+            get => _rhinoLayers;
             set
             {
-                _layers = value;
+                _rhinoLayers = value;
                 OnPropertyChanged();
             }
         }
@@ -98,7 +98,7 @@ namespace MetaDataHelper
             // Set the selected layer to the current layer in the active Rhino document
             var doc = Rhino.RhinoDoc.ActiveDoc;
             var currentLayerName = doc.Layers.CurrentLayer.Name;
-            this.SelectedLayer = Layers.FirstOrDefault(l => l.Name == currentLayerName);
+            this.SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == currentLayerName);
 
             this.Message = "View Model Has Loaded";
             this.CurrentTemplate = new UserStringTemplate();
@@ -134,17 +134,30 @@ namespace MetaDataHelper
 
         private void UpdateLayers()
         {
+            var selectedLayerName = string.Empty;
             // Temporarily store the selected layer name to restore it after updating the list
-            var selectedLayerName = SelectedLayer?.Name;
-
-            Layers.Clear();
-            foreach (var layer in RhinoDoc.ActiveDoc.Layers)
+            try
             {
-                Layers.Add(layer);
+                selectedLayerName = SelectedLayer?.Name;
+                RhinoLayers.Clear();
+                foreach (var layer in RhinoDoc.ActiveDoc.Layers)
+                {
+                    RhinoLayers.Add(layer);
+                }
+                SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == selectedLayerName);
             }
-
-            // Restore the selected layer
-            SelectedLayer = Layers.FirstOrDefault(l => l.Name == selectedLayerName);
+            catch
+            {
+                RhinoLayers.Clear();
+                foreach (var layer in RhinoDoc.ActiveDoc.Layers)
+                {
+                    RhinoLayers.Add(layer);
+                }
+                // Set the selected layer to the current layer in the active Rhino document
+                var doc = Rhino.RhinoDoc.ActiveDoc;
+                var currentLayerName = doc.Layers.CurrentLayer.Name;
+                this.SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == currentLayerName);
+            }
         }
 
         private void OnShowPanel(object sender, Rhino.UI.ShowPanelEventArgs e)

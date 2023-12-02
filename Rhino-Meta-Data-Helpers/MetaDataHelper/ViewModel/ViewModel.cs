@@ -149,12 +149,12 @@ namespace MetaDataHelper
             catch
             {
                 RhinoLayers.Clear();
-                foreach (var layer in RhinoDoc.ActiveDoc.Layers)
+                var doc = Rhino.RhinoDoc.ActiveDoc;
+                foreach (var layer in doc.Layers)
                 {
                     RhinoLayers.Add(layer);
                 }
                 // Set the selected layer to the current layer in the active Rhino document
-                var doc = Rhino.RhinoDoc.ActiveDoc;
                 var currentLayerName = doc.Layers.CurrentLayer.Name;
                 this.SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == currentLayerName);
             }

@@ -8,7 +8,11 @@ using System.Runtime.CompilerServices;
 
 namespace MetaDataHelper
 {
-
+    /// <summary>
+    /// This is the list of all attributes that is used to
+    /// populate the table. It is a collection of <see cref="RhinoObjectTableAttributes"/>
+    /// 
+    /// </summary>
     public class TableAttributes : ObservableCollection<RhinoObjectTableAttributes>, INotifyPropertyChanged
     {
 
@@ -86,7 +90,7 @@ namespace MetaDataHelper
         }
 
         //Refresh / Update the entire collection from the current rhino document. 
-        //Basicly a full re-build
+        //Basicly a full re-build the collection
         public void Refresh()
         {
             _allObjectKeys = new List<string>();

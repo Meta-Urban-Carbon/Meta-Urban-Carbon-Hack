@@ -127,8 +127,10 @@ namespace MetaDataHelper
 
         private void UpdateLayers()
         {
+            var doc = RhinoDoc.ActiveDoc;
+            var docLayers = doc.Layers;
             Layers.Clear();
-            foreach (var layer in RhinoDoc.ActiveDoc.Layers)
+            foreach (var layer in docLayers)
             {
                 Layers.Add(layer);
             }

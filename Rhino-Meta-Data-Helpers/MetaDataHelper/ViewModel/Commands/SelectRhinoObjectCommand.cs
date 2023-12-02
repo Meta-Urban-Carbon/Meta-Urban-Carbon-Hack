@@ -10,7 +10,7 @@ namespace MetaDataHelper
 {
     internal class SelectRhinoObjectCommand: ICommand
     {
-        private RhinoDoc _doc;
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -21,7 +21,7 @@ namespace MetaDataHelper
         {
             if (parameter is Guid objectId)
             {
-                //var rhinoDoc = Rhino.RhinoDoc.ActiveDoc; // Get the active Rhino document
+                var _doc = Rhino.RhinoDoc.ActiveDoc; // Get the active Rhino document
 
                 // Deselect all objects first, if you want only this object to be selected
                 _doc.Objects.UnselectAll();
@@ -41,9 +41,8 @@ namespace MetaDataHelper
 
         public event EventHandler CanExecuteChanged;
 
-        public SelectRhinoObjectCommand(RhinoDoc doc)   
+        public SelectRhinoObjectCommand()   
         {
-            _doc = doc;
         }
 
     }

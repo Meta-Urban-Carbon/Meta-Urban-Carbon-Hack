@@ -90,15 +90,18 @@ namespace MetaDataHelper
             MetaDataHelperPlugin.Instance.SettingsSaved +=
                 (sender, args) => SettingsChangedMessage = $"SettingSaved {++m_saved_count}";
             m_use_multiple_counters = this.UseMultipleCounters == true;
+
             Rhino.UI.Panels.Show += OnShowPanel;
+            RhinoDoc.LayerTableEvent += OnLayerTableEvent;
 
             RhinoDoc.LayerTableEvent += OnLayerTableEvent;
-            UpdateLayers();
+            RhinoDoc.NewDocument += OnDocumentChange;
+            RhinoDoc.BeginOpenDocument += OnDocumentChange;
+            RhinoDoc.ActiveDocumentChanged += OnDocumentChange;
+            RhinoDoc.EndOpenDocument += NewDocumentOpened;
 
-            // Set the selected layer to the current layer in the active Rhino document
-            var doc = Rhino.RhinoDoc.ActiveDoc;
-            var currentLayerName = doc.Layers.CurrentLayer.Name;
-            this.SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == currentLayerName);
+            // Initialize layers and selected layer
+            UpdateLayers();
 
             this.Message = "View Model Has Loaded";
             this.CurrentTemplate = new UserStringTemplate();
@@ -108,13 +111,18 @@ namespace MetaDataHelper
                 this.SelectedSavedTemplate = this.SavedTemplates[0];
             }
 
+            // Initialize commands
+            InitializeCommands();
+        }
+
+        private void InitializeCommands()
+        {
             this.AddUserStringDefinitionCommand = new AddUserStringDefinitionCommand(this.CurrentTemplate);
             this.OpenOptionManagerCommand = new OpenOptionManagerCommand(this.CurrentTemplate);
             this.SaveCommand = new SaveTemplateCommand(this.CurrentTemplate, this.SavedTemplates);
             this.LoadCommand = new LoadTemplateCommand(this.CurrentTemplate, this.SavedTemplates);
             this.AssignTemplateCommand = new AssignTemplateCommand(this.CurrentTemplate);
             this.AssignTemplateToLayerCommand = new AssignTemplateToLayerCommand(this.CurrentTemplate);
-
         }
 
         public void Dispose()
@@ -132,33 +140,48 @@ namespace MetaDataHelper
             }
         }
 
+
+        /// <summary>
+        /// On Document Change method clears all ref to layers
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void OnDocumentChange(object sender, DocumentEventArgs e)
+        {
+            RhinoLayers.Clear();
+            SelectedLayer = null;
+        }
+
+        /// <summary>
+        /// update layers when new document is opened
+        ///
+        /// </summary>
+        public void NewDocumentOpened(object sender, DocumentOpenEventArgs e)
+        {
+            UpdateLayers();
+        }
+
         private void UpdateLayers()
         {
-            var selectedLayerName = string.Empty;
-            // Temporarily store the selected layer name to restore it after updating the list
-            try
-            {
-                selectedLayerName = SelectedLayer?.Name;
-                RhinoLayers.Clear();
-                foreach (var layer in RhinoDoc.ActiveDoc.Layers)
-                {
-                    RhinoLayers.Add(layer);
-                }
-                SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == selectedLayerName);
-            }
-            catch
+            var selectedLayerName = SelectedLayer?.Name;
+            var doc = Rhino.RhinoDoc.ActiveDoc;
+            if (doc == null)
             {
                 RhinoLayers.Clear();
-                var doc = Rhino.RhinoDoc.ActiveDoc;
-                foreach (var layer in doc.Layers)
-                {
-                    RhinoLayers.Add(layer);
-                }
-                // Set the selected layer to the current layer in the active Rhino document
-                var currentLayerName = doc.Layers.CurrentLayer.Name;
-                this.SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == currentLayerName);
+                SelectedLayer = null;
+                return;
             }
+
+            RhinoLayers.Clear();
+            foreach (var layer in doc.Layers)
+            {
+                RhinoLayers.Add(layer);
+            }
+
+            // Attempt to reselect the previously selected layer
+            SelectedLayer = RhinoLayers.FirstOrDefault(l => l.Name == selectedLayerName)
+                            ?? doc.Layers.CurrentLayer; // Fallback to the current layer if not found
         }
+
 
         private void OnShowPanel(object sender, Rhino.UI.ShowPanelEventArgs e)
         {

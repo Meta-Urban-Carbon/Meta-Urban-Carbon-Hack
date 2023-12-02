@@ -67,6 +67,11 @@ namespace MetaDataHelper
             Rhino.UI.Panels.Show += OnShowPanel;
 
             RhinoDoc.LayerTableEvent += OnLayerTableEvent;
+            RhinoDoc.NewDocument += OnDocumentChange;
+            RhinoDoc.BeginOpenDocument += OnDocumentChange;
+            RhinoDoc.ActiveDocumentChanged += OnDocumentChange;
+            RhinoDoc.EndOpenDocument += NewDocumentOpened;
+
             UpdateLayers();
 
             // Set the selected layer to the current layer in the active Rhino document
@@ -83,13 +88,31 @@ namespace MetaDataHelper
 
 
             UpdateAttributesCommand = new RelayCommand(param => UpdateAttributes(param));
-            SelectRhinoObjectCommand = new SelectRhinoObjectCommand(doc);
+            SelectRhinoObjectCommand = new SelectRhinoObjectCommand();
             
         }
 
         public void Dispose()
         {
             RhinoDoc.LayerTableEvent -= OnLayerTableEvent;
+        }
+
+        /// <summary>
+        /// On Document Change method clears all ref to layers
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void OnDocumentChange(object sender, DocumentEventArgs e)
+        {
+            Layers.Clear();
+        }
+
+        /// <summary>
+        /// update layers when new document is opened
+        ///
+        /// </summary>
+        public void NewDocumentOpened(object sender, DocumentOpenEventArgs e)
+        {
+            UpdateLayers();
         }
 
         public void UpdateAttributes(object parameter)

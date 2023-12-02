@@ -25,10 +25,19 @@ namespace MetaDataHelper
             return null;
         }
 
+        //TODO this will cause a error if the user tries to edit the value in table. 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // Implement if needed for two-way binding
-            throw new NotImplementedException();
+            if (value is string stringValue && parameter is string key)
+            {
+                // Return a new dictionary with the updated value
+                // Assuming 'value' is the new value for the attribute corresponding to 'key'
+                return new Dictionary<string, string> { { key, stringValue } };
+            }
+
+            // Return the original value if the conversion is not applicable
+            return value;
         }
+
     }
 }

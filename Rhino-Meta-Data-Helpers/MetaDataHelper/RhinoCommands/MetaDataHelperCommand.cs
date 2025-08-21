@@ -20,7 +20,7 @@ namespace MetaDataHelper.Commands
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
-            System.Guid panelId = MetaDataTablePanelHost.PanelId;
+            System.Guid panelId = ClassManagerPanelHost.PanelId;
             bool bVisible = Rhino.UI.Panels.IsPanelVisible(panelId);
 
             string prompt = (bVisible)

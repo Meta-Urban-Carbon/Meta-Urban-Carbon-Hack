@@ -11,43 +11,34 @@ namespace MetaDataHelper
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return parameter is Layer && _currentTemplate != null && _currentTemplate.Collection != null;
         }
 
         public void Execute(object parameter)
         {
+            var targetLayer = parameter as Layer;
+            if (targetLayer == null) return;
 
-            var targetLayer = (Layer)parameter;
-
-            // Get the current Rhino document
             var doc = Rhino.RhinoDoc.ActiveDoc;
-
             if (doc == null) return;
 
-            var layerObjects = doc.Objects.FindByLayer(targetLayer.Name);
+            var layerObjects = doc.Objects.FindByLayer(targetLayer);
+            if (layerObjects == null) return;
 
-            // Create a list to hold the IDs of all selected objects
-            List<Guid> selectedObjectIds = new List<Guid>();
-
-            // Loop through all objects
+            var selectedObjectIds = new List<Guid>();
             foreach (var rhinoObject in layerObjects)
             {
-                // Check if the object is selected
                 selectedObjectIds.Add(rhinoObject.Id);
             }
 
-            // Loop through each UserStringDefinition in the current template
             foreach (var userStringDefinition in this._currentTemplate.Collection)
             {
-                // Loop through each selected object ID
                 foreach (var objectId in selectedObjectIds)
                 {
-                    // Assign the user string to the object
                     userStringDefinition.Assign(objectId);
                 }
             }
 
-            // Redraw the document to update the changes
             doc.Views.Redraw();
         }
 

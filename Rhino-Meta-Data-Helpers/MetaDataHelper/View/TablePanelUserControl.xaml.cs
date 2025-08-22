@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Data;
+using Rhino;
 
 
 namespace MetaDataHelper
@@ -25,18 +27,30 @@ namespace MetaDataHelper
             // Subscribe to the ColumnsUpdated event
             viewModel.ColumnsUpdated += OnColumnsUpdated;
 
+            // Clean up on unload to avoid leaks
+            this.Unloaded += TablePanelUserControl_Unloaded;
+
             Instance = this;
         }
 
-        private TableViewModel ViewModel => DataContext as TableViewModel;
+        private void TablePanelUserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is TableViewModel vm)
+            {
+                vm.ColumnsUpdated -= OnColumnsUpdated;
+                vm.Dispose();
+            }
+        }
 
-        //private ViewModel ViewModel => DataContext as ViewModel;
+        private TableViewModel ViewModel => DataContext as TableViewModel;
 
         private void DataGridAttributes_Loaded(object sender, RoutedEventArgs e)
         {
             var viewModel = DataContext as TableViewModel;
             if (viewModel != null)
             {
+                // Ensure initial data is loaded
+                viewModel.UpdateAttributes(null);
                 CreateDataGridColumns(DataGridAttributes, viewModel.TableAttributes.AllObjectKeys);
             }
         }
@@ -48,20 +62,43 @@ namespace MetaDataHelper
 
         public void CreateDataGridColumns(DataGrid dataGrid, IEnumerable<string> allKeys)
         {
-            // Identify the starting index for adding new columns
-            // This assumes that any static columns defined in XAML are already present
-            int startIndex = dataGrid.Columns.Count;
+            if (dataGrid == null) return;
 
-            foreach (var key in allKeys)
+            var keys = (allKeys ?? Enumerable.Empty<string>())
+                .Distinct(StringComparer.Ordinal)
+                .ToHashSet(StringComparer.Ordinal);
+
+            // Remove stale dynamic columns (keep the static "Select" column)
+            for (int i = dataGrid.Columns.Count - 1; i >= 0; i--)
             {
-                // Check if a column for this key already exists, to avoid duplicates
-                if (dataGrid.Columns.Any(c => c.Header.ToString().Equals(key)))
+                var col = dataGrid.Columns[i];
+                var header = col.Header?.ToString();
+                if (!string.Equals(header, "Select", StringComparison.Ordinal))
+                {
+                    if (header == null || !keys.Contains(header))
+                        dataGrid.Columns.RemoveAt(i);
+                }
+            }
+
+            // Insert after the "Select" column if present
+            int startIndex = 0;
+            var selectIndex = dataGrid.Columns.ToList().FindIndex(c => string.Equals(c.Header?.ToString(), "Select", StringComparison.Ordinal));
+            startIndex = selectIndex >= 0 ? selectIndex + 1 : dataGrid.Columns.Count;
+
+            foreach (var key in keys)
+            {
+                // Avoid duplicates
+                if (dataGrid.Columns.Any(c => string.Equals(c.Header?.ToString(), key, StringComparison.Ordinal)))
                     continue;
 
                 var column = new DataGridTextColumn
                 {
                     Header = key,
-                    Binding = new Binding($"Attributes[{key}]") { Converter = new DictionaryValueConverter() }
+                    Binding = new Binding($"Attributes[{key}]")
+                    {
+                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                        Mode = BindingMode.TwoWay
+                    }
                 };
 
                 dataGrid.Columns.Insert(startIndex++, column);
@@ -87,6 +124,36 @@ namespace MetaDataHelper
             {
                 e.Handled = true; // Disallow pasting in the TextBox
             }
+        }
+
+        private void DataGridAttributes_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (ViewModel == null) return;
+            if (!ViewModel.LiveEdit) return;
+            if (e.EditAction != DataGridEditAction.Commit) return;
+
+            var row = e.Row?.Item as RhinoObjectTableAttributes;
+            if (row == null) return;
+
+            var tb = e.EditingElement as TextBox;
+            if (tb == null) return;
+
+            // Ensure latest text is pushed to binding source
+            var be = tb.GetBindingExpression(TextBox.TextProperty);
+            be?.UpdateSource();
+
+            var newValue = tb.Text;
+            var key = e.Column.Header?.ToString();
+            if (string.IsNullOrEmpty(key)) return;
+
+            ViewModel.ApplyCellEdit(row, key, newValue);
+        }
+
+        private void ApplySelectedRows_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel == null) return;
+            var selected = DataGridAttributes.SelectedItems.Cast<RhinoObjectTableAttributes>().ToList();
+            ViewModel.ApplySelectedRows(selected);
         }
     }
 

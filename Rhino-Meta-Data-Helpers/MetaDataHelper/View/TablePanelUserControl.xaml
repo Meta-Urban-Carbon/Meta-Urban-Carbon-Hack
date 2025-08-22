@@ -10,69 +10,81 @@
              Height="Auto"
              Width="Auto"
              d:DesignHeight="450"
-             d:DesignWidth="400"
->
+             d:DesignWidth="400">
 
     <UserControl.Resources>
-        <!-- Other resources -->
-
-            <local:DictionaryValueConverter x:Key="DictValueConverter"/>
-
+        <local:DictionaryValueConverter x:Key="DictValueConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
 
     <Grid>
-        <!-- Master Grid Definition -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height ="1"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="Auto"/>
-            <RowDefinition Height ="1"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="1" Grid.Column="1"
-               Grid.ColumnSpan="3"
-               Content="{Binding Message}"/>
 
-        <!-- Assuming your ViewModel is set as the DataContext of this Window or a parent element -->
+        <!-- Edit mode row -->
+        <DockPanel Grid.Row="1" LastChildFill="False" Margin="8,0,8,4">
+            <TextBlock Text="Edit mode:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <CheckBox Content="Live edit" IsChecked="{Binding LiveEdit}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+            <!-- Show Apply Edits only when LiveEdit is false -->
+            <Button Content="Apply edits" Click="ApplySelectedRows_Click" Margin="0,0,0,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding LiveEdit}" Value="False">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </DockPanel>
 
-        <DataGrid Grid.Row="4" Grid.Column="1" 
-                  Grid.ColumnSpan="5" 
-                  Height="800"
-                  x:Name="DataGridAttributes" 
-                  AutoGenerateColumns="False" 
-                  ItemsSource="{Binding CollectionViewSource.View}" 
+        <!-- Filters row -->
+        <DockPanel Grid.Row="2" LastChildFill="False" Margin="8,0,8,6">
+            <TextBlock Text="Table filters:" VerticalAlignment="Center" Margin="0,0,12,0"/>
+            <CheckBox Content="Selected only" IsChecked="{Binding FilterSelectedOnly}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+            <CheckBox Content="Visible only" IsChecked="{Binding FilterVisibleOnly}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+            <TextBlock Text="Layer:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <ComboBox Width="200" ItemsSource="{Binding LayerFilterOptions}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedLayerFilterOption}" Margin="0,0,12,0"/>
+        </DockPanel>
+
+        <!-- Actions row: Refresh / Export -->
+        <DockPanel Grid.Row="3" LastChildFill="False" Margin="8,0,8,6">
+            <Button Content="Refresh" Command="{Binding UpdateAttributesCommand}" Margin="0,0,8,0"/>
+            <Button Content="Export CSV" Command="{Binding ExportCsvCommand}"/>
+        </DockPanel>
+
+        <!-- Data grid fills remaining space; own scrollbars -->
+        <DataGrid Grid.Row="4"
+                  x:Name="DataGridAttributes"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding CollectionViewSource.View}"
                   Loaded="DataGridAttributes_Loaded"
-                  HorizontalScrollBarVisibility="Auto" 
+                  CellEditEnding="DataGridAttributes_CellEditEnding"
+                  HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto"
-        >
-
+                  EnableRowVirtualization="True"
+                  EnableColumnVirtualization="True"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  ScrollViewer.CanContentScroll="True"
+                  IsReadOnly="False"
+                  Margin="8,0,8,8">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Select">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Select" 
-                                  
-                                    Command="{Binding DataContext.SelectRhinoObjectCommand,
-                                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                            <Button Content="Select"
+                                    Command="{Binding DataContext.SelectRhinoObjectCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                     CommandParameter="{Binding ObjectGuid}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -80,19 +92,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--<DataGrid Grid.Row="4" Grid.Column="1" 
-                  Grid.ColumnSpan="5" 
-                  ItemsSource="{Binding TableViewSource.View}" AutoGenerateColumns="True"
-                  Height="800">-->
-            <!-- Additional DataGrid configuration goes here -->
-            <!-- If you want to define specific columns rather than auto-generating them, you can do so here -->
-        <!--</DataGrid>-->
 
-
-        <Button Grid.Row="2" Grid.Column="1" 
-                            Grid.ColumnSpan="5"  Content="Update Attributes" Command="{Binding UpdateAttributesCommand}" />
-
+        <!-- Status / diagnostics message -->
+        <TextBlock Grid.Row="5" Margin="8,4,8,4" Text="{Binding Message}" TextWrapping="Wrap"/>
 
     </Grid>
-
 </UserControl>

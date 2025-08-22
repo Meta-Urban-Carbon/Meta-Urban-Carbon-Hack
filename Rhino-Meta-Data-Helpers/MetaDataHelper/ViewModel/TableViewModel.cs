@@ -149,8 +149,6 @@ namespace MetaDataHelper
             ColumnsUpdated?.Invoke(TableAttributes?.AllObjectKeys ?? new List<string>());
         }
 
-        // Add Refresh command to trigger UpdateAttributes and message update
-        public ICommand UpdateAttributesCommand { get; private set; }
         public ICommand SelectRhinoObjectCommand { get; private set; }
         public ICommand ExportCsvCommand { get; private set; }
 
@@ -189,8 +187,10 @@ namespace MetaDataHelper
                 UpdateAttributes(null);
             };
 
-            // Wire commands
-            UpdateAttributesCommand = new RelayCommand(param => UpdateAttributes(param));
+            // Selection monitor timer
+            _selectionMonitorTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
+            _selectionMonitorTimer.Tick += (s, e) => OnSelectionMonitorTick();
+
             SelectRhinoObjectCommand = new SelectRhinoObjectCommand();
             ExportCsvCommand = new ExportCsvCommand(this);
 

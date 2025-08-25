@@ -71,8 +71,9 @@ namespace MetaDataHelper
         /// </summary>
         /// <param name="doc"></param>
         /// <param name="guid"></param>
-        public void Assign(RhinoDoc doc, Guid guid)
+        public void Assign(Guid guid)
         {
+            var doc = RhinoDoc.ActiveDoc;
             var docObject = doc.Objects.FindId(guid);
 
             foreach (var UserStringDeffinition in this.Collection)

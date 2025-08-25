@@ -72,6 +72,15 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
+        <!-- NEW: Assign target enum provider for UI -->
+        <ObjectDataProvider MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            x:Key="AssignTargetEnumProvider">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:AssignTargetEnum" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
         <local:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
 
     </UserControl.Resources>
@@ -172,12 +181,29 @@
 
         </Grid>
 
+        <!-- NEW: Auto-apply and target controls -->
+        <StackPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal" Margin="0,4,0,4">
+            <CheckBox Content="Auto-apply on edit"
+                      IsChecked="{Binding AutoApplyOnEdit}"
+                      VerticalAlignment="Center"
+                      Margin="0,0,8,0"/>
+            <TextBlock Text="Target:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <ComboBox Width="140"
+                      ItemsSource="{Binding Source={StaticResource AssignTargetEnumProvider}}"
+                      SelectedItem="{Binding AutoApplyTarget}"/>
+        </StackPanel>
+
         <!-- List of User String Deffinitions form Current Template -->
         <DataGrid Grid.Row="8" Grid.Column="1" 
           Grid.ColumnSpan="5"
           ItemsSource="{Binding CurrentTemplate.Collection }"
           CanUserResizeColumns="True"
-          AutoGenerateColumns="False">
+          AutoGenerateColumns="False"
+          EnableRowVirtualization="True"
+          EnableColumnVirtualization="True"
+          VirtualizingPanel.IsVirtualizing="True"
+          VirtualizingPanel.VirtualizationMode="Recycling"
+          ScrollViewer.CanContentScroll="True">
 
             <!-- Table. -->
             <DataGrid.Columns>
@@ -351,7 +377,7 @@
         <ComboBox Grid.Row="10" Grid.Column="1" 
                   Grid.ColumnSpan="2"
                   x:Name="LayerComboBox" 
-                  ItemsSource="{Binding Layers}"
+                  ItemsSource="{Binding RhinoLayers}"
                   DisplayMemberPath="Name"
                   SelectedItem="{Binding SelectedLayer, Mode=TwoWay}" />
 

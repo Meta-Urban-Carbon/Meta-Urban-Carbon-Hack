@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Input;
+using System.Windows;
+using Rhino;
 
 namespace MetaDataHelper
 {
@@ -9,8 +12,8 @@ namespace MetaDataHelper
     /// </summary>
     internal class LoadTemplateCommand : ICommand
     {
-        private UserStringTemplate _currentTemplate;
-        private SavedTemplates _savedTemplates;
+        private readonly UserStringTemplate _currentTemplate;
+        private readonly SavedTemplates _savedTemplates;
 
         public bool CanExecute(object parameter)
         {
@@ -19,26 +22,37 @@ namespace MetaDataHelper
 
         public void Execute(object parameter)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.DefaultExt = ".json"; // Default file extension
-            dlg.Filter = "Json documents (.json)|*.json"; // Filter files by extension
-            dlg.InitialDirectory = Settings.DefaultTemplatePath; //Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                DefaultExt = ".json", // Default file extension
+                Filter = "Json documents (.json)|*.json", // Filter files by extension
+                InitialDirectory = Settings.DefaultTemplatePath //Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            };
 
             // Show open file dialog box
             bool? result = dlg.ShowDialog();
+            if (result != true) return;
 
             // Process open file dialog box results
-            if (result == true)
+            string filename = dlg.FileName;
+            if (!File.Exists(filename))
             {
-                // Load document
-                string filename = dlg.FileName;
-                var LoadedTemplate = new UserStringTemplate();
-                LoadedTemplate.LoadAndReplace(filename);
+                MessageBox.Show($"The selected file does not exist:\n{filename}", "Template Load Error");
+                return;
+            }
 
-                this._savedTemplates.Add(LoadedTemplate);
+            try
+            {
+                var loadedTemplate = new UserStringTemplate();
+                loadedTemplate.LoadAndReplace(filename);
 
-                this._currentTemplate.LoadAndReplace(filename);
-                
+                this._savedTemplates.Add(loadedTemplate);
+                this._currentTemplate.Replace(loadedTemplate);
+            }
+            catch (Exception ex)
+            {
+                RhinoApp.WriteLine($"Failed to load template from '{filename}': {ex}");
+                MessageBox.Show($"Failed to load template:\n{ex.Message}", "Template Load Error");
             }
         }
 
@@ -46,8 +60,8 @@ namespace MetaDataHelper
 
         public LoadTemplateCommand(UserStringTemplate currentTemplate, SavedTemplates savedTemplates)
         {
-            this._currentTemplate = currentTemplate;
-            this._savedTemplates = savedTemplates;
+            this._currentTemplate = currentTemplate ?? throw new ArgumentNullException(nameof(currentTemplate));
+            this._savedTemplates = savedTemplates ?? throw new ArgumentNullException(nameof(savedTemplates));
         }
     }
 }
